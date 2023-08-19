@@ -1,0 +1,29 @@
+.primary {
+  all: unset;
+  border: 1px solid #000;
+  background-color: var(--color-accent-500);
+}
+
+.secondary {
+  all: unset;
+  border: 1px solid #000;
+  background-color: var(--color-dark-300);
+}
+
+.tertiary {
+  all: unset;
+  border: 1px solid #000;
+
+  // background-color: blue;
+}
+
+.link {
+  all: unset;
+  border: 1px solid #000;
+
+  // background-color: yellow;
+}
+
+.fullWidth {
+  width: 100%;
+}
