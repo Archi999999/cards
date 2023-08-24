@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from './'
 
+import Icon from '@/components/ui/icon/icon.tsx'
+
 const meta = {
   title: 'Components/Button',
   component: Button,
@@ -24,6 +26,18 @@ export const Primary: Story = {
     disabled: false,
   },
 }
+export const PrimaryWithIcon: Story = {
+  args: {
+    variant: 'primary',
+    children: (
+      <>
+        <Icon id={'log-out-outline'} />
+        Button primary
+      </>
+    ),
+    disabled: false,
+  },
+}
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
@@ -41,7 +55,7 @@ export const Tertiary: Story = {
 export const Link: Story = {
   args: {
     variant: 'link',
-    children: 'Tertiary Button',
+    children: 'Link-button',
     disabled: false,
   },
 }
