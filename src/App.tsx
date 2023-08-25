@@ -11,12 +11,12 @@ export function App() {
       <Button variant={'tertiary'}> Click </Button>
       <Button variant={'primary'}>
         <Icon id={'calendar-outline'} />
-        {'Clickingzdfndfgnfxg'}
+        {'Click'}
       </Button>
       <div>
-        <TextField variant={'input'} />
+        <TextField variant={'input'} name={'Input'} />
       </div>
-      <div style={{ padding: '10px' }}>
+      <div style={{ padding: '10px 0' }}>
         <TextField variant={'inputWithIcon'} name={'name'} error={true} />
       </div>
       <div>
