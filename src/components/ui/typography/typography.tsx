@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import s from './typography.module.scss'
 
-export type TypographyProps<T extends ElementType = 'p'> = {
+export type TypographyProps<T extends ElementType = 'span'> = {
   as?: T
   children: ReactNode
   variant?:
@@ -21,10 +21,10 @@ export type TypographyProps<T extends ElementType = 'p'> = {
   className?: string
 } & ComponentPropsWithoutRef<T>
 
-export const Typography = <T extends ElementType = 'p'>(
+export const Typography = <T extends ElementType = 'span'>(
   props: TypographyProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TypographyProps<T>>
 ) => {
-  const { variant = 'body_2', fullWidth, className, as: Component = 'p', ...rest } = props
+  const { variant = 'body_2', fullWidth, className, as: Component = 'span', ...rest } = props
 
-  return <Component className={`${s[variant as keyof typeof s]} ${className}`} {...rest} />
+  return <Component className={`${s[variant]} ${className}`} {...rest} />
 }
