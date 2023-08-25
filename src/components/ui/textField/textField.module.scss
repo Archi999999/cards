@@ -1,16 +1,44 @@
-.someText,
-.password,
+.input,
+.inputWithIcon,
 .search {
+  all: unset;
+
   width: 284px;
   height: 36px;
-  color: var(--dark-100, #808080);
+  padding-left: 12px;
 
-  /* Body 1 */
-  font-family: Roboto, arial, serif;
-  font-size: 16px;
+  font-family: var(--font-family-primary);
+  font-size: 16px; //var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
   font-style: normal;
-  font-weight: 400;
-  line-height: 24px; /* 150% */
+  line-height: var(--line-height-m);
+  color: var(--color-dark-100);
+
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+
+  &:active {
+    color: var(---color-light-100);
+    border-color: var(--color-light-100);
+  }
+
+  &:hover {
+    background: var(--color-dark-700);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-info-700);
+  }
+
+  &:disabled {
+    color: var(--color-dark-300);
+    border: 1px solid var(--color-dark-300);
+  }
+}
+
+.error {
+  color: var(--color-danger-300);
+  border: 1px solid var(--color-danger-300);
 }
 
 //.primary,
