@@ -6,11 +6,13 @@ import s from './icon.module.scss'
 
 type Props = {
   id: string
+  width?: string
+  height?: string
 }
 
-const Icon: FC<Props> = ({ id }) => {
+const Icon: FC<Props> = ({ id, width, height }) => {
   return (
-    <svg className={s.icon}>
+    <svg className={s.icon} style={{ width: width, height: height }}>
       <use xlinkHref={`${Icons}#${id}`} />
     </svg>
   )
