@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, FC } from 'react'
 
 import s from './textField.module.scss'
 
-import Icon from '@/components/ui/icon/icon.tsx'
+import { EyeOutline } from '@/svg'
 
 export type TextFieldProps = {
   variant?: 'input' | 'inputWithIcon' | 'search'
@@ -27,7 +27,7 @@ export const TextField: FC<TextFieldProps> = props => {
           />
           {variant === 'inputWithIcon' && (
             <div className={s.textFieldIcon}>
-              <Icon id={'eye-outline'} />
+              <EyeOutline />
             </div>
           )}
         </div>

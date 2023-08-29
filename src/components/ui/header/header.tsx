@@ -1,22 +1,26 @@
+import { FC } from 'react'
+
 import s from './header.module.scss'
 
 import { Button } from '@/components/ui'
-import Icon from '@/components/ui/icon/icon.tsx'
+import { UserHeader } from '@/components/ui/header/user-header'
 import { Typography } from '@/components/ui/typography/typography.tsx'
-import { UserHeader } from '@/components/ui/user-header/userHeader.tsx'
+import { Logo } from '@/svg'
 
-export const Header = () => {
-  const isAuth = false
+type Props = {
+  isAuth: boolean
+}
 
+export const Header: FC<Props> = ({ isAuth }) => {
   return (
     <div className={s.header}>
-      <Icon id={'logo'} width={'157'} height={'36'} />
+      <Logo />
       {isAuth ? (
-        <Button variant={'primary'}>
+        <UserHeader />
+      ) : (
+        <Button variant={'primary'} as={'a'}>
           <Typography>Sign in</Typography>
         </Button>
-      ) : (
-        <UserHeader />
       )}
     </div>
   )
