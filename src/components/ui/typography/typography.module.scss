@@ -1,75 +1,75 @@
 .large {
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 36px;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-l);
 }
 
 .h1 {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 36px;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-l);
 }
 
 .h2 {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24px;
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
 }
 
 .h3 {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
 }
 
 .body_1 {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
 }
 
 .subtitle_1 {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
 }
 
 .body_2 {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
 }
 
 .subtitle_2 {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 24px;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
 }
 
 .caption {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
 }
 
 .overline {
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 16px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-s);
 }
 
 .link_1 {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
   color: var(--color-info-500);
   text-decoration-line: underline;
 }
 
 .link_2 {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
   color: var(--color-info-500);
   text-decoration-line: underline;
 }
