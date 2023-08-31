@@ -1,4 +1,5 @@
 export * from './button'
-export * from './textField'
+export * from './text-field'
 export * from './header'
 export * from './typography'
+export * from './checkbox'

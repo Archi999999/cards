@@ -1,5 +1,3 @@
-// import Icon from '@/components/ui/icon/icon.tsx'
-import Icon from '@/components/ui/icon/icon.tsx'
 import { Typography } from '@/components/ui/typography/typography.tsx'
 
 export const UserHeader = () => {
@@ -11,7 +9,6 @@ export const UserHeader = () => {
       <Typography variant={'subtitle_1'} style={style}>
         {name}
       </Typography>
-      <Icon id={'calendar-outline'} />
       {/*<div*/}
       {/*  style={{*/}
       {/*    backgroundColor: 'white',*/}
