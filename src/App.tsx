@@ -1,17 +1,19 @@
-import { Button } from '@/components/ui'
-import Icon from '@/components/ui/icon/icon.tsx'
+import { Button, Header, Typography } from '@/components/ui'
 import { TextField } from '@/components/ui/textField'
+import { EyeOutline } from '@/svg'
 
 export function App() {
   return (
     <div>
       Hello
+      <Header isAuth={false} />
+      <Header isAuth={true} />
       <Button variant={'primary'}> Click </Button>
       <Button variant={'secondary'}> Click </Button>
       <Button variant={'tertiary'}> Click </Button>
       <Button variant={'primary'}>
-        <Icon id={'calendar-outline'} />
-        {'Click'}
+        <EyeOutline />
+        <Typography>Click</Typography>
       </Button>
       <div>
         <TextField variant={'input'} name={'Input'} />

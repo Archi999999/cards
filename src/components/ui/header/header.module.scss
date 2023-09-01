@@ -1,5 +1,16 @@
 .header {
   display: flex;
   justify-content: space-between;
+  height: 60px;
   padding: 12px 136px;
+}
+
+.userHeader {
+  display: flex;
+}
+
+.headerSpan {
+  height: 24px;
+  margin-right: 14px;
+  border-bottom: dashed 1px;
 }
