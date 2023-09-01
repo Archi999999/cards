@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { TextField } from '@/components/ui/textField/textField.tsx'
+import { TextField } from '@/components/ui/text-field/textField.tsx'
 
 const meta = {
   title: 'Components/TextField',
@@ -16,18 +16,21 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Input: Story = {
+export const Email: Story = {
   args: {
     variant: 'input',
+    name: 'email',
   },
 }
-export const InputWithIcon: Story = {
+export const Password: Story = {
   args: {
     variant: 'inputWithIcon',
+    name: 'password',
   },
 }
 export const Search: Story = {
   args: {
     variant: 'search',
+    name: 'text',
   },
 }
