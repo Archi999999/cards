@@ -1,11 +1,13 @@
 import { useForm, Controller } from 'react-hook-form'
 
-import { Button, Checkbox, TextField } from '@/components'
+import { Button, TextField } from '@/components'
+import { Checkbox } from '@/components/ui/checkbox'
+// import  from '@/components/ui/checkbox'
 
 type FormValues = {
   email: string
   password: string
-  rememberMe: boolean
+  RememberMe: boolean
 }
 
 export const LoginForm = () => {
@@ -17,7 +19,7 @@ export const LoginForm = () => {
     defaultValues: {
       email: '',
       password: '',
-      rememberMe: false,
+      RememberMe: false,
     },
     mode: 'onBlur',
   })
@@ -73,12 +75,12 @@ export const LoginForm = () => {
       />
       {/*{errors.password && <span>{errors.password.message}</span>}*/}
       <Controller
-        name="rememberMe"
+        name="RememberMe"
         control={control}
         render={({ field }) => (
           <Checkbox
             checked={field.value}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => field.onChange(e.target.checked)}
+            onChange={checked => field.onChange(checked)}
             name={field.name}
           />
         )}
