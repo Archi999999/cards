@@ -1,7 +1,9 @@
 .logout,
 .eye,
 .eyeOff,
-.search {
+.search,
+.checked,
+.unchecked {
   fill: currentcolor;
 }
 
@@ -22,4 +24,12 @@
 
   width: 20px;
   height: 20px;
+}
+
+.checked,
+.unchecked {
+  width: 24px;
+  height: 24px;
+
+  vertical-align: middle;
 }
