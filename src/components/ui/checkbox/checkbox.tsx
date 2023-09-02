@@ -14,9 +14,10 @@ type Props = {
   onChange: (checked: boolean) => void
   disabled?: boolean
   id?: string
+  label?: string
 }
 
-export const Checkbox: FC<Props> = ({ checked, name, disabled, id, onChange }) => (
+export const Checkbox: FC<Props> = ({ checked, name, disabled, id, label, onChange }) => (
   <div className={s.checkbox}>
     <RadixCheckbox.Root
       checked={checked}
@@ -30,7 +31,7 @@ export const Checkbox: FC<Props> = ({ checked, name, disabled, id, onChange }) =
       {/*<RadixCheckbox.Indicator />*/}
     </RadixCheckbox.Root>
     <label htmlFor={id}>
-      <Typography>{name}</Typography>
+      <Typography>{label}</Typography>
     </label>
   </div>
 )
