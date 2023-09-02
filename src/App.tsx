@@ -1,8 +1,18 @@
 import { Button, Header, TextField } from '@/components/ui'
+import { Select } from '@/components/ui/select/select.tsx'
+import { SelectSecond } from '@/components/ui/select/selectSecond.tsx'
+
+export const people = [
+  { value: '1', label: 'Durward Reynolds' },
+  { value: '2', label: 'Kenton Towne' },
+  { value: '3', label: 'Therese Wunsch' },
+  { value: '4', label: 'Benedict Kessler' },
+  { value: '5', label: 'Katelyn Rohan' },
+]
 
 export function App() {
   return (
-    <div>
+    <div style={{ marginRight: '5px', marginLeft: '10px' }}>
       Hello
       <Header isAuth={false} />
       <Header isAuth={true} />
@@ -17,6 +27,13 @@ export function App() {
       </div>
       <div>
         <TextField variant={'search'} />
+      </div>
+      <Select />
+      <div>
+        <Select />
+      </div>
+      <div>
+        <SelectSecond options={people} placeholder={'select'} label={'Select'} />
       </div>
     </div>
   )
