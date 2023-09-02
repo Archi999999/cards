@@ -1,37 +1,29 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, Controller } from 'react-hook-form'
+import { z } from 'zod'
 
-import { Button, Checkbox, TextField } from '@/components'
+import { Button, TextField } from '@/components'
+import { Checkbox } from '@/components/ui/checkbox'
 
-type FormValues = {
-  email: string
-  password: string
-  rememberMe: boolean
-}
+const loginSchema = z.object({
+  email: z.string().nonempty('Field is required').email({ message: 'invalid email address' }),
+  password: z.string().min(6, 'Minimum 6 characters for password'),
+  rememberMe: z.boolean().default(false),
+})
+
+type LoginFormSchema = z.infer<typeof loginSchema>
 
 export const LoginForm = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    defaultValues: {
-      email: '',
-      password: '',
-      rememberMe: false,
-    },
-    mode: 'onBlur',
+  } = useForm<LoginFormSchema>({
+    resolver: zodResolver(loginSchema),
   })
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = (data: LoginFormSchema) => {
     console.log(data)
-  }
-
-  const minLength = 3
-  const validateEmail = (value: string): string | undefined => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const isValid = emailRegex.test(value)
-
-    return isValid ? undefined : 'Email is incorrect'
   }
 
   return (
@@ -39,7 +31,7 @@ export const LoginForm = () => {
       <Controller
         name="email"
         control={control}
-        rules={{ required: 'Email is required', validate: validateEmail }}
+        // rules={{ required: 'Email is required', validate: validateEmail }}
         render={({ field }) => (
           <TextField
             value={field.value}
@@ -50,17 +42,9 @@ export const LoginForm = () => {
           />
         )}
       />
-      {/*{errors.email && <span>{errors.email.message}</span>}*/}
       <Controller
         name="password"
         control={control}
-        rules={{
-          required: 'Enter Password',
-          minLength: {
-            value: minLength,
-            message: 'Password is too short',
-          },
-        }}
         render={({ field }) => (
           <TextField
             value={field.value}
@@ -77,9 +61,10 @@ export const LoginForm = () => {
         control={control}
         render={({ field }) => (
           <Checkbox
-            checked={field.value}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => field.onChange(e.target.checked)}
+            checked={!!field.value}
+            onChange={checked => field.onChange(checked)}
             name={field.name}
+            label={'Remember Me'}
           />
         )}
       />
