@@ -2,12 +2,12 @@ import { Button, Header, TextField } from '@/components/ui'
 import { Select } from '@/components/ui/select/select.tsx'
 import { SelectSecond } from '@/components/ui/select/selectSecond.tsx'
 
-export const people = [
-  { value: '1', label: 'Durward Reynolds' },
-  { value: '2', label: 'Kenton Towne' },
-  { value: '3', label: 'Therese Wunsch' },
-  { value: '4', label: 'Benedict Kessler' },
-  { value: '5', label: 'Katelyn Rohan' },
+export const technologies = [
+  { id: '1', value: 'React' },
+  { id: '2', value: 'Redux' },
+  { id: '3', value: 'HTML' },
+  { id: '4', value: 'CSS' },
+  { id: '5', value: 'REST API' },
 ]
 
 export function App() {
@@ -33,7 +33,11 @@ export function App() {
         <Select />
       </div>
       <div>
-        <SelectSecond options={people} placeholder={'select'} label={'Select'} />
+        <SelectSecond
+          options={technologies}
+          placeholder={'technologies'}
+          label={'choose technologies'}
+        />
       </div>
     </div>
   )

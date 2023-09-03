@@ -12,36 +12,36 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const people = [
-  { value: '1', label: 'Durward Reynolds' },
-  { value: '2', label: 'Kenton Towne' },
-  { value: '3', label: 'Therese Wunsch' },
-  { value: '4', label: 'Benedict Kessler' },
-  { value: '5', label: 'Katelyn Rohan' },
+const technologies = [
+  { id: '1', value: 'React' },
+  { id: '2', value: 'Redux' },
+  { id: '3', value: 'HTML' },
+  { id: '4', value: 'CSS' },
+  { id: '5', value: 'REST API' },
 ]
 
 export const SelectStory: Story = {
   args: {
-    label: 'Select',
-    placeholder: 'Select item',
+    label: 'Technologies',
+    placeholder: 'Select tech',
     disabled: false,
-    options: people,
+    options: technologies,
   },
 }
 
 export const SelectStoryDisabled: Story = {
   args: {
-    label: 'Select',
-    placeholder: 'Select item',
+    label: 'Technologies',
+    placeholder: 'Select tech',
     disabled: true,
-    options: people,
+    options: technologies,
   },
 }
 export const SelectPersonDisabled: Story = {
   args: {
-    label: 'Select',
-    placeholder: 'Select person',
+    label: 'Technologies',
+    placeholder: 'Select tech',
     disabled: false,
-    options: people,
+    options: technologies,
   },
 }
