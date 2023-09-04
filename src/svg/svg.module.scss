@@ -1,3 +1,20 @@
+.button {
+  all: unset;
+
+  position: absolute;
+  top: 8px;
+  right: 12px;
+
+  display: flex;
+
+  height: 20px;
+
+  &:focus {
+    background-color: var(--color-dark-100);
+    border-radius: 50%;
+  }
+}
+
 .logout,
 .eye,
 .eyeOff,
@@ -18,10 +35,6 @@
 
 .eye,
 .eyeOff {
-  position: relative;
-  top: 8px;
-  right: 32px;
-
   width: 20px;
   height: 20px;
 }
@@ -30,6 +43,5 @@
 .unchecked {
   width: 24px;
   height: 24px;
-
   vertical-align: middle;
 }
