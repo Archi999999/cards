@@ -1,4 +1,5 @@
 import { Button, Header, TextField } from '@/components/ui'
+import { RadioGroup } from '@/components/ui/radio-group/radiogroup.tsx'
 import { Select } from '@/components/ui/select/select.tsx'
 import { SelectSecond } from '@/components/ui/select/selectSecond.tsx'
 
@@ -38,6 +39,9 @@ export function App() {
           placeholder={'technologies'}
           label={'choose technologies'}
         />
+      </div>
+      <div style={{ margin: '10px' }}>
+        <RadioGroup options={technologies} disabled={false} />
       </div>
     </div>
   )
