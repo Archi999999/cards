@@ -1,8 +1,12 @@
 .header {
   display: flex;
   justify-content: space-between;
+
   height: 60px;
   padding: 12px 136px;
+
+  background-color: var(--color-dark-700);
+  border-bottom: 1px solid #313131;
 }
 
 .userHeader {

@@ -13,29 +13,26 @@ type Props = {
   name?: string
   onChange: (checked: boolean) => void
   disabled?: boolean
-  id?: string
+  className?: string
+  // id?: string
   label?: string
 }
 
-export const Checkbox: FC<Props> = ({ checked, name, disabled, id, label, onChange }) => (
-  <div className={s.checkbox}>
+export const Checkbox: FC<Props> = ({ checked, name, disabled, label, className, onChange }) => (
+  <div className={`${s.checkbox}  ${className}`}>
     <RadixCheckbox.Root
       checked={checked}
       name={name}
       onCheckedChange={checked => onChange(!!checked)}
       className={s.buttonCheckbox}
       disabled={disabled}
-      id={id}
+      id={label}
     >
       {checked ? <CheckedIcon /> : <UncheckedIcon />}
       {/*<RadixCheckbox.Indicator />*/}
     </RadixCheckbox.Root>
-    <label htmlFor={id}>
+    <label htmlFor={label}>
       <Typography>{label}</Typography>
     </label>
   </div>
 )
-
-// export const Checkbox = (props: any) => {
-//   return <input type={'checkbox'} onChange={props.onCheckedChange} />
-// }

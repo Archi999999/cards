@@ -6,9 +6,13 @@ import { Button, TextField } from '@/components'
 import { Checkbox } from '@/components/ui/checkbox'
 
 const loginSchema = z.object({
-  email: z.string().nonempty('Field is required').email({ message: 'invalid email address' }),
-  password: z.string().min(6, 'Minimum 6 characters for password'),
+  email: z.string().nonempty('Enter email').email({ message: 'invalid email address' }).default(''),
   rememberMe: z.boolean().default(false),
+  password: z
+    .string()
+    .nonempty('Enter password')
+    .min(6, 'Minimum 6 characters for password')
+    .default(''),
 })
 
 type LoginFormSchema = z.infer<typeof loginSchema>
@@ -38,6 +42,7 @@ export const LoginForm = () => {
             onChange={field.onChange}
             onBlur={field.onBlur}
             name={field.name}
+            label={'Email'}
             error={errors?.email?.message}
           />
         )}
@@ -51,6 +56,7 @@ export const LoginForm = () => {
             onChange={field.onChange}
             onBlur={field.onBlur}
             name={field.name}
+            label={'Password'}
             error={errors?.password?.message}
           />
         )}
