@@ -6,10 +6,11 @@ import * as RadixSelect from '@radix-ui/react-select'
 import styles from './select.module.scss'
 
 import { Typography } from '@/components'
+import { SelectArrow } from '@/svg/selectArrow.tsx'
 
 export type OptionType = {
-  value: any
-  label: any
+  id: string
+  value: string
 }
 type SelectPropsType = {
   label?: string
@@ -57,15 +58,15 @@ export const SelectSecond: FC<SelectPropsType> = ({
         >
           <div>
             <RadixSelect.Value placeholder={placeholder} />
-            {/*<RadixSelectArrow className={disabled ? styles.iconDisabled : styles.icon} />*/}
+            <SelectArrow className={disabled ? styles.iconDisabled : styles.icon} />
           </div>
         </RadixSelect.Trigger>
         <RadixSelect.Portal>
           <RadixSelect.Content className={styles.content} position={'popper'} sideOffset={-1}>
             <RadixSelect.Viewport>
               {options?.map(el => (
-                <RadixSelect.Item key={el.value} value={el.value} className={styles.item}>
-                  <RadixSelect.ItemText>{el.label}</RadixSelect.ItemText>
+                <RadixSelect.Item key={el.id} value={el.value} className={styles.item}>
+                  <RadixSelect.ItemText>{el.value}</RadixSelect.ItemText>
                 </RadixSelect.Item>
               ))}
             </RadixSelect.Viewport>
