@@ -41,7 +41,7 @@ export const Checked: Story = () => {
 
   return (
     <>
-      <Checkbox label="Check box" checked={checked} onChange={handleChange} id={'123'} />
+      <Checkbox label="Check box" checked={checked} onChange={handleChange} />
       <Checkbox label="Disable checked" disabled={true} checked={true} onChange={handleChange} />
       <Checkbox label="Disable unchecked" disabled={true} checked={false} onChange={handleChange} />
     </>
