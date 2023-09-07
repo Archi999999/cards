@@ -105,8 +105,10 @@
           border-radius: 50%;
         }
 
-        &:disabled {
-          background-color: var(--color-accent-900);
+        &[data-disabled] {
+          &::after {
+            background-color: var(--color-accent-900);
+          }
         }
       }
     }
