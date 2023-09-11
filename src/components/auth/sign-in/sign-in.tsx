@@ -30,7 +30,7 @@ export const SignIn = () => {
   })
 
   const onSubmit = (data: LoginFormSchema) => {
-    // console.log(data)
+    console.log(data)
   }
 
   return (

@@ -14,6 +14,7 @@ export type OptionType = {
 }
 type SelectPropsType = {
   // label?: string
+  width?: string
   placeholder?: string
   value?: string
   onValueChange?: (value: string) => void
@@ -26,6 +27,7 @@ type SelectPropsType = {
 }
 export const SelectSecond: FC<SelectPropsType> = ({
   // label,
+  width,
   placeholder,
   value,
   onValueChange,
@@ -54,6 +56,7 @@ export const SelectSecond: FC<SelectPropsType> = ({
         aria-label={'select'}
         tabIndex={1}
         id={id}
+        style={{ width: width }}
       >
         <div>
           <RadixSelect.Value placeholder={placeholder} />

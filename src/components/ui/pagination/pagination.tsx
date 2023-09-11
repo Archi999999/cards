@@ -37,6 +37,7 @@ export const Pagination: React.FC<Props> = ({
           className={s.select}
           // value={itemsPerPage.toString()}
           id={'itemsPerPage'}
+          width={'69px'}
         />
         <Typography>на странице</Typography>
       </label>
