@@ -1,0 +1,112 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  width: 555px;
+  height: 24px;
+}
+
+.pageSelector {
+  all: unset;
+  display: flex;
+  align-items: center;
+  list-style: none;
+
+  li {
+    margin-right: 12px;
+  }
+}
+
+.leftButton,
+.rightButton {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 2px;
+
+  fill: var(--color-light-100);
+
+  &:hover {
+    color: inherit;
+    background-color: var(--color-dark-500);
+  }
+
+  &:active {
+    background-color: var(--color-light-100);
+    fill: var(--color-dark-700);
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: inherit;
+    fill: var(--color-dark-300);
+  }
+}
+
+.pageButton {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+
+  color: var(--color-light-100);
+
+  border-radius: 2px;
+
+  &:hover {
+    color: inherit;
+    background-color: var(--color-dark-500);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-info-700);
+  }
+
+  &:active {
+    color: var(--color-dark-700);
+    background-color: var(--color-light-100);
+  }
+}
+
+.pageButtonActive {
+  color: var(--color-dark-700);
+  background-color: var(--color-light-100);
+}
+
+.rightArrow {
+  transform: rotate(-90deg);
+}
+
+.leftArrow {
+  all: unset;
+  transform: rotate(90deg);
+}
+
+.labelSelect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select {
+  height: 24px;
+  margin: 0 9px;
+}
+
+.div {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+}

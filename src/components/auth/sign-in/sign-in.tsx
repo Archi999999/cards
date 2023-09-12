@@ -80,20 +80,47 @@ export const SignIn = () => {
               />
             )}
           />
-          <Link to={'/password-recovery'} className={s.linkRecover}>
-            <Typography>Forgot Password?</Typography>
-          </Link>
+          <Typography as={Link} to={'/password-recovery'} className={s.linkRecover}>
+            Forgot Password?
+          </Typography>
           <Button type="submit">
             <Typography>Sign In</Typography>
           </Button>
         </form>
         <Typography className={s.span}>Don&apos;t have an account?</Typography>
-        <Link to={'/registration'} className={s.linkReg}>
-          <Button variant={'link'} className={s.buttonSignUp}>
-            Sign Up
-          </Button>
-        </Link>
+        <Button variant={'link'} className={s.buttonSignUp} as={Link} to={'/registration'}>
+          Sign Up
+        </Button>
       </Card>
     </div>
   )
 }
+
+//
+// import { useController, useForm } from 'react-hook-form';
+//
+// const MyInput = ({ field }) => {
+//   return <input value={field.value} onChange={field.onChange} />;
+// };
+//
+// const MyForm = () => {
+//   const { control, handleSubmit } = useForm();
+//
+//   const { field } = useController({
+//     name: 'myField',
+//     control,
+//     defaultValue: '',
+//     rules: { required: true },
+//   });
+//
+//   const onSubmit = (data) => {
+//     console.log(data);
+//   };
+//
+//   return (
+//       <form onSubmit={handleSubmit(onSubmit)}>
+//         <MyInput field={field} />
+//         <button type="submit">Submit</button>
+//       </form>
+//   );
+// };
