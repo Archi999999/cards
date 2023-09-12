@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import s from './header.module.scss'
 
 import { Button } from '@/components/ui'
@@ -13,15 +15,15 @@ type Props = {
 
 export const Header: FC<Props> = ({ isAuth }) => {
   return (
-    <div className={s.header}>
+    <header className={s.header}>
       <Logo />
       {isAuth ? (
         <UserHeader />
       ) : (
-        <Button variant={'primary'} as={'a'}>
+        <Button variant={'primary'} as={Link} to={'/'}>
           <Typography>Sign in</Typography>
         </Button>
       )}
-    </div>
+    </header>
   )
 }

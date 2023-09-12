@@ -41,12 +41,9 @@
   text-align: center;
 }
 
-.linkReg {
+.buttonSignUp {
+  cursor: pointer;
   display: block;
   margin: auto;
-  text-decoration-color: var(--color-accent-700);
-
-  &:focus {
-    outline: none;
-  }
+  text-decoration: underline;
 }
