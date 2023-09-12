@@ -8,7 +8,7 @@ import { Header } from '@/components/ui'
 export function App() {
   return (
     <>
-      <Header isAuth={false} />
+      <Header isAuth={true} />
 
       <main>
         <Routes>

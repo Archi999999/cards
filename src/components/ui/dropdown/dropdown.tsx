@@ -16,12 +16,18 @@ export const Dropdown: FC<DropdownProps> = ({ children, trigger }) => {
 
   return (
     <DropdownMenu.Root open={open} onOpenChange={setOpen}>
-      <DropdownMenu.Trigger asChild>{trigger}</DropdownMenu.Trigger>
+      <DropdownMenu.Trigger aria-label={'Customise options'}>{trigger}</DropdownMenu.Trigger>
       {open && (
-        <DropdownMenu.Portal>
-          <DropdownMenu.Content className={styles.dropdownMenuContent}>
+        <DropdownMenu.Portal forceMount>
+          <DropdownMenu.Content
+            side={'bottom'}
+            sideOffset={8}
+            align={'end'}
+            alignOffset={-5}
+            className={styles.dropdownMenuContent}
+          >
             {children}
-            <DropdownMenu.Arrow className={styles.arrowBox} asChild>
+            <DropdownMenu.Arrow className={styles.arrowBox} width={16} height={8} asChild>
               <div className={styles.arrow} />
             </DropdownMenu.Arrow>
           </DropdownMenu.Content>
@@ -45,8 +51,12 @@ type DropdownItemWithIconProps = Omit<DropdownItemProps, 'children'> & {
 export const DropdownItemWithIcon: FC<DropdownItemWithIconProps> = ({ text, icon }) => {
   return (
     <DropdownMenu.Item className={styles.dropdownMenuItem}>
-      <div>{icon}</div>
+      {icon}
       <Typography variant={'caption'}>{text}</Typography>
     </DropdownMenu.Item>
   )
+}
+
+export const Separator = () => {
+  return <DropdownMenu.Separator className={styles.dropdownMenuSeparator} />
 }
