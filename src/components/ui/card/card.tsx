@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
 import s from './card.module.scss'
 
@@ -6,6 +6,6 @@ type CardProps = {
   children: ReactNode
 }
 
-export const Card: React.FC<CardProps> = ({ children }) => {
+export const Card: FC<CardProps> = ({ children }) => {
   return <div className={s.card}>{children}</div>
 }
