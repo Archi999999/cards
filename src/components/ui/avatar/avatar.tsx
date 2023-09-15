@@ -6,10 +6,11 @@ import ava from '@/components/ui/header/user-header/images/avatar.jpg'
 
 type AvatarProps = {
   avatar?: string
+  className?: string
 }
-export const Avatar: FC<AvatarProps> = ({ avatar }) => {
+export const Avatar: FC<AvatarProps> = ({ avatar, className }) => {
   return (
-    <div className={styles.avatar}>
+    <div className={className ? `${className} ${styles.avatar}` : styles.avatar}>
       <img src={avatar ? avatar : ava} alt={'avatar'} />
     </div>
   )
