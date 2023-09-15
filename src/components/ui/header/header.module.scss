@@ -18,3 +18,14 @@
   margin-right: 14px;
   border-bottom: dashed 1px;
 }
+
+.headerUserInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.headerEmail {
+  margin-right: 15px;
+  color: var(--color-dark-100);
+}
