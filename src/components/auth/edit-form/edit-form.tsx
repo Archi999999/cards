@@ -33,7 +33,7 @@ const EditForm: FC<EditFormProps> = ({}) => {
     formState: { errors },
   } = useForm<nameFormSchema>({
     resolver: zodResolver(nameSchema),
-    defaultValues: { nickname: '' },
+    defaultValues: { nickname: currentName },
   })
   const onSubmit = (data: nameFormSchema) => {
     // eslint-disable-next-line no-console
@@ -83,6 +83,7 @@ const EditForm: FC<EditFormProps> = ({}) => {
             control={control}
             render={({ field }) => (
               <TextField
+                defaultValue={field.name}
                 value={field.name}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
