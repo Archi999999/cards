@@ -36,6 +36,7 @@ const EditForm: FC<EditFormProps> = ({}) => {
     defaultValues: { nickname: '' },
   })
   const onSubmit = (data: nameFormSchema) => {
+    // eslint-disable-next-line no-console
     console.log(data)
     setEditInfo(false)
   }
