@@ -1,10 +1,10 @@
-.label {
-  color: var(--color-dark-100);
-}
+// .label {
+//  color: var(--color-dark-100);
+// }
 
-.labelDisabled {
-  color: var(--color-dark-300);
-}
+// .labelDisabled {
+//  color: var(--color-dark-300);
+// }
 
 .icon {
   transform: rotate(0deg);
@@ -18,7 +18,8 @@
   align-items: center;
   justify-content: space-between;
 
-  width: 100%;
+  // width: 100%;
+  // width: var(--radix-select-content-width);
   padding: 0.37rem 0.75rem;
 
   border: 1px solid var(--color-dark-100);
