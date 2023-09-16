@@ -1,7 +1,7 @@
 import { SVGProps } from 'react'
 
 import s from './svg.module.scss'
-export const SelectArrow = (props: SVGProps<SVGSVGElement>) => (
+export const Arrow = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={16}
     height={16}

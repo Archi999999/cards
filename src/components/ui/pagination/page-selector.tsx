@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 
 import { Button, Typography } from '@/components'
 import s from '@/components/ui/pagination/pagination.module.scss'
-import { SelectArrow } from '@/svg/selectArrow.tsx'
+import { Arrow } from '@/svg/arrow.tsx'
 
 type Props = {
   currentPage: number
@@ -65,7 +65,7 @@ export const PageSelector: FC<Props> = ({ currentPage, totalPages }) => {
     <ul className={s.pageSelector}>
       <li key={'arrowLeft'}>
         <Button className={s.leftButton} onClick={onClickLeft} disabled={page === 1}>
-          <SelectArrow className={s.leftArrow} />
+          <Arrow className={s.leftArrow} />
         </Button>
       </li>
       <li key={1}>
@@ -87,7 +87,7 @@ export const PageSelector: FC<Props> = ({ currentPage, totalPages }) => {
       </li>
       <li key={'arrowRight'}>
         <Button className={s.rightButton} onClick={onClickRight} disabled={page === totalPages}>
-          <SelectArrow className={s.rightArrow} />
+          <Arrow className={s.rightArrow} />
         </Button>
       </li>
     </ul>

@@ -8,7 +8,7 @@ import {
 
 import { Header, SignIn } from '@/components'
 import { SignUp } from '@/components/auth/sign-up/sign-up.tsx'
-import { Decks } from '@/pages/decks.tsx'
+import { Decks } from '@/pages/packs-list/decks.tsx'
 
 const isAuthenticated = true
 
