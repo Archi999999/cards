@@ -15,7 +15,7 @@ type Props = {
 
 export const Header: FC<Props> = ({ isAuth }) => {
   return (
-    <header className={s.header}>
+    <header className={`${s.header}`}>
       <Logo />
       {isAuth ? (
         <UserHeader />
