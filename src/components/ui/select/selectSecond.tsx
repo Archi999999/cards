@@ -6,7 +6,7 @@ import * as RadixSelect from '@radix-ui/react-select'
 import styles from './select.module.scss'
 
 // import { Typography } from '@/components'
-import { SelectArrow } from '@/svg/selectArrow.tsx'
+import { Arrow } from '@/svg/arrow.tsx'
 
 export type OptionType = {
   id: string
@@ -60,7 +60,7 @@ export const SelectSecond: FC<SelectPropsType> = ({
       >
         <div>
           <RadixSelect.Value placeholder={placeholder} />
-          <SelectArrow className={disabled ? styles.iconDisabled : styles.icon} />
+          <Arrow className={disabled ? styles.iconDisabled : styles.icon} />
         </div>
       </RadixSelect.Trigger>
       <RadixSelect.Portal>

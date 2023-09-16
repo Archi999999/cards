@@ -1,0 +1,14 @@
+.buttonUpdated {
+  cursor: pointer;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+
+  .arrow {
+    transform: rotate(180deg);
+    fill: currentcolor;
+  }
+}
+
+.createdBy {
+}

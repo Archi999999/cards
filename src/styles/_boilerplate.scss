@@ -40,6 +40,11 @@ body {
   background-color: var(--color-dark-900);
 }
 
-h1 {
-  margin: 0;
+h1,
+h2 {
+  all: unset;
+}
+
+.container {
+  padding: 0 2.5rem;
 }
