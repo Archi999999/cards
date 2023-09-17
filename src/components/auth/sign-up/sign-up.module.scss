@@ -1,6 +1,33 @@
 .signUp {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 36px 0 0;
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.title {
+  cursor: default;
+  margin-bottom: 27px;
+}
+
+.confirmPassword {
+  margin-bottom: 44px;
+}
+
+.span {
+  cursor: default;
+
+  display: block;
+
+  margin: 20px 0 11px;
+
+  color: var(--color-light-900);
+  text-align: center;
+}
+
+.buttonSignIn {
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  text-decoration: underline;
 }

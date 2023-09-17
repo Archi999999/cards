@@ -34,65 +34,63 @@ export const SignIn = () => {
   }
 
   return (
-    <div className={s.signIn}>
-      <Card>
-        <Typography as={'h1'} variant={'large'} className={s.title}>
-          Sign In
+    <Card className={s.signIn}>
+      <Typography as={'h1'} variant={'large'} className={s.title}>
+        Sign In
+      </Typography>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              name={field.name}
+              label={'Email'}
+              error={errors?.email?.message}
+            />
+          )}
+        />
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              name={field.name}
+              label={'Password'}
+              error={errors?.password?.message}
+            />
+          )}
+        />
+        <Controller
+          name="rememberMe"
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              checked={!!field.value}
+              onChange={checked => field.onChange(checked)}
+              name={field.name}
+              label={'Remember Me'}
+            />
+          )}
+        />
+        <Typography as={Link} to={'/password-recovery'} className={s.linkRecover}>
+          Forgot Password?
         </Typography>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className={s.form}>
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                value={field.value}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-                name={field.name}
-                label={'Email'}
-                error={errors?.email?.message}
-              />
-            )}
-          />
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                value={field.value}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-                name={field.name}
-                label={'Password'}
-                error={errors?.password?.message}
-              />
-            )}
-          />
-          <Controller
-            name="rememberMe"
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                checked={!!field.value}
-                onChange={checked => field.onChange(checked)}
-                name={field.name}
-                label={'Remember Me'}
-              />
-            )}
-          />
-          <Typography as={Link} to={'/password-recovery'} className={s.linkRecover}>
-            Forgot Password?
-          </Typography>
-          <Button type="submit">
-            <Typography>Sign In</Typography>
-          </Button>
-        </form>
-        <Typography className={s.span}>Don&apos;t have an account?</Typography>
-        <Button variant={'link'} className={s.buttonSignUp} as={Link} to={'/registration'}>
-          Sign Up
+        <Button type="submit">
+          <Typography>Sign In</Typography>
         </Button>
-      </Card>
-    </div>
+      </form>
+      <Typography className={s.span}>Don&apos;t have an account?</Typography>
+      <Button variant={'link'} className={s.buttonSignUp} as={Link} to={'/registration'}>
+        Sign Up
+      </Button>
+    </Card>
   )
 }
 

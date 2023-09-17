@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { Header, SignIn } from '@/components'
+import { PasswordRecovery } from '@/components/auth/password-recovery/password-recovery.tsx'
 import { SignUp } from '@/components/auth/sign-up/sign-up.tsx'
 import { Decks } from '@/pages/packs-list/decks.tsx'
 
@@ -20,6 +21,10 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/registration',
     element: <SignUp />,
+  },
+  {
+    path: '/password-recovery',
+    element: <PasswordRecovery />,
   },
 ]
 
