@@ -37,7 +37,7 @@ export const TextField: FC<TextFieldProps> = props => {
   }
 
   return (
-    <div className={s.textField}>
+    <div className={`${s.textField} ${className}`}>
       <label className={s.label} htmlFor={label}>
         <Typography>{label}</Typography>
       </label>
@@ -45,7 +45,7 @@ export const TextField: FC<TextFieldProps> = props => {
         <input
           type={!isVisible ? name : 'input'}
           name={name}
-          className={`${s[variant]} ${error ? s.error : ''} ${className} ${s.input}`}
+          className={`${s[variant]} ${error ? s.error : ''} ${s.input}`}
           placeholder={placeholder}
           onChange={onchangeHandler}
           required={props.required}
