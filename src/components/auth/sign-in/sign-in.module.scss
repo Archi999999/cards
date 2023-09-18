@@ -1,9 +1,4 @@
 .signIn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 36px 0 0;
-
   form {
     display: flex;
     flex-direction: column;
@@ -36,8 +31,12 @@
 
 .span {
   cursor: default;
+
   display: block;
+
   margin: 20px 0 11px;
+
+  color: var(--color-light-900);
   text-align: center;
 }
 
