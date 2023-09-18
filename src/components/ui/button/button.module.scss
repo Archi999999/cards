@@ -5,11 +5,16 @@
 
   cursor: pointer;
 
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+  justify-content: center;
+
   padding: 6px 28px;
 
-  font-size: 14px;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
   color: var(--color-light-100);
-  text-align: center;
 
   border-radius: 4px;
 }

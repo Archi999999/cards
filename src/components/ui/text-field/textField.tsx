@@ -3,7 +3,7 @@ import { ChangeEvent, ComponentPropsWithoutRef, FC, useState } from 'react'
 import s from './textField.module.scss'
 
 import { Typography } from '@/components'
-import { EyeOffOutline, EyeOutline } from '@/svg'
+import { EyeOffOutline, EyeOutline, Search } from '@/svg'
 
 export type TextFieldProps = {
   variant?: 'input' | 'inputWithIcon' | 'search'
@@ -42,11 +42,12 @@ export const TextField: FC<TextFieldProps> = props => {
         <Typography>{label}</Typography>
       </label>
       <div className={s.textFieldInput}>
+        {variant === 'search' && <Search className={s.searchIcon} />}
         <input
           type={!isVisible ? name : 'input'}
           name={name}
           className={`${s[variant]} ${error ? s.error : ''} ${s.input}`}
-          placeholder={placeholder}
+          placeholder={variant === 'search' ? 'Input search' : placeholder}
           onChange={onchangeHandler}
           required={props.required}
           minLength={props.minLength}
