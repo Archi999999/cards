@@ -16,7 +16,10 @@ import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { Arrow } from '@/svg/arrow.tsx'
 
 export const Decks = () => {
-  const [itemsPerPage, setItemsPerPage] = useState(10)
+  const [
+    itemsPerPage,
+    // , setItemsPerPage
+  ] = useState(10)
   const decks = useGetDecksQuery({
     itemsPerPage,
   })
@@ -26,7 +29,7 @@ export const Decks = () => {
   console.log(decks.data)
 
   return (
-    <Table>
+    <Table className={s.table}>
       <TableHeader>
         <TableRow>
           <TableHead>Name</TableHead>
