@@ -39,7 +39,7 @@ export const SelectSecond: FC<SelectPropsType> = ({
   className,
 }) => {
   return (
-    <>
+    <div className={className}>
       {label && (
         <RadixLabel htmlFor={label || postLabel}>
           <Typography className={`${styles.label} ${disabled && styles.labelDisabled}`}>
@@ -55,7 +55,7 @@ export const SelectSecond: FC<SelectPropsType> = ({
         required={required}
       >
         <RadixSelect.Trigger
-          className={`${disabled ? styles.triggerDisabled : styles.trigger} ${className}`}
+          className={`${disabled ? styles.triggerDisabled : styles.trigger}`}
           asChild
           aria-label={'select'}
           tabIndex={1}
@@ -86,6 +86,6 @@ export const SelectSecond: FC<SelectPropsType> = ({
           </Typography>
         </RadixLabel>
       )}
-    </>
+    </div>
   )
 }

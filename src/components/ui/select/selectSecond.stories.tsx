@@ -22,7 +22,7 @@ const technologies = [
 
 export const SelectStory: Story = {
   args: {
-    // label: 'Technologies',
+    label: 'Technologies',
     placeholder: 'Select tech',
     disabled: false,
     options: technologies,
@@ -31,7 +31,7 @@ export const SelectStory: Story = {
 
 export const SelectStoryDisabled: Story = {
   args: {
-    // label: 'Technologies',
+    label: 'Technologies',
     placeholder: 'Select tech',
     disabled: true,
     options: technologies,
@@ -39,7 +39,8 @@ export const SelectStoryDisabled: Story = {
 }
 export const SelectPersonDisabled: Story = {
   args: {
-    // label: 'Technologies',
+    label: 'Technologies',
+    postLabel: 'post label',
     placeholder: 'Select tech',
     disabled: false,
     options: technologies,

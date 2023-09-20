@@ -8,15 +8,30 @@ type Props = {
   confirmButtonName: string
   setModal: (value: boolean) => void
   children: React.ReactNode
+  onConfirm: () => void
 }
-export const Modal: React.FC<Props> = ({ title, setModal, confirmButtonName, children }) => {
+export const Modal: React.FC<Props> = ({
+  title,
+  setModal,
+  confirmButtonName,
+  children,
+  onConfirm,
+}) => {
   const onCloseModal = () => {
     setModal(false)
   }
 
   return (
-    <section role="dialog" aria-label="Modal Dialog" className={s.modal} onClick={onCloseModal}>
-      <div className={s.window} onClick={e => e.stopPropagation()}>
+    <section
+      role="dialog"
+      aria-label="Modal Dialog"
+      className={s.modal}
+      // onClick={onCloseModal}
+    >
+      <div
+        className={s.window}
+        // onClick={e => e.stopPropagation()}
+      >
         <header className={s.header}>
           <Typography as={'h2'} variant={'h2'}>
             {title}
@@ -30,7 +45,7 @@ export const Modal: React.FC<Props> = ({ title, setModal, confirmButtonName, chi
           <Button variant={'secondary'} onClick={onCloseModal}>
             Cancel
           </Button>
-          <Button>{confirmButtonName}</Button>
+          <Button onClick={onConfirm}>{confirmButtonName}</Button>
         </footer>
       </div>
     </section>
