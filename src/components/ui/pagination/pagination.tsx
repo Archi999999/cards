@@ -1,6 +1,5 @@
 import s from './pagination.module.scss'
 
-import { Typography } from '@/components'
 import { PageSelector } from '@/components/ui/pagination/page-selector.tsx'
 import { SelectSecond } from '@/components/ui/select/selectSecond.tsx'
 
@@ -30,17 +29,14 @@ export const Pagination: React.FC<Props> = ({
   return (
     <nav className={s.pagination}>
       <PageSelector totalPages={totalPages} currentPage={currentPage} />
-      <label htmlFor={'itemsPerPage'} className={s.labelSelect}>
-        <Typography>Показать </Typography>
-        <SelectSecond
-          options={options}
-          className={s.select}
-          // value={itemsPerPage.toString()}
-          id={'itemsPerPage'}
-          width={'69px'}
-        />
-        <Typography>на странице</Typography>
-      </label>
+      <SelectSecond
+        label={'Показать'}
+        postLabel={'на странице'}
+        options={options}
+        className={s.select}
+        // value={itemsPerPage.toString()}
+        width={'69px'}
+      />
     </nav>
   )
 }
