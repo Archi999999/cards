@@ -9,7 +9,7 @@ import {
 import { Header, SignIn } from '@/components'
 import { PasswordRecovery } from '@/components/auth/password-recovery/password-recovery.tsx'
 import { SignUp } from '@/components/auth/sign-up/sign-up.tsx'
-import { Decks } from '@/pages/packs-list/decks.tsx'
+import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 
 const isAuthenticated = true
 
@@ -31,7 +31,7 @@ const publicRoutes: RouteObject[] = [
 const privateRoutes: RouteObject[] = [
   {
     path: '/',
-    element: <Decks />,
+    element: <PacksList />,
   },
 ]
 

@@ -1,0 +1,35 @@
+.tabsTrigger {
+  position: relative;
+  padding: 0.375rem 1.5rem;
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px 0 0 2px;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--color-light-100);
+    background-color: var(--color-dark-300);
+  }
+
+  &[data-state='active'] {
+    background-color: var(--color-accent-500);
+  }
+
+  &:focus-visible {
+    background-color: var(--color-dark-700);
+    outline: 2px solid var(--color-info-900);
+  }
+
+  &:disabled {
+    color: var(--color-dark-300);
+    background-color: var(--color-dark-700);
+  }
+}
+
+.content {
+  position: absolute;
+
+  //  top: 0;
+  right: 8.5rem;
+  left: 8.5rem;
+  padding-top: 2.25rem;
+}

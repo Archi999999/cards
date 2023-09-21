@@ -20,17 +20,27 @@ export const Email: Story = {
   args: {
     variant: 'input',
     name: 'email',
+    label: 'Email',
   },
 }
 export const Password: Story = {
   args: {
     variant: 'inputWithIcon',
     name: 'password',
+    label: 'Password',
   },
 }
 export const Search: Story = {
   args: {
     variant: 'search',
     name: 'text',
+  },
+}
+export const InputWithError: Story = {
+  args: {
+    variant: 'inputWithIcon',
+    name: 'password',
+    label: 'Password',
+    error: 'Password must be longer',
   },
 }

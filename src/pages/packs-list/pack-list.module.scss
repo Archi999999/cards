@@ -1,3 +1,29 @@
+.packList {
+  max-width: var(--main-container-width);
+  margin: 36px auto;
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterSection {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.inputSearch {
+  display: -webkit-box;
+  width: 18.6875rem;
+}
+
+.table {
+  max-width: var(--main-container-width);
+  margin: auto;
+}
+
 .buttonUpdated {
   cursor: pointer;
   display: flex;
@@ -10,5 +36,5 @@
   }
 }
 
-.createdBy {
-}
+// .createdBy {
+// }
