@@ -1,8 +1,11 @@
 .textFieldInput {
   position: relative;
+
   display: flex;
   flex-direction: row;
+
   width: 100%;
+  margin-bottom: 1.5625rem;
 }
 
 .textField span {
@@ -50,6 +53,10 @@
 /* stylelint-disable-next-line no-descending-specificity */
 .search {
   padding-left: 2.5625rem;
+}
+
+.fieldError {
+  margin-bottom: 0;
 }
 
 .error {
