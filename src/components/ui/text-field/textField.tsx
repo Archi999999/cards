@@ -41,7 +41,7 @@ export const TextField: FC<TextFieldProps> = props => {
       <label className={s.label} htmlFor={label}>
         <Typography>{label}</Typography>
       </label>
-      <div className={s.textFieldInput}>
+      <div className={`${s.textFieldInput} ${error ? s.fieldError : ''}`}>
         {variant === 'search' && <Search className={s.searchIcon} />}
         <input
           type={!isVisible ? name : 'input'}
@@ -56,9 +56,11 @@ export const TextField: FC<TextFieldProps> = props => {
         {name === 'password' &&
           (!isVisible ? <EyeOutline onClick={onVisible} /> : <EyeOffOutline onClick={onVisible} />)}
       </div>
-      <span className={s.errorSpan} style={{ visibility: !error ? 'hidden' : 'visible' }}>
-        <Typography variant={'caption'}>{error}!</Typography>
-      </span>
+      {error && (
+        <span className={s.errorSpan} style={{ visibility: !error ? 'hidden' : 'visible' }}>
+          <Typography variant={'caption'}>{error}</Typography>
+        </span>
+      )}
     </div>
   )
 }
