@@ -5,8 +5,10 @@ import { z } from 'zod'
 
 import s from './sign-in.module.scss'
 
-import { Button, Checkbox, TextField, Typography } from '@/components'
+import { Button, Checkbox, Typography } from '@/components'
 import { Card } from '@/components/ui/card/card.tsx'
+import { ControlledTextField } from '@/components/ui/controlled-text-field/controlled-text-field.tsx'
+import { useLoginMutation } from '@/services/auth/auth.ts'
 
 const loginSchema = z.object({
   email: z.string().nonempty('Enter email').email({ message: 'invalid email address' }).default(''),
@@ -21,52 +23,33 @@ const loginSchema = z.object({
 type LoginFormSchema = z.infer<typeof loginSchema>
 
 export const SignIn = () => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormSchema>({
+  const { control, handleSubmit, setError } = useForm<LoginFormSchema>({
     resolver: zodResolver(loginSchema),
   })
 
-  const onSubmit = (data: LoginFormSchema) => {
-    console.log(data)
+  const [login, { error }] = useLoginMutation()
+
+  if (error) {
+    if (
+      'status' in error &&
+      typeof error.data === 'object' &&
+      error.data &&
+      'message' in error.data
+    ) {
+      setError('password', { type: 'dark side', message: error.data.message as string })
+    }
   }
+
+  // loginError && setError('password', { type: 'dark side', message: loginError })
 
   return (
     <Card className={s.signIn}>
       <Typography as={'h1'} variant={'large'} className={s.title}>
         Sign In
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              value={field.value}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-              name={field.name}
-              label={'Email'}
-              error={errors?.email?.message}
-            />
-          )}
-        />
-        <Controller
-          name="password"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              value={field.value}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-              name={field.name}
-              label={'Password'}
-              error={errors?.password?.message}
-            />
-          )}
-        />
+      <form onSubmit={handleSubmit(login)} noValidate>
+        <ControlledTextField name={'email'} control={control} label={'Email'} />
+        <ControlledTextField name={'password'} control={control} label={'Password'} />
         <Controller
           name="rememberMe"
           control={control}
