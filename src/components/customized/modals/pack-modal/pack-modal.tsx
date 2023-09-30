@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { Checkbox, TextField } from '@/components'
-import { Modal } from '@/components/ui/modal'
+import { Modal } from '@/components/ui/modal/modal.tsx'
 import { useCreateDeckMutation } from '@/services/decks/decks.ts'
 
 type Props = {
@@ -25,6 +25,7 @@ export const PackModal: React.FC<Props> = ({ title, setModal, confirmButtonName 
 
   const onConfirm = () => {
     createDeck({ name, isPrivate: onPrivate })
+    setModal(false)
   }
 
   if (isLoading) return <div>...Loading</div>
