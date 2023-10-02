@@ -1,7 +1,7 @@
 import s from './card-modal.module.scss'
 
 import { TextField } from '@/components'
-import { Modal } from '@/components/ui/modal'
+import { Modal } from '@/components/ui/modal/modal.tsx'
 import { SelectSecond } from '@/components/ui/select/selectSecond.tsx'
 
 type Props = {
