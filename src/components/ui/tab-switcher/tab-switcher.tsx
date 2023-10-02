@@ -4,36 +4,34 @@ import * as Tabs from '@radix-ui/react-tabs'
 import s from './tab-switcher.module.scss'
 
 import { Typography } from '@/components'
-import { Decks } from '@/pages/packs-list/decks.tsx'
 
 type Props = {
   label?: string
-  content?: Content[]
-}
-type Content = {
-  [propertyName: string]: React.ReactNode
+  tabs: Tab[]
 }
 
-export const TabSwitcher: React.FC<Props> = ({
-  label,
-  // content
-}) => {
+type Tab = {
+  trigger: string
+  content: React.ReactNode
+}
+
+export const TabSwitcher: React.FC<Props> = ({ label, tabs }) => {
   return (
     <Label>
       <Typography>{label}</Typography>
       <Tabs.Root>
         <Tabs.List>
-          <Tabs.Trigger className={s.tabsTrigger} value={'myCards'}>
-            <Typography variant={'body_1'}>My Cards</Typography>
-          </Tabs.Trigger>
-          <Tabs.Trigger className={s.tabsTrigger} value={'allCards'}>
-            <Typography variant={'body_1'}>All Cards</Typography>
-          </Tabs.Trigger>
+          {tabs.map(tab => (
+            <Tabs.Trigger className={s.tabsTrigger} value={tab.trigger} key={tab.trigger}>
+              <Typography variant={'body_1'}>{tab.trigger}</Typography>
+            </Tabs.Trigger>
+          ))}
         </Tabs.List>
-        <Tabs.Content value={'myCards'} className={s.content}>
-          <Decks />
-        </Tabs.Content>
-        <Tabs.Content value={'allCards'}></Tabs.Content>
+        {tabs.map(tab => (
+          <Tabs.Content key={tab.trigger} value={tab.trigger} className={s.content}>
+            {tab.content}
+          </Tabs.Content>
+        ))}
       </Tabs.Root>
     </Label>
   )

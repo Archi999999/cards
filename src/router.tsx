@@ -6,17 +6,18 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { Header, SignIn } from '@/components'
+import { Header } from '@/components'
 import { PasswordRecovery } from '@/components/auth/password-recovery/password-recovery.tsx'
 import { SignUp } from '@/components/auth/sign-up/sign-up.tsx'
 import { PacksList } from '@/pages/packs-list/packs-list.tsx'
+import { SignInPage } from '@/pages/sign-in-page.tsx'
 
 const isAuthenticated = true
 
 const publicRoutes: RouteObject[] = [
   {
     path: '/login',
-    element: <SignIn />,
+    element: <SignInPage />,
   },
   {
     path: '/registration',
