@@ -26,7 +26,6 @@ export const Decks = () => {
 
   if (decks.isLoading) return <div>...Loading</div>
   if (decks.error) return <div>ERROR!!!</div>
-  console.log(decks.data)
 
   return (
     <Table className={s.table}>
@@ -51,7 +50,7 @@ export const Decks = () => {
               <TableCell>{deck.name}</TableCell>
               <TableCell>{deck.cardsCount}</TableCell>
               <TableCellDate date={deck.updated} />
-              <TableCellDate date={deck.created} />
+              <TableCell>{deck.author.name}</TableCell>
               <TableCellWithButtons />
             </TableRow>
           )

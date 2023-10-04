@@ -2,6 +2,17 @@ import { baseApi } from '@/services/base-api.ts'
 
 const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
+    me: builder.query<any, void>({
+      query: () => {
+        return {
+          url: 'v1/auth/me',
+          method: 'GET',
+        }
+      },
+      extraOptions: {
+        maxRetries: 0,
+      },
+    }),
     login: builder.mutation<any, { email: string; password: string }>({
       query: params => {
         return {
@@ -14,4 +25,4 @@ const authApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useLoginMutation } = authApi
+export const { useLoginMutation, useMeQuery } = authApi

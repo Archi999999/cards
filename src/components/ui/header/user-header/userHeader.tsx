@@ -13,13 +13,16 @@ import { Typography } from '@/components/ui/typography/typography.tsx'
 import { Logout } from '@/svg'
 import { PersonOutline } from '@/svg/person-outline.tsx'
 
-export const UserHeader = () => {
-  const name = 'Ivan'
+type Props = {
+  name: string
+  avatar: string
+}
 
+export const UserHeader: FC<Props> = ({ name, avatar }) => {
   return (
-    <Dropdown trigger={<User name={name} />}>
+    <Dropdown trigger={<User name={name} avatar={avatar} />}>
       <DropdownItem>
-        <Avatar />
+        <Avatar avatar={avatar} />
         <div className={s.headerUserInfo}>
           <Typography variant={'subtitle_2'}>{name}</Typography>
           <Typography variant={'caption'} className={s.headerEmail}>
@@ -37,14 +40,15 @@ export const UserHeader = () => {
 
 type UserProps = {
   name: string
+  avatar: string
 }
-const User: FC<UserProps> = ({ name }) => {
+const User: FC<UserProps> = ({ name, avatar }) => {
   return (
     <div className={s.userHeader}>
       <Typography variant={'subtitle_1'} className={s.headerSpan}>
         {name}
       </Typography>
-      <Avatar />
+      <Avatar avatar={avatar} />
     </div>
   )
 }
