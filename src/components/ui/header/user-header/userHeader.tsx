@@ -14,8 +14,8 @@ import { Logout } from '@/svg'
 import { PersonOutline } from '@/svg/person-outline.tsx'
 
 type Props = {
-  name: string
-  avatar: string
+  name?: string
+  avatar?: string
 }
 
 export const UserHeader: FC<Props> = ({ name, avatar }) => {
@@ -39,8 +39,8 @@ export const UserHeader: FC<Props> = ({ name, avatar }) => {
 }
 
 type UserProps = {
-  name: string
-  avatar: string
+  name?: string
+  avatar?: string
 }
 const User: FC<UserProps> = ({ name, avatar }) => {
   return (
