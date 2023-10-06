@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 
 import s from './pack-list.module.scss'
 
@@ -12,16 +12,23 @@ import {
 } from '@/components/ui/table'
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { TableCellWithButtons } from '@/components/ui/table/table-cell-with-buttons.tsx'
+import { useMeQuery } from '@/services/auth/auth.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { Arrow } from '@/svg/arrow.tsx'
 
-export const Decks = () => {
+type Props = {
+  variant?: 'myPacks' | 'allPacks'
+}
+
+export const Decks: FC<Props> = ({ variant }) => {
+  const { data: { id: authorId } = {} } = useMeQuery()
   const [
     itemsPerPage,
     //  setItemsPerPage,
   ] = useState(10)
   const decks = useGetDecksQuery({
     itemsPerPage,
+    authorId: variant === 'myPacks' ? authorId : undefined,
   })
 
   if (decks.isLoading) return <div>...Loading</div>
@@ -51,7 +58,7 @@ export const Decks = () => {
               <TableCell>{deck.cardsCount}</TableCell>
               <TableCellDate date={deck.updated} />
               <TableCell>{deck.author.name}</TableCell>
-              <TableCellWithButtons id={deck.id} />
+              <TableCellWithButtons packId={deck.id} variant={variant} />
             </TableRow>
           )
         })}
