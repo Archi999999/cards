@@ -13,6 +13,11 @@ export type DecksResponseItemsAuthor = {
   id: string
   name: string
 }
+export type CreateDeckArgs = {
+  name: string
+  isPrivate?: boolean
+}
+export type DeleteDeckArgs = Pick<Deck, 'id'>
 export type Deck = {
   id: string
   userId: string

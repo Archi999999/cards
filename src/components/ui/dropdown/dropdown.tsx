@@ -39,21 +39,28 @@ export const Dropdown: FC<DropdownProps> = ({ children, trigger }) => {
 
 type DropdownItemProps = {
   children: ReactNode
+  onClick?: () => void
 }
-export const DropdownItem: FC<DropdownItemProps> = ({ children }) => {
-  return <DropdownMenu.Item className={styles.dropdownMenuItem}>{children}</DropdownMenu.Item>
+export const DropdownItem: FC<DropdownItemProps> = ({ children, onClick }) => {
+  return (
+    <button onClick={onClick} className={styles.buttonDropDownMenu}>
+      <DropdownMenu.Item className={styles.dropdownMenuItem}>{children}</DropdownMenu.Item>
+    </button>
+  )
 }
 
 type DropdownItemWithIconProps = Omit<DropdownItemProps, 'children'> & {
   icon: ReactNode
   text: string
-} & ComponentPropsWithoutRef<'div'>
-export const DropdownItemWithIcon: FC<DropdownItemWithIconProps> = ({ text, icon }) => {
+} & ComponentPropsWithoutRef<'button'>
+export const DropdownItemWithIcon: FC<DropdownItemWithIconProps> = ({ text, icon, ...rest }) => {
   return (
-    <DropdownMenu.Item className={styles.dropdownMenuItem}>
-      {icon}
-      <Typography variant={'caption'}>{text}</Typography>
-    </DropdownMenu.Item>
+    <button className={styles.buttonDropDownMenu} onClick={rest.onClick}>
+      <DropdownMenu.Item className={styles.dropdownMenuItem}>
+        {icon}
+        <Typography variant={'caption'}>{text}</Typography>
+      </DropdownMenu.Item>
+    </button>
   )
 }
 

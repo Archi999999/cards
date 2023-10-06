@@ -1,22 +1,23 @@
+import { Navigate, useNavigate } from 'react-router-dom'
+
 import { SignIn } from '@/components'
-// import { useLoginMutation } from '@/services/auth/auth.ts'
+import { useLoginMutation, useMeQuery } from '@/services/auth/auth.ts'
 
 export const SignInPage = () => {
-  // const [login, { error }] = useLoginMutation()
-  //
-  // let loginError = ''
-  //
-  // if (error) {
-  //   if (
-  //     'status' in error &&
-  //     typeof error.data === 'object' &&
-  //     error.data &&
-  //     'message' in error.data
-  //   ) {
-  //     loginError = error.data.message as string
-  //   }
-  // }
-  // console.log(error)
+  const { data, isLoading } = useMeQuery()
+  const [signIn, { isLoading: isSigningIn }] = useLoginMutation()
+  const navigate = useNavigate()
 
-  return <SignIn />
+  if (isLoading) return <>Loading...</>
+  if (data) return <Navigate to={'/'} />
+
+  const handleSignIn = (data: any) => {
+    signIn(data)
+      .unwrap()
+      .then(() => {
+        navigate('/')
+      })
+  }
+
+  return <SignIn onSubmit={handleSignIn} isSubmitting={isSigningIn} />
 }

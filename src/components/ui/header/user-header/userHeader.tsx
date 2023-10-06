@@ -10,16 +10,25 @@ import {
   Separator,
 } from '@/components/ui/dropdown/dropdown.tsx'
 import { Typography } from '@/components/ui/typography/typography.tsx'
+import { useLogoutMutation } from '@/services/auth/auth.ts'
 import { Logout } from '@/svg'
 import { PersonOutline } from '@/svg/person-outline.tsx'
 
-export const UserHeader = () => {
-  const name = 'Ivan'
+type Props = {
+  name?: string
+  avatar?: string
+}
+
+export const UserHeader: FC<Props> = ({ name, avatar }) => {
+  const [logout] = useLogoutMutation()
+  // const logoutHandler = () => {
+  //   logout()
+  // }
 
   return (
-    <Dropdown trigger={<User name={name} />}>
+    <Dropdown trigger={<User name={name} avatar={avatar} />}>
       <DropdownItem>
-        <Avatar />
+        <Avatar avatar={avatar} />
         <div className={s.headerUserInfo}>
           <Typography variant={'subtitle_2'}>{name}</Typography>
           <Typography variant={'caption'} className={s.headerEmail}>
@@ -30,21 +39,22 @@ export const UserHeader = () => {
       <Separator />
       <DropdownItemWithIcon icon={<PersonOutline />} text={'My Profile'} />
       <Separator />
-      <DropdownItemWithIcon icon={<Logout />} text={'Sign Out'} />
+      <DropdownItemWithIcon onClick={() => logout()} icon={<Logout />} text={'Sign Out'} />
     </Dropdown>
   )
 }
 
 type UserProps = {
-  name: string
+  name?: string
+  avatar?: string
 }
-const User: FC<UserProps> = ({ name }) => {
+const User: FC<UserProps> = ({ name, avatar }) => {
   return (
     <div className={s.userHeader}>
       <Typography variant={'subtitle_1'} className={s.headerSpan}>
         {name}
       </Typography>
-      <Avatar />
+      <Avatar avatar={avatar} />
     </div>
   )
 }

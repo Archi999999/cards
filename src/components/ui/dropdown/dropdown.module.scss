@@ -49,10 +49,16 @@ button {
   border-left: none;
 }
 
+.buttonDropDownMenu {
+  cursor: pointer;
+  width: 100%;
+}
+
 .dropdownMenuItem {
   user-select: none;
 
   display: flex;
+  gap: 6px;
   align-items: center;
   justify-content: flex-start;
 
