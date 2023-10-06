@@ -17,17 +17,29 @@ const loginSchema = z.object({
     .string()
     .nonempty('Enter password')
     .min(6, 'Minimum 6 characters for password')
+    .max(30, 'Maximum 30 characters for password')
     .default(''),
 })
 
 type LoginFormSchema = z.infer<typeof loginSchema>
 
-export const SignIn = () => {
+type Props = {
+  onSubmit: ({}: any) => void
+  isSubmitting: boolean
+}
+
+export const SignIn = (props: Props) => {
   const { control, handleSubmit, setError } = useForm<LoginFormSchema>({
     resolver: zodResolver(loginSchema),
   })
 
-  const [login, { error }] = useLoginMutation()
+  const [, { error }] = useLoginMutation()
+  // const { data, isLoading: isLoading } = useMeQuery()
+
+  // console.log(data)
+  //
+  // if (isLoading) return <>Loading...</>
+  // if (data) return <Navigate to={'/'} />
 
   if (error) {
     if (
@@ -40,14 +52,12 @@ export const SignIn = () => {
     }
   }
 
-  // loginError && setError('password', { type: 'dark side', message: loginError })
-
   return (
     <Card className={s.signIn}>
       <Typography as={'h1'} variant={'large'} className={s.title}>
         Sign In
       </Typography>
-      <form onSubmit={handleSubmit(login)} noValidate>
+      <form onSubmit={handleSubmit(props.onSubmit)} noValidate>
         <ControlledTextField name={'email'} control={control} label={'Email'} />
         <ControlledTextField name={'password'} control={control} label={'Password'} />
         <Controller
@@ -65,7 +75,7 @@ export const SignIn = () => {
         <Typography as={Link} to={'/password-recovery'} className={s.linkRecover}>
           Forgot Password?
         </Typography>
-        <Button type="submit">
+        <Button type="submit" disabled={props.isSubmitting}>
           <Typography>Sign In</Typography>
         </Button>
       </form>

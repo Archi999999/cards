@@ -11,8 +11,7 @@ import { PasswordRecovery } from '@/components/auth/password-recovery/password-r
 import { SignUp } from '@/components/auth/sign-up/sign-up.tsx'
 import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 import { SignInPage } from '@/pages/sign-in-page.tsx'
-
-const isAuthenticated = true
+import { useMeQuery } from '@/services/auth/auth.ts'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -39,7 +38,7 @@ const privateRoutes: RouteObject[] = [
 const Layout = () => {
   return (
     <>
-      <Header isAuth={isAuthenticated} />
+      <Header />
       <Outlet />
     </>
   )
@@ -49,19 +48,39 @@ const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
-      ...privateRoutes.map(route => ({
-        ...route,
-        element: <PrivateRouteWrapper>{route.element}</PrivateRouteWrapper>,
-      })),
+      {
+        element: <PrivateRoutes />,
+        children: privateRoutes,
+      },
       ...publicRoutes,
     ],
   },
+  // {
+  //   element: <Layout />,
+  //   children: [
+  //     ...privateRoutes.map(route => ({
+  //       ...route,
+  //       element: <PrivateRouteWrapper>{route.element}</PrivateRouteWrapper>,
+  //     })),
+  //     ...publicRoutes,
+  //   ],
+  // },
 ])
 
 export const Router = () => {
   return <RouterProvider router={router} />
 }
 
-function PrivateRouteWrapper({ children }: { children: React.ReactNode }) {
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" />
+function PrivateRoutes() {
+  const { data, isLoading } = useMeQuery()
+
+  if (isLoading) return <>Loading...</>
+
+  const isAuthenticated = !!data
+
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
+
+// function PrivateRouteWrapper({ children }: { children: React.ReactNode }) {
+//   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />
+// }
