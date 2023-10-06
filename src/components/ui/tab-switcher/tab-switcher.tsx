@@ -28,7 +28,7 @@ export const TabSwitcher: React.FC<Props> = ({ label, tabs }) => {
           ))}
         </Tabs.List>
         {tabs.map(tab => (
-          <Tabs.Content key={tab.trigger} value={tab.trigger} className={s.content}>
+          <Tabs.Content key={tab.trigger + 'tl'} value={tab.trigger} className={s.content}>
             {tab.content}
           </Tabs.Content>
         ))}

@@ -1,14 +1,22 @@
 import { useState } from 'react'
 
+import { useDispatch } from 'react-redux'
+
 import s from './pack-list.module.scss'
 
 import { Button, Slider, TextField, Typography } from '@/components'
 import { PackModal } from '@/components/customized/modals/pack-modal/pack-modal.tsx'
 import { TabSwitcherPacks } from '@/components/customized/tab-switcher-packs/tab-switcher-packs.tsx'
+import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { Trash } from '@/svg/trash-outline.tsx'
 
 export const PacksList = () => {
+  const dispatch = useDispatch()
   const [modal, setModal] = useState(false)
+
+  const onSearch = (value: string) => {
+    dispatch(decksSlice.actions.setSearchByName(value))
+  }
 
   return (
     <div className={s.packList}>
@@ -19,7 +27,11 @@ export const PacksList = () => {
         <Button onClick={() => setModal(true)}>Add New Pack</Button>
       </section>
       <section className={s.filterSection}>
-        <TextField variant={'search'} className={s.inputSearch} />
+        <TextField
+          variant={'search'}
+          className={s.inputSearch}
+          onValueChange={value => onSearch(value)}
+        />
         <TabSwitcherPacks />
         <Slider label={'Number of cards'} minValue={0} maxValue={12} />
         <Button variant={'secondary'}>

@@ -1,5 +1,7 @@
 import { FC, useState } from 'react'
 
+import { useSelector } from 'react-redux'
+
 import s from './pack-list.module.scss'
 
 import {
@@ -14,21 +16,27 @@ import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { TableCellWithButtons } from '@/components/ui/table/table-cell-with-buttons.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
+import { RootState } from '@/services/store.ts'
 import { Arrow } from '@/svg/arrow.tsx'
 
 type Props = {
   variant?: 'myPacks' | 'allPacks'
+  perPage?: number
 }
 
-export const Decks: FC<Props> = ({ variant }) => {
+export const Decks: FC<Props> = ({ variant, perPage = 10 }) => {
   const { data: { id: authorId } = {} } = useMeQuery()
+
   const [
     itemsPerPage,
-    //  setItemsPerPage,
-  ] = useState(10)
+    // setItemsPerPage
+  ] = useState(perPage)
+  const searchByName = useSelector<RootState, string>(state => state.decksSlice.searchByName)
+
   const decks = useGetDecksQuery({
     itemsPerPage,
     authorId: variant === 'myPacks' ? authorId : undefined,
+    name: searchByName,
   })
 
   if (decks.isLoading) return <div>...Loading</div>
@@ -57,7 +65,11 @@ export const Decks: FC<Props> = ({ variant }) => {
               <TableCell>{deck.name}</TableCell>
               <TableCell>{deck.cardsCount}</TableCell>
               <TableCellDate date={deck.updated} />
-              <TableCell>{deck.author.name}</TableCell>
+              {variant === 'myPacks' ? (
+                <TableCellDate date={deck.created} />
+              ) : (
+                <TableCell>{deck.author.name}</TableCell>
+              )}
               <TableCellWithButtons packId={deck.id} variant={variant} />
             </TableRow>
           )
