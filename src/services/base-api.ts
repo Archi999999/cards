@@ -4,7 +4,7 @@ import { customFetchBase } from '@/services/base-api-with-refetch.ts'
 
 export const baseApi = createApi({
   reducerPath: 'baseApi',
-  tagTypes: ['Decks'],
+  tagTypes: ['Decks', 'Me'],
   baseQuery: customFetchBase,
   //   fetchBaseQuery({
   // baseUrl: 'https://api.flashcards.andrii.es',

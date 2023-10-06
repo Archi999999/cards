@@ -12,6 +12,7 @@ const authApi = baseApi.injectEndpoints({
       extraOptions: {
         maxRetries: 0,
       },
+      providesTags: ['Me'],
     }),
     login: builder.mutation<any, { email: string; password: string }>({
       query: params => {
@@ -21,8 +22,31 @@ const authApi = baseApi.injectEndpoints({
           body: params,
         }
       },
+      invalidatesTags: ['Me'],
+    }),
+    logout: builder.mutation<void, void>({
+      query: () => {
+        return {
+          url: 'v1/auth/logout',
+          method: 'POST',
+        }
+      },
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          authApi.util.updateQueryData('me', undefined, () => {
+            return null
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        }
+      },
+      invalidatesTags: ['Me'],
     }),
   }),
 })
 
-export const { useLoginMutation, useMeQuery } = authApi
+export const { useLoginMutation, useMeQuery, useLogoutMutation } = authApi

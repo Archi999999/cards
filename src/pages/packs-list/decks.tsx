@@ -18,7 +18,7 @@ import { Arrow } from '@/svg/arrow.tsx'
 export const Decks = () => {
   const [
     itemsPerPage,
-    // , setItemsPerPage
+    //  setItemsPerPage,
   ] = useState(10)
   const decks = useGetDecksQuery({
     itemsPerPage,
@@ -51,7 +51,7 @@ export const Decks = () => {
               <TableCell>{deck.cardsCount}</TableCell>
               <TableCellDate date={deck.updated} />
               <TableCell>{deck.author.name}</TableCell>
-              <TableCellWithButtons />
+              <TableCellWithButtons id={deck.id} />
             </TableRow>
           )
         })}

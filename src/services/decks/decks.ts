@@ -1,5 +1,11 @@
 import { baseApi } from '@/services/base-api.ts'
-import { Deck, DecksParams, DecksResponse } from '@/services/decks/types.ts'
+import {
+  CreateDeckArgs,
+  Deck,
+  DecksParams,
+  DecksResponse,
+  DeleteDeckArgs,
+} from '@/services/decks/types.ts'
 
 const decksApi = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -13,15 +19,72 @@ const decksApi = baseApi.injectEndpoints({
       },
       providesTags: ['Decks'],
     }),
-    createDeck: build.mutation<Deck, { name: string; isPrivate?: boolean }>({
+    createDeck: build.mutation<Deck, CreateDeckArgs>({
       query: ({ name, isPrivate }) => ({
         url: 'v1/decks',
         method: 'POST',
         body: { name, isPrivate },
       }),
+      // async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+      //   console.log('here')
+      //   const state = getState() as RootState
+      //
+      //   console.log(state)
+      //   const { orderBy, searchByName, itemsPerPage, currentPage } = state.decksSlice
+      //   const patchResult = dispatch(
+      //     decksApi.util.updateQueryData(
+      //       'getDecks',
+      //       { name: searchByName, orderBy, itemsPerPage, currentPage },
+      //       (draft) => {
+      //         debugger
+      //         console.log(draft)
+      //         draft.items.pop()
+      //         draft.items.unshift()
+      //       }
+      //     )
+      //   )
+      //
+      //   try {
+      //     await queryFulfilled
+      //   } catch {
+      //     patchResult.undo()
+      //   }
+      // },
       invalidatesTags: ['Decks'],
+    }),
+    deleteDeck: build.mutation<void, DeleteDeckArgs>({
+      query: ({ id }) => {
+        return {
+          url: `v1/decks/${id}`,
+          method: 'DELETE',
+        }
+      },
+      // async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
+      //   const state = getState() as RootState
+      //
+      //   console.log(id)
+      //   const { orderBy, searchByName, itemsPerPage, currentPage } = state.decksSlice
+      //   const patchResult = dispatch(
+      //     decksApi.util.updateQueryData(
+      //       'getDecks',
+      //       { name: searchByName, orderBy, itemsPerPage, currentPage },
+      //       draft => {
+      //         debugger
+      //         console.log(draft)
+      //         draft.items = draft.items.filter(deck => deck.id !== id)
+      //       }
+      //     )
+      //   )
+      //
+      //     try {
+      //       await queryFulfilled
+      //     } catch {
+      //       patchResult.undo()
+      //     }
+      //   },
+      //   invalidatesTags: ['Decks'],
     }),
   }),
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation } = decksApi
+export const { useGetDecksQuery, useCreateDeckMutation, useDeleteDeckMutation } = decksApi

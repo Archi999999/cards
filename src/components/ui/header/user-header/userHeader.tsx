@@ -10,6 +10,7 @@ import {
   Separator,
 } from '@/components/ui/dropdown/dropdown.tsx'
 import { Typography } from '@/components/ui/typography/typography.tsx'
+import { useLogoutMutation } from '@/services/auth/auth.ts'
 import { Logout } from '@/svg'
 import { PersonOutline } from '@/svg/person-outline.tsx'
 
@@ -19,6 +20,11 @@ type Props = {
 }
 
 export const UserHeader: FC<Props> = ({ name, avatar }) => {
+  const [logout] = useLogoutMutation()
+  // const logoutHandler = () => {
+  //   logout()
+  // }
+
   return (
     <Dropdown trigger={<User name={name} avatar={avatar} />}>
       <DropdownItem>
@@ -33,7 +39,7 @@ export const UserHeader: FC<Props> = ({ name, avatar }) => {
       <Separator />
       <DropdownItemWithIcon icon={<PersonOutline />} text={'My Profile'} />
       <Separator />
-      <DropdownItemWithIcon icon={<Logout />} text={'Sign Out'} />
+      <DropdownItemWithIcon onClick={() => logout()} icon={<Logout />} text={'Sign Out'} />
     </Dropdown>
   )
 }
