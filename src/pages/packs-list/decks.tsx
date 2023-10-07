@@ -32,11 +32,15 @@ export const Decks: FC<Props> = ({ variant, perPage = 10 }) => {
     // setItemsPerPage
   ] = useState(perPage)
   const searchByName = useSelector<RootState, string>(state => state.decksSlice.searchByName)
+  const minCardsCount = useSelector<RootState, number>(state => state.decksSlice.minCardsCount)
+  const maxCardsCount = useSelector<RootState, number>(state => state.decksSlice.maxCardsCount)
 
   const decks = useGetDecksQuery({
     itemsPerPage,
     authorId: variant === 'myPacks' ? authorId : undefined,
     name: searchByName,
+    minCardsCount,
+    maxCardsCount,
   })
 
   if (decks.isLoading) return <div>...Loading</div>
