@@ -52,6 +52,7 @@ export const TextField: FC<TextFieldProps> = props => {
           required={props.required}
           minLength={props.minLength}
           id={label}
+          value={props.value}
         />
         {name === 'password' &&
           (!isVisible ? <EyeOutline onClick={onVisible} /> : <EyeOffOutline onClick={onVisible} />)}

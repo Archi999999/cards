@@ -59,6 +59,7 @@ const decksApi = baseApi.injectEndpoints({
           method: 'DELETE',
         }
       },
+      invalidatesTags: ['Decks'],
       // async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
       //   const state = getState() as RootState
       //
