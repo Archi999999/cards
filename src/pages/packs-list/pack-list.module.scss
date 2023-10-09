@@ -22,6 +22,7 @@
 .table {
   max-width: var(--main-container-width);
   margin: auto;
+  margin-bottom: 30px;
 }
 
 .buttonUpdated {
@@ -36,5 +37,7 @@
   }
 }
 
-// .createdBy {
-// }
+.pagination {
+  display: flex;
+  justify-content: center;
+}

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import { Button, Typography } from '@/components'
 import s from '@/components/ui/pagination/pagination.module.scss'
@@ -7,25 +7,54 @@ import { Arrow } from '@/svg/arrow.tsx'
 type Props = {
   currentPage: number
   totalPages: number
+  callBack?: (pageNumber: number) => void
 }
 
-export const PageSelector: FC<Props> = ({ currentPage, totalPages }) => {
-  const [page, setPage] = useState(currentPage)
-
+export const PageSelector: FC<Props> = ({ currentPage: page, totalPages, callBack }) => {
+  if (page > totalPages) {
+    page = totalPages
+  }
   const onChangePage = (pageNumber: number) => {
-    setPage(pageNumber)
+    callBack && callBack(pageNumber)
   }
 
   const onClickLeft = () => {
-    setPage(prev => prev - 1)
+    callBack && callBack(page - 1)
   }
 
   const onClickRight = () => {
-    setPage(prev => prev + 1)
+    callBack && callBack(page + 1)
   }
 
   const leftNumber = page < 4 ? 2 : page - 2
   const rightNumber = page > totalPages - 3 ? totalPages : page + 3
+
+  if (totalPages < 7) {
+    return (
+      <ul className={s.pageSelector}>
+        <li key={'arrowLeft'}>
+          <Button className={s.leftButton} onClick={onClickLeft} disabled={page === 1}>
+            <Arrow className={s.leftArrow} />
+          </Button>
+        </li>
+        {Array.from({ length: totalPages }, (_, i) => (
+          <li key={i + 1}>
+            <button
+              onClick={() => onChangePage(i + 1)}
+              className={`${s.pageButton} ${page === i + 1 && s.pageButtonActive}`}
+            >
+              {i + 1}
+            </button>
+          </li>
+        ))}
+        <li key={'arrowRight'}>
+          <Button className={s.rightButton} onClick={onClickRight} disabled={page === totalPages}>
+            <Arrow className={s.rightArrow} />
+          </Button>
+        </li>
+      </ul>
+    )
+  }
 
   let totalPageNumbers = []
 
