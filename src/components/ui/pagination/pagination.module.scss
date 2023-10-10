@@ -101,8 +101,13 @@
 // }
 
 .select {
+  display: flex;
+  gap: 10px;
+
   height: 24px;
   margin: 0 9px;
+
+  white-space: nowrap;
 }
 
 .div {
