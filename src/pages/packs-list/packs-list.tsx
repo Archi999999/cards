@@ -18,7 +18,14 @@ export const PacksList = () => {
   const [currentMinValue, setMinValue] = useState(0)
   const [currentMaxValue, setMaxValue] = useState(0)
 
-  const { data: { maxCardsCount } = {} } = useGetDecksQuery()
+  const { data } = useGetDecksQuery()
+  const maxCardsCount = data?.maxCardsCount
+  // const totalPages = data?.pagination.totalPages
+  // const itemsPerPage = data?.pagination.itemsPerPage
+  // const currentPage = data?.pagination.currentPage
+  // const totalItems = data?.pagination.totalItems
+
+  // console.log(data)
 
   useEffect(() => {
     if (maxCardsCount) {
