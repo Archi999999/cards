@@ -1,6 +1,6 @@
 .packList {
   max-width: var(--main-container-width);
-  margin: 36px auto;
+  margin: 36px 136px;
 }
 
 .headerSection {
@@ -10,6 +10,8 @@
 
 .filterSection {
   display: flex;
+  flex-wrap: nowrap;
+  gap: 2px;
   align-items: end;
   justify-content: space-between;
 }
