@@ -21,7 +21,7 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
   variant,
   ...props
 }) => {
-  const [modal, setModal] = useState(false)
+  const [modalDelete, setModalDelete] = useState(false)
 
   return (
     <td className={`${className} ${s.cell} `} {...props}>
@@ -34,18 +34,18 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
             <button className={s.button}>
               <Edit2Outline color={'currentColor'} />
             </button>
-            <button className={s.button} onClick={() => setModal(true)}>
+            <button className={s.button} onClick={() => setModalDelete(true)}>
               <Trash />
             </button>
           </>
         )}
         {variant === 'allPacks' && <span>Learn</span>}
       </div>
-      {modal && (
+      {modalDelete && (
         <DeleteModal
           title={'Delete Pack'}
           nameItem={nameItem}
-          setModal={setModal}
+          setModal={setModalDelete}
           packId={packId}
         />
       )}
