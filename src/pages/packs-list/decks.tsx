@@ -57,6 +57,7 @@ export const Decks: FC<Props> = ({ variant }) => {
   if (decks.error) return <div>ERROR!!!</div>
 
   return (
+
     <>
       <Table className={s.table}>
         <TableHeader>
@@ -84,8 +85,8 @@ export const Decks: FC<Props> = ({ variant }) => {
                   <TableCellDate date={deck.created} />
                 ) : (
                   <TableCell>{deck.author.name}</TableCell>
-                )}
-                <TableCellWithButtons packId={deck.id} variant={variant} />
+                )}                
+                <TableCellWithButtons packId={deck.id} variant={variant} nameItem={deck.name} />
               </TableRow>
             )
           })}
@@ -100,5 +101,6 @@ export const Decks: FC<Props> = ({ variant }) => {
         />
       </section>
     </>
+
   )
 }
