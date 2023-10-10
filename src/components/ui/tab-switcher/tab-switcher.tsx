@@ -19,7 +19,7 @@ export const TabSwitcher: React.FC<Props> = ({ label, tabs }) => {
   return (
     <Label>
       <Typography>{label}</Typography>
-      <Tabs.Root>
+      <Tabs.Root activationMode={'automatic'}>
         <Tabs.List className={s.tabsList}>
           {tabs.map(tab => (
             <Tabs.Trigger className={s.tabsTrigger} value={tab.trigger} key={tab.trigger}>
