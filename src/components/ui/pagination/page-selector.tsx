@@ -11,9 +11,6 @@ type Props = {
 }
 
 export const PageSelector: FC<Props> = ({ currentPage: page, totalPages, callBack }) => {
-  if (page > totalPages) {
-    page = totalPages
-  }
   const onChangePage = (pageNumber: number) => {
     callBack && callBack(pageNumber)
   }
