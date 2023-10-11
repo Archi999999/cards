@@ -36,9 +36,11 @@ const privateRoutes: RouteObject[] = [
 ]
 
 const Layout = () => {
+  const { data, isLoading } = useMeQuery()
+
   return (
     <>
-      <Header />
+      <Header data={data} isLoading={isLoading} />
       <Outlet />
     </>
   )

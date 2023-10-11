@@ -17,6 +17,7 @@ export type CreateDeckArgs = {
   name: string
   isPrivate?: boolean
 }
+export type UpdateDeckArgs = Pick<Deck, 'id' | 'cover' | 'name' | 'isPrivate'>
 export type DeleteDeckArgs = Pick<Deck, 'id'>
 export type Deck = {
   id: string
