@@ -5,6 +5,7 @@ import {
   DecksParams,
   DecksResponse,
   DeleteDeckArgs,
+  UpdateDeckArgs,
 } from '@/services/decks/types.ts'
 
 const decksApi = baseApi.injectEndpoints({
@@ -52,6 +53,14 @@ const decksApi = baseApi.injectEndpoints({
       // },
       invalidatesTags: ['Decks'],
     }),
+    updateDeck: build.mutation<any, UpdateDeckArgs>({
+      query: ({ id, name, isPrivate }) => ({
+        url: `v1/decks/${id}`,
+        method: 'PATCH',
+        body: { name, isPrivate },
+      }),
+      invalidatesTags: ['Decks'],
+    }),
     deleteDeck: build.mutation<void, DeleteDeckArgs>({
       query: ({ id }) => {
         return {
@@ -88,4 +97,9 @@ const decksApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation, useDeleteDeckMutation } = decksApi
+export const {
+  useGetDecksQuery,
+  useCreateDeckMutation,
+  useUpdateDeckMutation,
+  useDeleteDeckMutation,
+} = decksApi
