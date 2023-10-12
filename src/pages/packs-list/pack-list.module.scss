@@ -3,6 +3,13 @@
   margin: 36px 136px;
 }
 
+.linkCard {
+  &:hover {
+    cursor: pointer;
+    color: var(--color-dark-100);
+  }
+}
+
 .headerSection {
   display: flex;
   justify-content: space-between;

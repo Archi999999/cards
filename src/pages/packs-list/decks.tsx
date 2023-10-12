@@ -57,7 +57,6 @@ export const Decks: FC<Props> = ({ variant }) => {
   if (decks.error) return <div>ERROR!!!</div>
 
   return (
-
     <>
       <Table className={s.table}>
         <TableHeader>
@@ -78,14 +77,21 @@ export const Decks: FC<Props> = ({ variant }) => {
           {decks.data?.items?.map(deck => {
             return (
               <TableRow key={deck.id}>
-                <TableCell>{deck.name}</TableCell>
+                <TableCell
+                  className={s.linkCard}
+                  onClick={() => {
+                    alert('hi!')
+                  }}
+                >
+                  {deck.name}
+                </TableCell>
                 <TableCell>{deck.cardsCount}</TableCell>
                 <TableCellDate date={deck.updated} />
                 {variant === 'myPacks' ? (
                   <TableCellDate date={deck.created} />
                 ) : (
                   <TableCell>{deck.author.name}</TableCell>
-                )}                
+                )}
                 <TableCellWithButtons packId={deck.id} variant={variant} nameItem={deck.name} />
               </TableRow>
             )
@@ -101,6 +107,5 @@ export const Decks: FC<Props> = ({ variant }) => {
         />
       </section>
     </>
-
   )
 }
