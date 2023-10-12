@@ -1,3 +1,5 @@
+import { FC } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
@@ -19,6 +21,7 @@ const loginSchema = z
       .string()
       .nonempty('Enter password')
       .min(6, 'Minimum 6 characters for password')
+      .max(30, 'Maximum 30 characters for password')
       .default(''),
     confirmPassword: z.string().nonempty('Confirm password').default(''),
   })
@@ -29,16 +32,20 @@ const loginSchema = z
 
 type LoginFormSchema = z.infer<typeof loginSchema>
 
-export const SignUp = () => {
+type Props = {
+  onSubmit: ({}: any) => void
+}
+
+export const SignUp: FC<Props> = ({ onSubmit }) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormSchema>({ resolver: zodResolver(loginSchema) })
 
-  const onSubmit = (data: LoginFormSchema) => {
-    console.log(data)
-  }
+  // const onSubmit = (data: LoginFormSchema) => {
+  //   console.log(data)
+  // }
 
   return (
     <Card className={s.signUp}>
