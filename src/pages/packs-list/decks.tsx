@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import s from './pack-list.module.scss'
 
@@ -77,13 +78,8 @@ export const Decks: FC<Props> = ({ variant }) => {
           {decks.data?.items?.map(deck => {
             return (
               <TableRow key={deck.id}>
-                <TableCell
-                  className={s.linkCard}
-                  onClick={() => {
-                    alert('hi!')
-                  }}
-                >
-                  {deck.name}
+                <TableCell className={s.linkCard}>
+                  <Link to={`/cards/${deck.id}`}>{deck.name}</Link>
                 </TableCell>
                 <TableCell>{deck.cardsCount}</TableCell>
                 <TableCellDate date={deck.updated} />

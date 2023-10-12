@@ -3,7 +3,7 @@ import { CardsResponse, GetRequestCards } from '@/services/cards/types.ts'
 
 const cardsApi = baseApi.injectEndpoints({
   endpoints: build => ({
-    getCard: build.query<CardsResponse, GetRequestCards>({
+    getCards: build.query<CardsResponse, GetRequestCards>({
       query: ({ id, ...args }) => {
         return {
           url: `v1/decks/${id}/cards`,
@@ -16,4 +16,4 @@ const cardsApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetCardQuery } = cardsApi
+export const { useGetCardsQuery } = cardsApi

@@ -4,8 +4,12 @@
 }
 
 .linkCard {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   &:hover {
-    cursor: pointer;
     color: var(--color-dark-100);
   }
 }
