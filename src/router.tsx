@@ -8,6 +8,9 @@ import {
 
 import { Header } from '@/components'
 import { PasswordRecovery } from '@/components/auth/password-recovery/password-recovery.tsx'
+
+import { SignUp } from '@/components/auth/sign-up/sign-up.tsx'
+import { Cards } from '@/pages/cards-list/cards.tsx'
 import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 import { SignInPage } from '@/pages/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up-page.tsx'
@@ -32,6 +35,10 @@ const privateRoutes: RouteObject[] = [
   {
     path: '/',
     element: <PacksList />,
+  },
+  {
+    path: '/cards/:deckId',
+    element: <Cards />,
   },
 ]
 

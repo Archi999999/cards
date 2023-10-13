@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import s from './pack-list.module.scss'
 
@@ -16,6 +17,7 @@ import {
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { TableCellWithButtons } from '@/components/ui/table/table-cell-with-buttons.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
+import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { RootState } from '@/services/store.ts'
 import { Arrow } from '@/svg/arrow.tsx'
@@ -50,11 +52,16 @@ export const Decks: FC<Props> = ({ variant }) => {
     maxCardsCount,
     currentPage,
   })
+  const dispatch = useDispatch()
 
   const totalPages = decks.data?.pagination.totalPages
 
   if (decks.isLoading) return <div>...Loading</div>
   if (decks.error) return <div>ERROR!!!</div>
+  const chooseDeckHandler = (name: string, id: string) => {
+    dispatch(cardsSlice.actions.setUserId(id))
+    dispatch(cardsSlice.actions.setNameCard(name))
+  }
 
   return (
     <>
@@ -77,7 +84,12 @@ export const Decks: FC<Props> = ({ variant }) => {
           {decks.data?.items?.map(deck => {
             return (
               <TableRow key={deck.id}>
-                <TableCell>{deck.name}</TableCell>
+                <TableCell
+                  className={s.linkCard}
+                  onClick={() => chooseDeckHandler(deck.name, deck.userId)}
+                >
+                  <Link to={`/cards/${deck.id}`}>{deck.name}</Link>
+                </TableCell>
                 <TableCell>{deck.cardsCount}</TableCell>
                 <TableCellDate date={deck.updated} />
                 {variant === 'myPacks' ? (
