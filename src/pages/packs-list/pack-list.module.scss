@@ -3,17 +3,6 @@
   margin: 36px 136px;
 }
 
-.linkCard {
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  &:hover {
-    color: var(--color-dark-100);
-  }
-}
-
 .headerSection {
   display: flex;
   justify-content: space-between;
@@ -34,8 +23,7 @@
 
 .table {
   max-width: var(--main-container-width);
-  margin: auto;
-  margin-bottom: 30px;
+  margin: 0 auto 30px;
 }
 
 .buttonUpdated {
@@ -53,4 +41,64 @@
 .pagination {
   display: flex;
   justify-content: center;
+}
+
+//these styles for cards
+.linkCard {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: var(--color-dark-100);
+  }
+}
+
+.emptyDeck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 80px;
+
+  color: var(--color-dark-100);
+
+  button {
+    width: fit-content;
+    margin-top: 30px;
+  }
+}
+
+.tablesButtons {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+
+  &:disabled {
+    pointer-events: none;
+    color: var(--color-dark-100);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-500);
+    box-shadow: 0 0 0 5px var(--color-dark-500);
+  }
+
+  &:active {
+    background-color: var(--color-dark-300);
+    box-shadow: 0 0 0 5px var(--color-dark-300);
+
+    svg {
+      fill: var(--color-light-900);
+    }
+  }
 }
