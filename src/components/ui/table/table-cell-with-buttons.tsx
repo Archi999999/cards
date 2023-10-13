@@ -3,6 +3,7 @@ import { ComponentPropsWithoutRef, FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { DeleteModal } from '@/components/customized/modals/delete-modal/delete-modal.tsx'
+import { UpdatePackModal } from '@/components/customized/modals/pack-modal/update-pack-modal.tsx'
 import s from '@/components/ui/table/table.module.scss'
 import { Edit2Outline } from '@/svg/edit-2-outline.tsx'
 import { PlayCircleOutline } from '@/svg/play-circle-outline.tsx'
@@ -22,6 +23,7 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
   ...props
 }) => {
   const [modalDelete, setModalDelete] = useState(false)
+  const [modalUpdate, setModalUpdate] = useState(false)
 
   return (
     <td className={`${className} ${s.cell} `} {...props}>
@@ -31,7 +33,7 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
         </Link>
         {variant === 'myPacks' && (
           <>
-            <button className={s.button}>
+            <button className={s.button} onClick={() => setModalUpdate(true)}>
               <Edit2Outline color={'currentColor'} />
             </button>
             <button className={s.button} onClick={() => setModalDelete(true)}>
@@ -49,6 +51,7 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
           packId={packId}
         />
       )}
+      {modalUpdate && <UpdatePackModal id={packId} setModal={setModalUpdate} />}
     </td>
   )
 }

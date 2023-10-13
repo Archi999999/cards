@@ -8,10 +8,12 @@ import {
 
 import { Header } from '@/components'
 import { PasswordRecovery } from '@/components/auth/password-recovery/password-recovery.tsx'
+
 import { SignUp } from '@/components/auth/sign-up/sign-up.tsx'
 import { Cards } from '@/pages/cards-list/cards.tsx'
 import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 import { SignInPage } from '@/pages/sign-in-page.tsx'
+import { SignUpPage } from '@/pages/sign-up-page.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
 
 const publicRoutes: RouteObject[] = [
@@ -21,7 +23,7 @@ const publicRoutes: RouteObject[] = [
   },
   {
     path: '/registration',
-    element: <SignUp />,
+    element: <SignUpPage />,
   },
   {
     path: '/password-recovery',
@@ -41,9 +43,11 @@ const privateRoutes: RouteObject[] = [
 ]
 
 const Layout = () => {
+  const { data, isLoading } = useMeQuery()
+
   return (
     <>
-      <Header />
+      <Header data={data} isLoading={isLoading} />
       <Outlet />
     </>
   )
@@ -77,11 +81,11 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const { data, isLoading } = useMeQuery()
+  const { isLoading, isError } = useMeQuery()
 
   if (isLoading) return <>Loading...</>
 
-  const isAuthenticated = !!data
+  const isAuthenticated = !isError
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }

@@ -29,11 +29,11 @@ type Props = {
 export const Decks: FC<Props> = ({ variant }) => {
   const { data: { id: authorId } = {} } = useMeQuery()
 
-  const { data } = useGetDecksQuery()
+  // const { data } = useGetDecksQuery()
   // const totalPages = data?.pagination.totalPages
   // const itemsPerPage = data?.pagination.itemsPerPage
   // const currentPage = data?.pagination.currentPage
-  const totalItems = data?.pagination.totalItems
+  // const totalItems = data?.pagination.totalItems
   // const [
   //   itemsPerPage,
   //   // setItemsPerPage
@@ -58,7 +58,6 @@ export const Decks: FC<Props> = ({ variant }) => {
 
   if (decks.isLoading) return <div>...Loading</div>
   if (decks.error) return <div>ERROR!!!</div>
-
   const chooseDeckHandler = (name: string, id: string) => {
     dispatch(cardsSlice.actions.setUserId(id))
     dispatch(cardsSlice.actions.setNameCard(name))
@@ -109,7 +108,7 @@ export const Decks: FC<Props> = ({ variant }) => {
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
           totalPages={totalPages}
-          totalItems={totalItems}
+          // totalItems={totalItems}
         />
       </section>
     </>

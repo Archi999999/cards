@@ -1,3 +1,5 @@
+import { FC } from 'react'
+
 import { Link } from 'react-router-dom'
 
 import s from './header.module.scss'
@@ -5,11 +7,16 @@ import s from './header.module.scss'
 import { Button } from '@/components/ui'
 import { UserHeader } from '@/components/ui/header/user-header'
 import { Typography } from '@/components/ui/typography/typography.tsx'
-import { useMeQuery } from '@/services/auth/auth.ts'
+// import { useMeQuery } from '@/services/auth/auth.ts'
 import { Logo } from '@/svg'
 
-export const Header = () => {
-  const { data, isLoading } = useMeQuery()
+type Props = {
+  data: any
+  isLoading: boolean
+}
+
+export const Header: FC<Props> = ({ data, isLoading }) => {
+  // const { data, isLoading } = useMeQuery()
 
   // if (isLoading) {
   //   return <>Loading...</>

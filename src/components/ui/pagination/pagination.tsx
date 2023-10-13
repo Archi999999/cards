@@ -27,6 +27,10 @@ export const Pagination: React.FC<Props> = ({
     { id: '30', value: '30' },
   ]
 
+  if (currentPage > totalPages) {
+    dispatch(decksSlice.actions.setCurrentPage(totalPages))
+  }
+
   const onChangePerPage = (value: string) => {
     dispatch(decksSlice.actions.setItemPerPage(+value))
   }

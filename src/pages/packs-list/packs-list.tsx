@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import s from './pack-list.module.scss'
 
 import { Button, Slider, TextField, Typography } from '@/components'
-import { PackModal } from '@/components/customized/modals/pack-modal/pack-modal.tsx'
+import { CreatePackModal } from '@/components/customized/modals/pack-modal/create-pack-modal.tsx'
 import { TabSwitcherPacks } from '@/components/customized/tab-switcher-packs/tab-switcher-packs.tsx'
 import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
@@ -98,9 +98,7 @@ export const PacksList = () => {
           Clear Filter
         </Button>
       </section>
-      {modal && (
-        <PackModal title={'Add New Pack'} setModal={setModal} confirmButtonName={'Add New Pack'} />
-      )}
+      {modal && <CreatePackModal setModal={setModal} />}
     </div>
   )
 }
