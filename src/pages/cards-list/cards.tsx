@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import styles from './cards.module.scss'
 
@@ -21,17 +21,16 @@ export const Cards: FC<CardsProps> = ({}) => {
   })
   const { data: { id: authorId } = {} } = useMeQuery()
 
-  ta
   const userId = useSelector<RootState, string>(state => state.cardsSlice.userId)
   const cardsName = useSelector<RootState, string>(state => state.cardsSlice.nameCard)
   const isMyCard = userId === authorId
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.linkBack}>
+      <Link className={styles.linkBack} to={`/`}>
         <ArrowBack />
         <Typography variant={'body_2'}> Back to Packs List</Typography>
-      </div>
+      </Link>
       <div className={styles.headerCards}>
         <Typography variant={'large'}>{cardsName}</Typography>
         <Button variant={'primary'} disabled={dataCards?.items.length === 0}>
