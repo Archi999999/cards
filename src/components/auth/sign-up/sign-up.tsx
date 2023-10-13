@@ -1,12 +1,16 @@
+import { FC } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { z } from 'zod'
 
 import s from './sign-up.module.scss'
 
-import { Button, TextField, Typography } from '@/components'
+import {Button, TextField, Typography} from '@/components'
 import { Card } from '@/components/ui/card/card.tsx'
+import {useRegistrationMutation} from "@/services/auth/auth.ts";
+import {ControlledTextField} from "@/components/ui/controlled-text-field/controlled-text-field.tsx";
 
 const loginSchema = z
   .object({
@@ -19,6 +23,7 @@ const loginSchema = z
       .string()
       .nonempty('Enter password')
       .min(6, 'Minimum 6 characters for password')
+      .max(30, 'Maximum 30 characters for password')
       .default(''),
     confirmPassword: z.string().nonempty('Confirm password').default(''),
   })
@@ -29,16 +34,31 @@ const loginSchema = z
 
 type LoginFormSchema = z.infer<typeof loginSchema>
 
-export const SignUp = () => {
+type Props = {
+  onSubmit: ({}: any) => void
+}
+
+export const SignUp: FC<Props> = ({ onSubmit }) => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+      setError,
+    // formState: { errors },
   } = useForm<LoginFormSchema>({ resolver: zodResolver(loginSchema) })
 
-  const onSubmit = (data: LoginFormSchema) => {
-    console.log(data)
-  }
+  const [,{error}] = useRegistrationMutation()
+
+    if (error) {
+        if (
+            'status' in error &&
+            typeof error.data === 'object' &&
+            error.data &&
+            'errorMessages' in error.data &&
+            Array.isArray(error.data.errorMessages)
+    ){
+            setError('confirmPassword', {type: 'dark side', message: error.data.errorMessages[0] as string})
+        }
+    }
 
   return (
     <Card className={s.signUp}>
@@ -46,34 +66,9 @@ export const SignUp = () => {
         Sign Up
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              value={field.value}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-              name={field.name}
-              error={errors?.email?.message}
-              label={'Email'}
-            />
-          )}
-        />
-        <Controller
-          name="password"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              value={field.value}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-              name={field.name}
-              error={errors?.password?.message}
-              label={'Password'}
-            />
-          )}
-        />
+          <ControlledTextField name={'email'} control={control} label={'Email'}/>
+          <ControlledTextField name={'password'} control={control} label={'Password'}/>
+        {/*  <ControlledTextField name={'confirmPassword'} control={control} label={'Confirm password'}/>*/}
         <Controller
           name="confirmPassword"
           control={control}
@@ -83,7 +78,7 @@ export const SignUp = () => {
               onChange={field.onChange}
               onBlur={field.onBlur}
               name="password"
-              error={errors?.confirmPassword?.message}
+              // error={errors?.confirmPassword?.message}
               label={'Confirm password'}
               className={s.confirmPassword}
             />
