@@ -2,8 +2,8 @@ import { FC } from 'react'
 
 import { Label } from '@radix-ui/react-label'
 import * as RadixSlider from '@radix-ui/react-slider'
-// import { useDispatch } from 'react-redux'
 
+// import { useDispatch } from 'react-redux'
 import s from './slider.module.scss'
 
 import { Typography } from '@/components'
