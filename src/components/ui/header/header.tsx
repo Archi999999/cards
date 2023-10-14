@@ -26,6 +26,7 @@ export const Header: FC<Props> = ({ data, isLoading }) => {
 
   const name = data?.name
   const avatar = data?.avatar
+  const email = data?.email
 
   return (
     <header className={`${s.header}`}>
@@ -35,7 +36,7 @@ export const Header: FC<Props> = ({ data, isLoading }) => {
           <Typography>Sign in</Typography>
         </Button>
       ) : (
-        <UserHeader name={name} avatar={avatar} />
+        <UserHeader name={name} avatar={avatar} email={email}/>
       )}
     </header>
   )

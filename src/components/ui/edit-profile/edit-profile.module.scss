@@ -1,0 +1,65 @@
+.profile{
+  align-items: center;
+
+}
+
+.title {
+  margin-bottom: 27px;
+}
+
+.avatarBlock {
+  width: 96px;
+  height: 96px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.buttonEdit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  margin-left: 9px;
+  cursor: pointer;
+}
+
+.buttonEditImage {
+  position: absolute;
+  background-color: var(--color-dark-300);
+  border-radius: 4px;
+}
+
+.nameBlock {
+  display: flex;
+  align-items: center;
+}
+
+.email {
+  color: var(--color-dark-100);
+  margin-bottom: 13px;
+}
+
+.logoutButton {
+  margin-bottom: 18px;
+}
+
+.textField {
+  width: 100%;
+  margin-top: 6px;
+  margin-bottom: 36px;
+}
+
+.buttonSaveName {
+  box-sizing: border-box;
+  margin-bottom: 61px;
+}

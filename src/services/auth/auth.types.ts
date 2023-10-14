@@ -12,3 +12,29 @@ export type RegistrationArgs = {
   subject?: string
   sendConfirmationEmail?: boolean
 }
+
+export type MeResponse = {
+  email?: string
+  name?: string
+  id?: string
+  isEmailVerified?: boolean
+  avatar?: string | null,
+  created?: string
+  updated?: string
+}
+
+export type updateResponse = {
+  avatar: string
+  id: string
+  email: string
+  isEmailVerified: boolean
+  name: string
+  created: string
+  updated: string
+}
+
+export type updateRequest = {
+  // avatar: string | null
+  name: string
+  email?: string
+}
