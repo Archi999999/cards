@@ -34,7 +34,7 @@ export type updateResponse = {
 }
 
 export type updateRequest = {
-  // avatar: string | null
-  name: string
+  avatar?: any
+  name?: string
   email?: string
-}
+} | FormData

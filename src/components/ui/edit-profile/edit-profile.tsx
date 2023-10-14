@@ -5,20 +5,36 @@ import {Logout} from "@/svg";
 import s from './edit-profile.module.scss'
 import {Avatar} from "@/components/ui/avatar/avatar.tsx";
 import {Edit2Outline} from "@/svg/edit-2-outline.tsx";
-import {KeyboardEvent, useState} from "react";
+import {ChangeEvent, KeyboardEvent, useRef, useState} from "react";
 
 export const EditProfile = () => {
     const {data} = useMeQuery()
-    const {name, email} = data || {};
+    const {name, email, avatar} = data || {};
     const [logout] = useLogoutMutation()
     const [showInput, setShowInput] = useState(false)
     const [newName, setNewName] = useState<string>(name!)
+    const inputRef = useRef<HTMLInputElement>(null)
+    const [inputFile, setInputFile] = useState(avatar)
 
     const [updateMe] = useUpdateMeMutation()
     function renameHandler (){
         if (newName === name) {setShowInput(false); return}
         updateMe({name: newName!})
         setShowInput(false)
+    }
+
+    const selectFileHandler = () => {
+        inputRef && inputRef.current?.click()
+    }
+
+    const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length) {
+            const image = e.target.files[0]
+            const formData = new FormData();
+            formData.append('avatar', image)
+            updateMe(formData)
+            setInputFile(URL.createObjectURL(image))
+        }
     }
 
     const dontRename = () => {
@@ -35,10 +51,11 @@ export const EditProfile = () => {
         <Card className={s.profile}>
             <Typography variant={'large'} className={s.title}>Personal Information</Typography>
             <div className={s.avatarBlock}>
-                <Avatar className={s.avatar}/>
-                <button className={`${s.buttonEdit} ${s.buttonEditImage}`}>
+                <Avatar className={s.avatar} avatar={inputFile!}/>
+                <button className={`${s.buttonEdit} ${s.buttonEditImage}`} onClick={selectFileHandler}>
                     <Edit2Outline color={'white'}/>
                 </button>
+                <input style={{ display: 'none' }} ref={inputRef} type="file" onChange={uploadHandler} />
             </div>
             {
                 !showInput
