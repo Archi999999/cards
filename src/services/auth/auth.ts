@@ -3,7 +3,7 @@ import { baseApi } from '@/services/base-api.ts'
 
 const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    me: builder.query<MeResponse | null, void>({
+    me: builder.query<MeResponse, void>({
       query: () => {
         return {
           url: 'v1/auth/me',
@@ -23,7 +23,7 @@ const authApi = baseApi.injectEndpoints({
           body: params,
         }
       },
-      invalidatesTags: ['Me'],
+      // invalidatesTags: ['Me'],
     }),
     login: builder.mutation<any, LoginArgs>({
       query: params => {
@@ -45,7 +45,7 @@ const authApi = baseApi.injectEndpoints({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           authApi.util.updateQueryData('me', undefined, () => {
-            return null
+            return {}
           })
         )
 

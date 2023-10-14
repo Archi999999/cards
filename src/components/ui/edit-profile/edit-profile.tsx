@@ -15,9 +15,8 @@ export const EditProfile = () => {
     const [newName, setNewName] = useState<string>(name!)
 
     const [updateMe] = useUpdateMeMutation()
-    const renameHandler = () => {
-        console.log(newName)
-        console.log(data)
+    function renameHandler (){
+        if (newName === name) {setShowInput(false); return}
         updateMe({name: newName!})
         setShowInput(false)
     }
@@ -55,11 +54,11 @@ export const EditProfile = () => {
                             <Logout/>Logout
                         </Button>
                     </>
-                    : <>
+                    : <div>
                         <TextField onValueChange={setNewName} value={newName} label={'Nickname'} className={s.textField}
-                                   autoFocus onBlur={dontRename} onKeyDown={keyDownHandler}/>
+                                   autoFocus onKeyDown={keyDownHandler}/>
                         <Button fullWidth className={s.buttonSaveName} onClick={renameHandler} >Save Changes</Button>
-                    </>
+                    </div>
             }
         </Card>
     );
