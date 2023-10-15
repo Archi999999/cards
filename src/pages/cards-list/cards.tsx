@@ -45,7 +45,7 @@ export const Cards: FC<CardsProps> = ({}) => {
             Add New Card
           </Button>
         )}
-        {!isMyCard && dataCards?.items.length === 0 && (
+        {!isMyCard && dataCards?.items.length !== 0 && (
           <Button variant={'primary'} disabled={dataCards?.items.length === 0}>
             Learn to Pack
           </Button>

@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { CardsGrade } from '@/pages/cards-list/cards-table/cards-grade.tsx'
 import s from '@/pages/packs-list/pack-list.module.scss'
 import { RootObjectItems } from '@/services/cards/types.ts'
@@ -54,7 +55,7 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard }) => {
             <TableRow key={card.id}>
               <TableCell>{card.question}</TableCell>
               <TableCell>{card.answer}</TableCell>
-              <TableCell>{card.updated}</TableCell>
+              <TableCellDate date={card.updated} />
               <TableCell>
                 <CardsGrade grade={card.grade} />
               </TableCell>

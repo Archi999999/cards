@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { TextField } from '@/components'
 import { Modal } from '@/components/ui/modal/modal.tsx'
 import { useCreateCardMutation } from '@/services/cards/cards.ts'
@@ -12,10 +14,11 @@ export const CreateCardModal: React.FC<Props> = ({ setModal, deckId }) => {
   //   { id: '', value: 'text' },
   //   { id: '', value: 'image' },
   // ]
-
+  const [question, setQuestion] = useState('')
+  const [answer, setAnswer] = useState('')
   const [createCard] = useCreateCardMutation()
   const confirmNewCard = () => {
-    createCard({ id: deckId, answer: 'qwerty', question: 'asdfg' })
+    createCard({ id: deckId, answer: answer, question: question })
     setModal(false)
   }
 
@@ -32,8 +35,8 @@ export const CreateCardModal: React.FC<Props> = ({ setModal, deckId }) => {
       {/*  className={s.select}*/}
       {/*  options={options}*/}
       {/*/>*/}
-      <TextField label={'Question'} />
-      <TextField label={'Answer'} />
+      <TextField label={'Question'} onValueChange={setQuestion} />
+      <TextField label={'Answer'} onValueChange={setAnswer} />
     </Modal>
   )
 }
