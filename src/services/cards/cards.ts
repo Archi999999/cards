@@ -23,7 +23,14 @@ const cardsApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ['Cards'],
     }),
+    deleteCard: build.mutation<any, { id: string }>({
+      query: ({ id }) => ({
+        url: `v1/cards/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Cards'],
+    }),
   }),
 })
 
-export const { useGetCardsQuery, useCreateCardMutation } = cardsApi
+export const { useGetCardsQuery, useCreateCardMutation, useDeleteCardMutation } = cardsApi

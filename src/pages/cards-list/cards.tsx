@@ -52,7 +52,11 @@ export const Cards: FC<CardsProps> = ({}) => {
         )}
       </div>
       <TextField className={styles.inputSearch} variant={'search'} />
-      <CardsTable data={dataCards && dataCards.items} isMyCard={isMyCard} />
+      <CardsTable
+        data={dataCards && dataCards.items}
+        isMyCard={isMyCard}
+        createNewCardButton={createNewCardButton}
+      />
       {openModalNewCard && <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId} />}
     </div>
   )

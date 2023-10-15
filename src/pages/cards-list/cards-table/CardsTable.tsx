@@ -1,6 +1,7 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 import { Button, Typography } from '@/components'
+import { DeleteModal } from '@/components/customized/modals/delete-modal'
 import {
   Table,
   TableBody,
@@ -20,61 +21,78 @@ import { Trash } from '@/svg/trash-outline.tsx'
 type CardsTableProps = {
   data: RootObjectItems[] | undefined
   isMyCard: boolean
+  createNewCardButton: () => void
 }
-export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard }) => {
+export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardButton }) => {
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
+
   if (data?.length === 0) {
     return (
       <div className={s.emptyDeck}>
         <Typography variant={'body_1'}>
           Can't find any pack of cards, but you can create card
         </Typography>
-        {isMyCard && <Button variant={'primary'}>Add New Card</Button>}
+        {isMyCard && (
+          <Button variant={'primary'} onClick={createNewCardButton}>
+            Add New Card
+          </Button>
+        )}
       </div>
     )
   }
 
   return (
-    <Table className={s.table}>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Question</TableHead>
-          <TableHead>Answer</TableHead>
-          <TableHead>
-            <button className={s.buttonUpdated}>
-              Last Updated
-              <Arrow className={s.arrow} />
-            </button>
-          </TableHead>
-          <TableHead>Grade</TableHead>
-          {isMyCard && <TableHead></TableHead>}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data?.map(card => {
-          return (
-            <TableRow key={card.id}>
-              <TableCell>{card.question}</TableCell>
-              <TableCell>{card.answer}</TableCell>
-              <TableCellDate date={card.updated} />
-              <TableCell>
-                <CardsGrade grade={card.grade} />
-              </TableCell>
-              {isMyCard && (
+    <>
+      <Table className={s.table}>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Question</TableHead>
+            <TableHead>Answer</TableHead>
+            <TableHead>
+              <button className={s.buttonUpdated}>
+                Last Updated
+                <Arrow className={s.arrow} />
+              </button>
+            </TableHead>
+            <TableHead>Grade</TableHead>
+            {isMyCard && <TableHead></TableHead>}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data?.map(card => {
+            return (
+              <TableRow key={card.id}>
+                <TableCell>{card.question}</TableCell>
+                <TableCell>{card.answer}</TableCell>
+                <TableCellDate date={card.updated} />
                 <TableCell>
-                  <div className={s.tablesButtons}>
-                    <button className={s.button}>
-                      <Edit2Outline color={'white'} />
-                    </button>
-                    <button className={s.button}>
-                      <Trash />
-                    </button>
-                  </div>
+                  <CardsGrade grade={card.grade} />
                 </TableCell>
-              )}
-            </TableRow>
-          )
-        })}
-      </TableBody>
-    </Table>
+                {isMyCard && (
+                  <TableCell>
+                    <div className={s.tablesButtons}>
+                      <button className={s.button}>
+                        <Edit2Outline color={'white'} />
+                      </button>
+                      <button className={s.button} onClick={() => setOpenDeleteModal(true)}>
+                        <Trash />
+                      </button>
+                      {openDeleteModal && (
+                        <DeleteModal
+                          nameItem={'this question'}
+                          title={'Delete Card'}
+                          packId={card.id}
+                          setModal={setOpenDeleteModal}
+                        />
+                      )}
+                    </div>
+                  </TableCell>
+                )}
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </Table>
+    </>
   )
 }
