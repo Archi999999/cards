@@ -25,6 +25,7 @@ export const TextField: FC<TextFieldProps> = props => {
     label,
     onValueChange,
     onChange,
+      ...rest
   } = props
   const [isVisible, setIsVisible] = useState(false)
   const onVisible = () => {
@@ -53,6 +54,7 @@ export const TextField: FC<TextFieldProps> = props => {
           minLength={props.minLength}
           id={label}
           value={props.value}
+          {...rest}
         />
         {name === 'password' &&
           (!isVisible ? <EyeOutline onClick={onVisible} /> : <EyeOffOutline onClick={onVisible} />)}

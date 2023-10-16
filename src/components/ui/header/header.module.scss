@@ -9,8 +9,14 @@
   border-bottom: 1px solid #313131;
 }
 
+.logoButton {
+  width: 157px;
+  cursor: pointer;
+}
+
 .userHeader {
   display: flex;
+  cursor: pointer;
 }
 
 .headerSpan {
