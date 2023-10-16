@@ -13,31 +13,31 @@ import { Typography } from '@/components/ui/typography/typography.tsx'
 import { useLogoutMutation } from '@/services/auth/auth.ts'
 import { Logout } from '@/svg'
 import { PersonOutline } from '@/svg/person-outline.tsx'
+import {useNavigate} from "react-router-dom";
 
 type Props = {
   name?: string
   avatar?: string
+    email?: string
 }
 
-export const UserHeader: FC<Props> = ({ name, avatar }) => {
+export const UserHeader: FC<Props> = ({ name, avatar, email }) => {
   const [logout] = useLogoutMutation()
-  // const logoutHandler = () => {
-  //   logout()
-  // }
+  const navigate = useNavigate()
 
   return (
     <Dropdown trigger={<User name={name} avatar={avatar} />}>
-      <DropdownItem>
+      <DropdownItem onClick={()=>navigate('/profile')}>
         <Avatar avatar={avatar} />
         <div className={s.headerUserInfo}>
           <Typography variant={'subtitle_2'}>{name}</Typography>
           <Typography variant={'caption'} className={s.headerEmail}>
-            emailemail@email
+              {email}
           </Typography>
         </div>
       </DropdownItem>
       <Separator />
-      <DropdownItemWithIcon icon={<PersonOutline />} text={'My Profile'} />
+      <DropdownItemWithIcon icon={<PersonOutline />} text={'My Profile'} onClick={()=>navigate('/profile')} />
       <Separator />
       <DropdownItemWithIcon onClick={() => logout()} icon={<Logout />} text={'Sign Out'} />
     </Dropdown>
