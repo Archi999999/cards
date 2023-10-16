@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom'
 import styles from './cards.module.scss'
 
 import { Button, TextField, Typography } from '@/components'
+import { CreateCardModal } from '@/components/customized/modals/card-modal/create-card-modal.tsx'
 import { CardsTable } from '@/pages/cards-list/cards-table/CardsTable.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
 import { useGetCardsQuery } from '@/services/cards/cards.ts'
@@ -21,9 +22,15 @@ export const Cards: FC<CardsProps> = ({}) => {
   })
   const { data: { id: authorId } = {} } = useMeQuery()
 
+  const [openModalNewCard, setOpenModalNewCard] = useState(false)
+
   const userId = useSelector<RootState, string>(state => state.cardsSlice.userId)
   const cardsName = useSelector<RootState, string>(state => state.cardsSlice.nameCard)
   const isMyCard = userId === authorId
+
+  const createNewCardButton = () => {
+    setOpenModalNewCard(true)
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -33,12 +40,24 @@ export const Cards: FC<CardsProps> = ({}) => {
       </Link>
       <div className={styles.headerCards}>
         <Typography variant={'large'}>{cardsName}</Typography>
-        <Button variant={'primary'} disabled={dataCards?.items.length === 0}>
-          {isMyCard ? 'Add New Card' : 'Learn to Pack'}
-        </Button>
+        {isMyCard && dataCards?.items.length !== 0 && (
+          <Button variant={'primary'} onClick={createNewCardButton}>
+            Add New Card
+          </Button>
+        )}
+        {!isMyCard && dataCards?.items.length !== 0 && (
+          <Button variant={'primary'} disabled={dataCards?.items.length === 0}>
+            Learn to Pack
+          </Button>
+        )}
       </div>
       <TextField className={styles.inputSearch} variant={'search'} />
-      <CardsTable data={dataCards && dataCards.items} isMyCard={isMyCard} />
+      <CardsTable
+        data={dataCards && dataCards.items}
+        isMyCard={isMyCard}
+        createNewCardButton={createNewCardButton}
+      />
+      {openModalNewCard && <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId} />}
     </div>
   )
 }

@@ -32,6 +32,15 @@ export type GetRequestCards = {
   currentPage?: number
   itemsPerPage?: number
 }
+export type CreateCardInput = {
+  id: string | undefined
+  question: string
+  answer: string
+  questionImg?: string
+  answerImg?: string
+  questionVideo?: string
+  answerVideo?: string
+}
 export type OneCardResponse = {
   id: string
   deckId: string

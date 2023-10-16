@@ -1,5 +1,6 @@
 import { Typography } from '@/components'
 import { Modal } from '@/components/ui/modal/modal.tsx'
+import { useDeleteCardMutation } from '@/services/cards/cards.ts'
 import { useDeleteDeckMutation } from '@/services/decks/decks.ts'
 
 type Props = {
@@ -12,13 +13,13 @@ type Props = {
 export const DeleteModal: React.FC<Props> = ({ title, setModal, packId, nameItem }) => {
   //нужно будет добавить удаление карточки и колоды
   const [deleteDeck] = useDeleteDeckMutation()
-  const deleteCard = () => {}
+  const [deleteCard] = useDeleteCardMutation()
 
   const onConfirm = () => {
     if (title === 'Delete Pack') {
       deleteDeck({ id: packId ?? '' })
     } else {
-      deleteCard()
+      deleteCard({ id: packId })
     }
     setModal(false)
   }
