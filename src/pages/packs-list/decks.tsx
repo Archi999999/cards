@@ -21,6 +21,7 @@ import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { RootState } from '@/services/store.ts'
 import { Arrow } from '@/svg/arrow.tsx'
+import {Typography} from "@/components";
 
 type Props = {
   variant?: 'myPacks' | 'allPacks'
@@ -29,20 +30,12 @@ type Props = {
 export const Decks: FC<Props> = ({ variant }) => {
   const { data: { id: authorId } = {} } = useMeQuery()
 
-  // const { data } = useGetDecksQuery()
-  // const totalPages = data?.pagination.totalPages
-  // const itemsPerPage = data?.pagination.itemsPerPage
-  // const currentPage = data?.pagination.currentPage
-  // const totalItems = data?.pagination.totalItems
-  // const [
-  //   itemsPerPage,
-  //   // setItemsPerPage
-  // ] = useState(perPage)
   const searchByName = useSelector<RootState, string>(state => state.decksSlice.searchByName)
   const minCardsCount = useSelector<RootState, number>(state => state.decksSlice.minCardsCount)
   const maxCardsCount = useSelector<RootState, number>(state => state.decksSlice.maxCardsCount)
   const itemsPerPage = useSelector<RootState, number>(state => state.decksSlice.itemsPerPage)
   const currentPage = useSelector<RootState, number>(state => state.decksSlice.currentPage)
+  const dispatch = useDispatch()
 
   const decks = useGetDecksQuery({
     itemsPerPage,
@@ -52,7 +45,8 @@ export const Decks: FC<Props> = ({ variant }) => {
     maxCardsCount,
     currentPage,
   })
-  const dispatch = useDispatch()
+
+  if (decks.data?.pagination.totalItems === 0) return <Typography variant={'h2'} className={s.emptyPack}>Can't find any pack of cards</Typography>
 
   const totalPages = decks.data?.pagination.totalPages
 
