@@ -1,4 +1,3 @@
-import { Label } from '@radix-ui/react-label'
 import * as Tabs from '@radix-ui/react-tabs'
 
 import s from './tab-switcher.module.scss'
@@ -8,6 +7,7 @@ import { Typography } from '@/components'
 type Props = {
   label?: string
   tabs: Tab[]
+    defaultValue: string
 }
 
 type Tab = {
@@ -15,11 +15,11 @@ type Tab = {
   content: React.ReactNode
 }
 
-export const TabSwitcher: React.FC<Props> = ({ label, tabs }) => {
+export const TabSwitcher: React.FC<Props> = ({ label, tabs, defaultValue }) => {
   return (
-    <Label>
+    <div>
       <Typography>{label}</Typography>
-      <Tabs.Root activationMode={'automatic'}>
+      <Tabs.Root activationMode={'automatic'} defaultValue={defaultValue}>
         <Tabs.List className={s.tabsList}>
           {tabs.map(tab => (
             <Tabs.Trigger className={s.tabsTrigger} value={tab.trigger} key={tab.trigger}>
@@ -33,6 +33,6 @@ export const TabSwitcher: React.FC<Props> = ({ label, tabs }) => {
           </Tabs.Content>
         ))}
       </Tabs.Root>
-    </Label>
+    </div>
   )
 }

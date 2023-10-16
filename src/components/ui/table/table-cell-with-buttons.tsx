@@ -28,7 +28,7 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
   return (
     <td className={`${className} ${s.cell} `} {...props}>
       <div className={s.buttonsBlock}>
-        <Link to={'./#'} className={s.button}>
+        <Link to={'./#'} className={s.button} aria-labelledby='learn'>
           <PlayCircleOutline />
         </Link>
         {variant === 'myPacks' && (
@@ -41,7 +41,7 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
             </button>
           </>
         )}
-        {variant === 'allPacks' && <span>Learn</span>}
+        {variant === 'allPacks' && <label id='learn'>Learn</label>}
       </div>
       {modalDelete && (
         <DeleteModal
