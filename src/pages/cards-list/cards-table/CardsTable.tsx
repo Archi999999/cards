@@ -1,6 +1,7 @@
 import { FC, useState } from 'react'
 
 import { Button, Typography } from '@/components'
+import { UpdateCardModal } from '@/components/customized/modals/card-modal/update-card-modal.tsx'
 import { DeleteModal } from '@/components/customized/modals/delete-modal'
 import {
   Table,
@@ -25,6 +26,9 @@ type CardsTableProps = {
 }
 export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardButton }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
+  const [openUpdateModal, setOpenUpdateModal] = useState(false)
+
+  console.log(isMyCard)
 
   if (data?.length === 0) {
     return (
@@ -71,15 +75,18 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
                 {isMyCard && (
                   <TableCell>
                     <div className={s.tablesButtons}>
-                      <button className={s.button}>
+                      <button className={s.button} onClick={() => setOpenUpdateModal(true)}>
                         <Edit2Outline color={'white'} />
                       </button>
+                      {openUpdateModal && (
+                        <UpdateCardModal setModal={setOpenUpdateModal} deckId={card.id} />
+                      )}
                       <button className={s.button} onClick={() => setOpenDeleteModal(true)}>
                         <Trash />
                       </button>
                       {openDeleteModal && (
                         <DeleteModal
-                          nameItem={'this question'}
+                          nameItem={'this card'}
                           title={'Delete Card'}
                           packId={card.id}
                           setModal={setOpenDeleteModal}

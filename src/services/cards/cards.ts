@@ -30,6 +30,14 @@ const cardsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
+    updateCard: build.mutation<any, CreateCardInput>({
+      query: ({ id, ...body }) => ({
+        url: `/v1/cards/${id}`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['Cards'],
+    }),
   }),
 })
 
