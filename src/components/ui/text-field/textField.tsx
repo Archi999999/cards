@@ -56,7 +56,7 @@ export const TextField: FC<TextFieldProps> = props => {
           value={props.value}
           {...rest}
         />
-        {name === 'password'  &&
+        {name === 'password' &&
           (!isVisible ? <EyeOutline onClick={onVisible} /> : <EyeOffOutline onClick={onVisible} />)}
       </div>
       {error && (

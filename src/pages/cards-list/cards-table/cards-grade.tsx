@@ -12,5 +12,11 @@ export const CardsGrade: FC<CardsGradeProps> = ({ grade }) => {
   const rowStar2 = new Array(5 - grade).fill(<Star />)
   const rowStar = [...rowStar1, ...rowStar2]
 
-  return <div className={styles.stars}>{rowStar}</div>
+  return (
+    <div className={styles.stars}>
+      {rowStar.map((el, index) => {
+        return <div key={index}>{el}</div>
+      })}
+    </div>
+  )
 }
