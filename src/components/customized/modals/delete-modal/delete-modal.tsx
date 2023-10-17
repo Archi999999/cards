@@ -15,11 +15,13 @@ export const DeleteModal: React.FC<Props> = ({ title, setModal, packId, nameItem
   const [deleteDeck] = useDeleteDeckMutation()
   const [deleteCard] = useDeleteCardMutation()
 
+  console.log('delete packId:' + packId)
   const onConfirm = () => {
     if (title === 'Delete Pack') {
       deleteDeck({ id: packId ?? '' })
-    } else {
-      deleteCard({ id: packId })
+    }
+    if (title === 'Delete Card') {
+      deleteCard({ id: packId ?? '' })
     }
     setModal(false)
   }

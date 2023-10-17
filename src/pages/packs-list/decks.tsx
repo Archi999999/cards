@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import s from './pack-list.module.scss'
 
+import { Typography } from '@/components'
 import { Pagination } from '@/components/ui/pagination'
 import {
   Table,
@@ -21,7 +22,6 @@ import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { RootState } from '@/services/store.ts'
 import { Arrow } from '@/svg/arrow.tsx'
-import {Typography} from "@/components";
 
 type Props = {
   variant?: 'myPacks' | 'allPacks'
@@ -46,7 +46,12 @@ export const Decks: FC<Props> = ({ variant }) => {
     currentPage,
   })
 
-  if (decks.data?.pagination.totalItems === 0) return <Typography variant={'h2'} className={s.emptyPack}>Can't find any pack of cards</Typography>
+  if (decks.data?.pagination.totalItems === 0)
+    return (
+      <Typography variant={'h2'} className={s.emptyPack}>
+        Can't find any pack of cards
+      </Typography>
+    )
 
   const totalPages = decks.data?.pagination.totalPages
 
@@ -82,7 +87,9 @@ export const Decks: FC<Props> = ({ variant }) => {
                   className={s.linkCard}
                   onClick={() => chooseDeckHandler(deck.name, deck.userId)}
                 >
-                  <Link to={`/cards/${deck.id}`}>{deck.name}</Link>
+                  <Link to={`/cards/${deck.id}`} state={{ cardsName: deck.name }}>
+                    {deck.name}
+                  </Link>
                 </TableCell>
                 <TableCell>{deck.cardsCount}</TableCell>
                 <TableCellDate date={deck.updated} />

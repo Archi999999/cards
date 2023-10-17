@@ -8,13 +8,12 @@ import {
 
 import { Header } from '@/components'
 import { PasswordRecovery } from '@/components/auth/password-recovery/password-recovery.tsx'
-
+import { EditProfile } from '@/components/ui/edit-profile/edit-profile.tsx'
 import { Cards } from '@/pages/cards-list/cards.tsx'
 import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 import { SignInPage } from '@/pages/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up-page.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
-import {EditProfile} from "@/components/ui/edit-profile/edit-profile.tsx";
 
 const publicRoutes: RouteObject[] = [
   {
@@ -42,8 +41,8 @@ const privateRoutes: RouteObject[] = [
   },
   {
     path: '/profile',
-    element: <EditProfile/>
-  }
+    element: <EditProfile />,
+  },
 ]
 
 const Layout = () => {

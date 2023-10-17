@@ -21,14 +21,14 @@ import { Trash } from '@/svg/trash-outline.tsx'
 
 type CardsTableProps = {
   data: RootObjectItems[] | undefined
-  isMyCard: boolean
+  isMyCard: boolean | undefined
   createNewCardButton: () => void
 }
 export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardButton }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [openUpdateModal, setOpenUpdateModal] = useState(false)
 
-  console.log(isMyCard)
+  console.log('CardsTable ' + isMyCard)
 
   if (data?.length === 0) {
     return (
@@ -47,6 +47,7 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
 
   return (
     <>
+      <div>isMyCard= `${isMyCard}`</div>
       <Table className={s.table}>
         <TableHeader>
           <TableRow>

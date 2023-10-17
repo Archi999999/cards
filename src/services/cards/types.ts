@@ -33,7 +33,7 @@ export type GetRequestCards = {
   itemsPerPage?: number
 }
 export type CreateCardInput = {
-  id: string | undefined
+  id: string
   question: string
   answer: string
   questionImg?: string
