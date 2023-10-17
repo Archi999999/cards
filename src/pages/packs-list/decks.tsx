@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import s from './pack-list.module.scss'
@@ -18,7 +18,6 @@ import {
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { TableCellWithButtons } from '@/components/ui/table/table-cell-with-buttons.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
-import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { RootState } from '@/services/store.ts'
 import { Arrow } from '@/svg/arrow.tsx'
@@ -35,7 +34,6 @@ export const Decks: FC<Props> = ({ variant }) => {
   const maxCardsCount = useSelector<RootState, number>(state => state.decksSlice.maxCardsCount)
   const itemsPerPage = useSelector<RootState, number>(state => state.decksSlice.itemsPerPage)
   const currentPage = useSelector<RootState, number>(state => state.decksSlice.currentPage)
-  const dispatch = useDispatch()
 
   const decks = useGetDecksQuery({
     itemsPerPage,
@@ -49,7 +47,7 @@ export const Decks: FC<Props> = ({ variant }) => {
   if (decks.data?.pagination.totalItems === 0)
     return (
       <Typography variant={'h2'} className={s.emptyPack}>
-        Can't find any pack of cards
+        {`Can't find any pack of cards`}
       </Typography>
     )
 
@@ -57,10 +55,6 @@ export const Decks: FC<Props> = ({ variant }) => {
 
   if (decks.isLoading) return <div>...Loading</div>
   if (decks.error) return <div>ERROR!!!</div>
-  const chooseDeckHandler = (name: string, id: string) => {
-    dispatch(cardsSlice.actions.setUserId(id))
-    dispatch(cardsSlice.actions.setNameCard(name))
-  }
 
   return (
     <>
@@ -83,13 +77,8 @@ export const Decks: FC<Props> = ({ variant }) => {
           {decks.data?.items?.map(deck => {
             return (
               <TableRow key={deck.id}>
-                <TableCell
-                  className={s.linkCard}
-                  onClick={() => chooseDeckHandler(deck.name, deck.userId)}
-                >
-                  <Link to={`/cards/${deck.id}`} state={{ cardsName: deck.name }}>
-                    {deck.name}
-                  </Link>
+                <TableCell className={s.linkCard}>
+                  <Link to={`/cards/${deck.id}`}>{deck.name}</Link>
                 </TableCell>
                 <TableCell>{deck.cardsCount}</TableCell>
                 <TableCellDate date={deck.updated} />

@@ -21,12 +21,14 @@ export const Cards: FC<CardsProps> = ({}) => {
     id: deckId || '',
   })
 
-  const { data: { name: cardName } = {} } = useGetDeckByIdQuery({ id: deckId || '' })
+  const { data: { name: cardName, userId: currentId } = {} } = useGetDeckByIdQuery({
+    id: deckId || '',
+  })
 
   const [openModalNewCard, setOpenModalNewCard] = useState(false)
 
-  const isMyCard = dataCards && dataCards.items.length > 0 && dataCards.items[0].userId === authorId
-  //const cardName = state?.cardsName
+  const isMyCard = currentId === authorId
+
   const createNewCardButton = () => {
     setOpenModalNewCard(true)
   }

@@ -21,20 +21,18 @@ import { Trash } from '@/svg/trash-outline.tsx'
 
 type CardsTableProps = {
   data: RootObjectItems[] | undefined
-  isMyCard: boolean | undefined
+  isMyCard: boolean
   createNewCardButton: () => void
 }
 export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardButton }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [openUpdateModal, setOpenUpdateModal] = useState(false)
 
-  console.log('CardsTable ' + isMyCard)
-
   if (data?.length === 0) {
     return (
       <div className={s.emptyDeck}>
         <Typography variant={'body_1'}>
-          Can't find any pack of cards, but you can create card
+          {`Can't find any pack of cards, but you can create card`}
         </Typography>
         {isMyCard && (
           <Button variant={'primary'} onClick={createNewCardButton}>
@@ -47,7 +45,6 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
 
   return (
     <>
-      <div>isMyCard= `${isMyCard}`</div>
       <Table className={s.table}>
         <TableHeader>
           <TableRow>
