@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 
-import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
 import styles from './cards.module.scss'
@@ -10,23 +9,25 @@ import { CreateCardModal } from '@/components/customized/modals/card-modal/creat
 import { CardsTable } from '@/pages/cards-list/cards-table/CardsTable.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
 import { useGetCardsQuery } from '@/services/cards/cards.ts'
-import { RootState } from '@/services/store.ts'
+import { useGetDeckByIdQuery } from '@/services/decks/decks.ts'
 import { ArrowBack } from '@/svg/arrow-back-outline.tsx'
 
 type CardsProps = {}
 export const Cards: FC<CardsProps> = ({}) => {
   const { deckId } = useParams<{ deckId: string }>()
 
+  const { data: { id: authorId } = {} } = useMeQuery()
   const { data: dataCards } = useGetCardsQuery({
     id: deckId || '',
   })
-  const { data: { id: authorId } = {} } = useMeQuery()
+
+  const { data: { name: cardName, userId: currentId } = {} } = useGetDeckByIdQuery({
+    id: deckId || '',
+  })
 
   const [openModalNewCard, setOpenModalNewCard] = useState(false)
 
-  const userId = useSelector<RootState, string>(state => state.cardsSlice.userId)
-  const cardsName = useSelector<RootState, string>(state => state.cardsSlice.nameCard)
-  const isMyCard = userId === authorId
+  const isMyCard = currentId === authorId
 
   const createNewCardButton = () => {
     setOpenModalNewCard(true)
@@ -39,7 +40,7 @@ export const Cards: FC<CardsProps> = ({}) => {
         <Typography variant={'body_2'}> Back to Packs List</Typography>
       </Link>
       <div className={styles.headerCards}>
-        <Typography variant={'large'}>{cardsName}</Typography>
+        <Typography variant={'large'}>{cardName}</Typography>
         {isMyCard && dataCards?.items.length !== 0 && (
           <Button variant={'primary'} onClick={createNewCardButton}>
             Add New Card

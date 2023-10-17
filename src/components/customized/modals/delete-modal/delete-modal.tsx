@@ -11,15 +11,15 @@ type Props = {
 }
 
 export const DeleteModal: React.FC<Props> = ({ title, setModal, packId, nameItem }) => {
-  //нужно будет добавить удаление карточки и колоды
   const [deleteDeck] = useDeleteDeckMutation()
   const [deleteCard] = useDeleteCardMutation()
 
   const onConfirm = () => {
     if (title === 'Delete Pack') {
       deleteDeck({ id: packId ?? '' })
-    } else {
-      deleteCard({ id: packId })
+    }
+    if (title === 'Delete Card') {
+      deleteCard({ id: packId ?? '' })
     }
     setModal(false)
   }

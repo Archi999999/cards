@@ -34,6 +34,7 @@ export type Deck = {
   cardsCount: number
   author: DecksResponseItemsAuthor
 }
+export type DeckById = Omit<Deck, 'isDeleted' | 'isBlocked'>
 
 export type DecksParams = {
   minCardsCount?: number

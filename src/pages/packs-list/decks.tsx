@@ -1,10 +1,11 @@
 import { FC } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import s from './pack-list.module.scss'
 
+import { Typography } from '@/components'
 import { Pagination } from '@/components/ui/pagination'
 import {
   Table,
@@ -17,11 +18,9 @@ import {
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { TableCellWithButtons } from '@/components/ui/table/table-cell-with-buttons.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
-import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { RootState } from '@/services/store.ts'
 import { Arrow } from '@/svg/arrow.tsx'
-import {Typography} from "@/components";
 
 type Props = {
   variant?: 'myPacks' | 'allPacks'
@@ -35,7 +34,6 @@ export const Decks: FC<Props> = ({ variant }) => {
   const maxCardsCount = useSelector<RootState, number>(state => state.decksSlice.maxCardsCount)
   const itemsPerPage = useSelector<RootState, number>(state => state.decksSlice.itemsPerPage)
   const currentPage = useSelector<RootState, number>(state => state.decksSlice.currentPage)
-  const dispatch = useDispatch()
 
   const decks = useGetDecksQuery({
     itemsPerPage,
@@ -46,16 +44,17 @@ export const Decks: FC<Props> = ({ variant }) => {
     currentPage,
   })
 
-  if (decks.data?.pagination.totalItems === 0) return <Typography variant={'h2'} className={s.emptyPack}>Can't find any pack of cards</Typography>
+  if (decks.data?.pagination.totalItems === 0)
+    return (
+      <Typography variant={'h2'} className={s.emptyPack}>
+        {`Can't find any pack of cards`}
+      </Typography>
+    )
 
   const totalPages = decks.data?.pagination.totalPages
 
   if (decks.isLoading) return <div>...Loading</div>
   if (decks.error) return <div>ERROR!!!</div>
-  const chooseDeckHandler = (name: string, id: string) => {
-    dispatch(cardsSlice.actions.setUserId(id))
-    dispatch(cardsSlice.actions.setNameCard(name))
-  }
 
   return (
     <>
@@ -78,10 +77,7 @@ export const Decks: FC<Props> = ({ variant }) => {
           {decks.data?.items?.map(deck => {
             return (
               <TableRow key={deck.id}>
-                <TableCell
-                  className={s.linkCard}
-                  onClick={() => chooseDeckHandler(deck.name, deck.userId)}
-                >
+                <TableCell className={s.linkCard}>
                   <Link to={`/cards/${deck.id}`}>{deck.name}</Link>
                 </TableCell>
                 <TableCell>{deck.cardsCount}</TableCell>

@@ -27,14 +27,18 @@ type CardsTableProps = {
 export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardButton }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [openUpdateModal, setOpenUpdateModal] = useState(false)
+  const [cardId, setCardId] = useState('')
 
-  console.log(isMyCard)
+  const clickOnButton = (id: string, chooseButton: string) => {
+    setCardId(id)
+    chooseButton === 'update' ? setOpenUpdateModal(true) : setOpenDeleteModal(true)
+  }
 
   if (data?.length === 0) {
     return (
       <div className={s.emptyDeck}>
         <Typography variant={'body_1'}>
-          Can't find any pack of cards, but you can create card
+          {`Can't find any pack of cards, but you can create card`}
         </Typography>
         {isMyCard && (
           <Button variant={'primary'} onClick={createNewCardButton}>
@@ -75,23 +79,12 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
                 {isMyCard && (
                   <TableCell>
                     <div className={s.tablesButtons}>
-                      <button className={s.button} onClick={() => setOpenUpdateModal(true)}>
+                      <button className={s.button} onClick={() => clickOnButton(card.id, 'update')}>
                         <Edit2Outline color={'white'} />
                       </button>
-                      {openUpdateModal && (
-                        <UpdateCardModal setModal={setOpenUpdateModal} deckId={card.id} />
-                      )}
-                      <button className={s.button} onClick={() => setOpenDeleteModal(true)}>
+                      <button className={s.button} onClick={() => clickOnButton(card.id, 'delete')}>
                         <Trash />
                       </button>
-                      {openDeleteModal && (
-                        <DeleteModal
-                          nameItem={'this card'}
-                          title={'Delete Card'}
-                          packId={card.id}
-                          setModal={setOpenDeleteModal}
-                        />
-                      )}
                     </div>
                   </TableCell>
                 )}
@@ -100,6 +93,15 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
           })}
         </TableBody>
       </Table>
+      {openDeleteModal && (
+        <DeleteModal
+          nameItem={'this card'}
+          title={'Delete Card'}
+          packId={cardId}
+          setModal={setOpenDeleteModal}
+        />
+      )}
+      {openUpdateModal && <UpdateCardModal setModal={setOpenUpdateModal} cardId={cardId} />}
     </>
   )
 }

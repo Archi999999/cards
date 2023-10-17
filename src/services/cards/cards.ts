@@ -1,5 +1,10 @@
 import { baseApi } from '@/services/base-api.ts'
-import { CardsResponse, CreateCardInput, GetRequestCards } from '@/services/cards/types.ts'
+import {
+  CardsResponse,
+  CreateCardInput,
+  GetRequestCards,
+  OneCardResponse,
+} from '@/services/cards/types.ts'
 
 const cardsApi = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -12,6 +17,12 @@ const cardsApi = baseApi.injectEndpoints({
         }
       },
       providesTags: ['Cards'],
+    }),
+    getCardById: build.query<OneCardResponse, { id: string }>({
+      query: ({ id }) => ({
+        url: `v1/cards/${id}`,
+        method: 'GET',
+      }),
     }),
     createCard: build.mutation<any, CreateCardInput>({
       query: ({ id, ...body }) => {
@@ -41,4 +52,10 @@ const cardsApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetCardsQuery, useCreateCardMutation, useDeleteCardMutation } = cardsApi
+export const {
+  useGetCardsQuery,
+  useCreateCardMutation,
+  useDeleteCardMutation,
+  useGetCardByIdQuery,
+  useUpdateCardMutation,
+} = cardsApi
