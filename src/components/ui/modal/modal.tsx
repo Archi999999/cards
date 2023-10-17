@@ -1,3 +1,5 @@
+import { FC, ReactNode } from 'react'
+
 import s from './modal.module.scss'
 
 import { Button, Typography } from '@/components'
@@ -7,16 +9,10 @@ type Props = {
   title: string
   confirmButtonName: string
   setModal: (value: boolean) => void
-  children: React.ReactNode
+  children: ReactNode
   onConfirm: () => void
 }
-export const Modal: React.FC<Props> = ({
-  title,
-  setModal,
-  confirmButtonName,
-  children,
-  onConfirm,
-}) => {
+export const Modal: FC<Props> = ({ title, setModal, confirmButtonName, children, onConfirm }) => {
   const onCloseModal = () => {
     setModal(false)
   }
