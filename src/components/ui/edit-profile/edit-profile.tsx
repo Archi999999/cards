@@ -30,8 +30,10 @@ export const EditProfile = () => {
     const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
             const image = e.target.files[0]
+            // const avatar = new Blob([image], {type: image.type})
             const formData = new FormData();
             formData.append('avatar', image)
+            // console.log(image)
             updateMe(formData)
             setInputFile(URL.createObjectURL(image))
         }
@@ -55,7 +57,7 @@ export const EditProfile = () => {
                 <button className={`${s.buttonEdit} ${s.buttonEditImage}`} onClick={selectFileHandler}>
                     <Edit2Outline color={'white'}/>
                 </button>
-                <input style={{ display: 'none' }} ref={inputRef} type="file" onChange={uploadHandler} />
+                <input style={{ display: 'none' }} ref={inputRef} type="file" onChange={uploadHandler} accept='*/image, .png, .img, .jpg'/>
             </div>
             {
                 !showInput
