@@ -24,7 +24,6 @@ const authApi = baseApi.injectEndpoints({
                 }
             },
             async onQueryStarted(args, {queryFulfilled, dispatch}) {
-                console.log('args' + args)
                 if (args instanceof FormData) {
                     const image = args.get('avatar');
                     console.log(image)
@@ -34,23 +33,19 @@ const authApi = baseApi.injectEndpoints({
                         if ('name' in args) {
                             draft.name = args.name
                         }
-                        // if (args === FormData) {
-                        //   draft = new FormData(args)
-                        // }
                         if (args instanceof FormData) {
-                            // const image = args.get('avatar');
-                            // if (image!==null) draft.avatar = URL.createObjectURL(image);
+                            const image = args.get('avatar');
+                            draft.avatar = URL.createObjectURL(image as Blob);
                         }
                     })
                 )
-
                 try {
                     await queryFulfilled
                 } catch {
                     patchResult.undo()
                 }
             },
-            invalidatesTags: ['Me'],
+            // invalidatesTags: ['Me'],
         }),
         login: builder.mutation<any, LoginArgs>({
             query: params => {
@@ -75,7 +70,6 @@ const authApi = baseApi.injectEndpoints({
                         return {}
                     })
                 )
-
                 try {
                     await queryFulfilled
                 } catch {
