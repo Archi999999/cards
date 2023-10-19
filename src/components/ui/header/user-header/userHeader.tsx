@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import s from '../header.module.scss'
 
 import { Avatar } from '@/components/ui/avatar/avatar.tsx'
@@ -13,12 +15,11 @@ import { Typography } from '@/components/ui/typography/typography.tsx'
 import { useLogoutMutation } from '@/services/auth/auth.ts'
 import { Logout } from '@/svg'
 import { PersonOutline } from '@/svg/person-outline.tsx'
-import {useNavigate} from "react-router-dom";
 
 type Props = {
   name?: string
   avatar?: string
-    email?: string
+  email?: string
 }
 
 export const UserHeader: FC<Props> = ({ name, avatar, email }) => {
@@ -27,17 +28,21 @@ export const UserHeader: FC<Props> = ({ name, avatar, email }) => {
 
   return (
     <Dropdown trigger={<User name={name} avatar={avatar} />}>
-      <DropdownItem onClick={()=>navigate('/profile')}>
+      <DropdownItem onClick={() => navigate('/profile')}>
         <Avatar avatar={avatar} />
         <div className={s.headerUserInfo}>
           <Typography variant={'subtitle_2'}>{name}</Typography>
           <Typography variant={'caption'} className={s.headerEmail}>
-              {email}
+            {email}
           </Typography>
         </div>
       </DropdownItem>
       <Separator />
-      <DropdownItemWithIcon icon={<PersonOutline />} text={'My Profile'} onClick={()=>navigate('/profile')} />
+      <DropdownItemWithIcon
+        icon={<PersonOutline />}
+        text={'My Profile'}
+        onClick={() => navigate('/profile')}
+      />
       <Separator />
       <DropdownItemWithIcon onClick={() => logout()} icon={<Logout />} text={'Sign Out'} />
     </Dropdown>

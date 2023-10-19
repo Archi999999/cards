@@ -15,6 +15,13 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 27px;
+
+  div {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .inputSearch {

@@ -7,6 +7,7 @@ import styles from './cards.module.scss'
 import { Button, TextField, Typography } from '@/components'
 import { CreateCardModal } from '@/components/customized/modals/card-modal/create-card-modal.tsx'
 import { CardsTable } from '@/pages/cards-list/cards-table/CardsTable.tsx'
+import CardsDrop from '@/pages/cards-list/cardsDrop.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
 import { useGetCardsQuery } from '@/services/cards/cards.ts'
 import { useGetDeckByIdQuery } from '@/services/decks/decks.ts'
@@ -40,7 +41,11 @@ export const Cards: FC<CardsProps> = ({}) => {
         <Typography variant={'body_2'}> Back to Packs List</Typography>
       </Link>
       <div className={styles.headerCards}>
-        <Typography variant={'large'}>{cardName}</Typography>
+        <div>
+          <Typography variant={'large'}>{cardName}</Typography>
+          {isMyCard && <CardsDrop />}
+        </div>
+
         {isMyCard && dataCards?.items.length !== 0 && (
           <Button variant={'primary'} onClick={createNewCardButton}>
             Add New Card
