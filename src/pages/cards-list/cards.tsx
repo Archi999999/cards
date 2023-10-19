@@ -1,19 +1,22 @@
 import { FC, useState } from 'react'
 
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import styles from './cards.module.scss'
 
 import { Button, TextField, Typography } from '@/components'
 import { CreateCardModal } from '@/components/customized/modals/card-modal/create-card-modal.tsx'
 import { CardsTable } from '@/pages/cards-list/cards-table/CardsTable.tsx'
+import CardsDrop from '@/pages/cards-list/cardsDrop.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
 import { useGetCardsQuery } from '@/services/cards/cards.ts'
 import { useGetDeckByIdQuery } from '@/services/decks/decks.ts'
+import { DeckById } from '@/services/decks/types.ts'
 import { ArrowBack } from '@/svg/arrow-back-outline.tsx'
 
 type CardsProps = {}
 export const Cards: FC<CardsProps> = ({}) => {
+  const navigate = useNavigate()
   const { deckId } = useParams<{ deckId: string }>()
 
   const { data: { id: authorId } = {} } = useMeQuery()
@@ -21,9 +24,15 @@ export const Cards: FC<CardsProps> = ({}) => {
     id: deckId || '',
   })
 
-  const { data: { name: cardName, userId: currentId } = {} } = useGetDeckByIdQuery({
-    id: deckId || '',
+  const { data, isError } = useGetDeckByIdQuery({
+    id: deckId!,
   })
+
+  const { name: cardName, userId: currentId } = data ? data : ({} as DeckById)
+
+  if (isError && !cardName) {
+    navigate('/')
+  }
 
   const [openModalNewCard, setOpenModalNewCard] = useState(false)
 
@@ -40,7 +49,11 @@ export const Cards: FC<CardsProps> = ({}) => {
         <Typography variant={'body_2'}> Back to Packs List</Typography>
       </Link>
       <div className={styles.headerCards}>
-        <Typography variant={'large'}>{cardName}</Typography>
+        <div className={styles.headerDeckInfo}>
+          <Typography variant={'large'}>{cardName}</Typography>
+          {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} cardName={cardName} />}
+        </div>
+
         {isMyCard && dataCards?.items.length !== 0 && (
           <Button variant={'primary'} onClick={createNewCardButton}>
             Add New Card
@@ -58,7 +71,9 @@ export const Cards: FC<CardsProps> = ({}) => {
         isMyCard={isMyCard}
         createNewCardButton={createNewCardButton}
       />
-      {openModalNewCard && <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId} />}
+      {openModalNewCard && (
+        <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId ? deckId : ''} />
+      )}
     </div>
   )
 }
