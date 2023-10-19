@@ -39,6 +39,7 @@ const privateRoutes: RouteObject[] = [
     path: '/cards/:deckId',
     element: <Cards />,
   },
+
   {
     path: '/profile',
     element: <EditProfile />,

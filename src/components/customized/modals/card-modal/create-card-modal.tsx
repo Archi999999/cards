@@ -6,7 +6,7 @@ import { useCreateCardMutation } from '@/services/cards/cards.ts'
 
 type Props = {
   setModal: (value: boolean) => void
-  deckId: string | undefined
+  deckId: string
 }
 
 export const CreateCardModal: React.FC<Props> = ({ setModal, deckId }) => {
