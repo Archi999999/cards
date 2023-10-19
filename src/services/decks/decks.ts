@@ -35,31 +35,35 @@ const decksApi = baseApi.injectEndpoints({
         method: 'POST',
         body: { name, isPrivate },
       }),
-      // async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
-      //   console.log('here')
-      //   const state = getState() as RootState
-      //
-      //   console.log(state)
-      //   const { orderBy, searchByName, itemsPerPage, currentPage } = state.decksSlice
-      //   const patchResult = dispatch(
-      //     decksApi.util.updateQueryData(
-      //       'getDecks',
-      //       { name: searchByName, orderBy, itemsPerPage, currentPage },
-      //       (draft) => {
-      //         debugger
-      //         console.log(draft)
-      //         draft.items.pop()
-      //         draft.items.unshift()
-      //       }
-      //     )
-      //   )
-      //
-      //   try {
-      //     await queryFulfilled
-      //   } catch {
-      //     patchResult.undo()
-      //   }
-      // },
+    //   onQueryStarted({ name}, { dispatch, getState, queryFulfilled }) {
+    //     const state = getState() as RootState
+    //     const {minCardsCount, maxCardsCount, searchByName, itemsPerPage, currentPage } = state.decksSlice
+    //     const authorId = state.authSlice.userId
+    //     const patchResult = dispatch(
+    //       decksApi.util.updateQueryData(
+    //         'getDecks',
+    //         {itemsPerPage, authorId, name: searchByName, minCardsCount,  maxCardsCount, currentPage},
+    //         (draft) => {
+    //           const newCard = {
+    //             id: '',
+    //             userId: authorId,
+    //             name: name,
+    //             isPrivate: false,
+    //             shots: 0,
+    //             cover: null,
+    //             rating:0,
+    //             created: '',
+    //             updated: '',
+    //             cardsCount: 0,
+    //             author: {id: authorId, name: ''}
+    //           }
+    //           draft.items.pop()
+    //           draft.items.unshift(newCard)
+    //         }
+    //       )
+    //     )
+    //     queryFulfilled.catch(patchResult.undo)
+    //   },
       invalidatesTags: ['Decks'],
     }),
     updateDeck: build.mutation<any, UpdateDeckArgs>({
@@ -79,7 +83,6 @@ const decksApi = baseApi.injectEndpoints({
         const state = getState() as RootState
         const { itemsPerPage, currentPage, maxCardsCount, minCardsCount, searchByName } = state.decksSlice
         const authorId = state.authSlice.userId
-        console.log(itemsPerPage, authorId, searchByName, minCardsCount, maxCardsCount, currentPage)
         const patchResult = dispatch(
           decksApi.util.updateQueryData(
             'getDecks',

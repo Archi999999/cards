@@ -70,7 +70,7 @@ const cardsApi = baseApi.injectEndpoints({
         const state = getState() as RootState
         const deckId = state.cardsSlice.deckId
         const patchResult = dispatch(
-            cardsApi.util.updateQueryData('getCards', {id: deckId}, draft=> {
+            cardsApi.util.updateQueryData('getCards', {id: deckId}, (draft)=> {
               draft.items = draft.items.filter(el=>el.id !== id)
             })
         )
