@@ -15,6 +15,7 @@ import { ArrowBack } from '@/svg/arrow-back-outline.tsx'
 
 type CardsProps = {}
 export const Cards: FC<CardsProps> = ({}) => {
+  // const navigate = useNavigate()
   const { deckId } = useParams<{ deckId: string }>()
 
   const { data: { id: authorId } = {} } = useMeQuery()
@@ -22,6 +23,11 @@ export const Cards: FC<CardsProps> = ({}) => {
     id: deckId || '',
   })
 
+  console.log('dataCards=' + dataCards)
+
+  // if (dataCards === undefined || Object.keys(dataCards).length === 0) {
+  //   return <PacksList />
+  // }
   const { data: { name: cardName, userId: currentId } = {} } = useGetDeckByIdQuery({
     id: deckId || '',
   })
@@ -41,9 +47,9 @@ export const Cards: FC<CardsProps> = ({}) => {
         <Typography variant={'body_2'}> Back to Packs List</Typography>
       </Link>
       <div className={styles.headerCards}>
-        <div>
+        <div className={styles.headerDeckInfo}>
           <Typography variant={'large'}>{cardName}</Typography>
-          {isMyCard && <CardsDrop />}
+          {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} cardName={cardName} />}
         </div>
 
         {isMyCard && dataCards?.items.length !== 0 && (

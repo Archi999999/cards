@@ -16,7 +16,9 @@ export const Dropdown: FC<DropdownProps> = ({ children, trigger }) => {
 
   return (
     <DropdownMenu.Root open={open} onOpenChange={setOpen}>
-      <DropdownMenu.Trigger aria-label={'Customise options'}>{trigger}</DropdownMenu.Trigger>
+      <DropdownMenu.Trigger className={styles.trigger} aria-label={'Customise options'}>
+        {trigger}
+      </DropdownMenu.Trigger>
       {open && (
         <DropdownMenu.Portal forceMount>
           <DropdownMenu.Content
