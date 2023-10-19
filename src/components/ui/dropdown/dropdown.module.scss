@@ -5,22 +5,24 @@ button {
 .buttonIcon {
   width: 35px;
   height: 35px;
-  border: 2px solid blue;
+  border: 2px solid var(--color-dark-500);
   border-radius: 50%;
 }
 
 .dropdownMenuSeparator {
   height: 1px;
-  margin: 12px 0;
+
+  //margin: 12px 0;
   background-color: var(--color-dark-500);
 }
 
 .dropdownMenuContent {
   z-index: 10;
 
-  width: auto;
-  height: auto;
-  padding: 12px;
+  display: flex;
+  flex-direction: column;
+
+  padding: 6px;
 
   opacity: 1;
   background-color: var(--color-dark-700);
@@ -36,8 +38,8 @@ button {
 
 .arrow {
   position: absolute;
-  top: -5px;
-  left: calc(100% - 26px);
+  top: -4px;
+  left: calc(50% - 3px);
   transform: rotate(45deg);
 
   width: 9px;
@@ -49,9 +51,15 @@ button {
   border-left: none;
 }
 
+.trigger {
+  cursor: pointer;
+}
+
 .buttonDropDownMenu {
   cursor: pointer;
   width: 100%;
+  height: fit-content;
+  margin: 12px 0;
 }
 
 .dropdownMenuItem {
@@ -61,6 +69,8 @@ button {
   gap: 6px;
   align-items: center;
   justify-content: flex-start;
+
+  margin: 3px 0;
 
   outline: none;
 }

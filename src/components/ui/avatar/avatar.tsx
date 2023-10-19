@@ -11,7 +11,11 @@ type AvatarProps = {
 export const Avatar: FC<AvatarProps> = ({ avatar, className }) => {
   return (
     <div className={className ? `${className} ${styles.avatar}` : styles.avatar}>
-      <img src={avatar ? avatar : ava} alt={'avatar'} />
+      <img
+        src={avatar ? avatar : ava}
+        alt={'avatar'}
+        onDragStart={event => event.preventDefault()}
+      />
     </div>
   )
 }
