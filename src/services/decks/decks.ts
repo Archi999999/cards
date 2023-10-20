@@ -8,6 +8,7 @@ import {
   DeleteDeckArgs,
   UpdateDeckArgs,
 } from '@/services/decks/types.ts'
+import {RootState} from "@/services/store.ts";
 
 const decksApi = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -34,31 +35,35 @@ const decksApi = baseApi.injectEndpoints({
         method: 'POST',
         body: { name, isPrivate },
       }),
-      // async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
-      //   console.log('here')
-      //   const state = getState() as RootState
-      //
-      //   console.log(state)
-      //   const { orderBy, searchByName, itemsPerPage, currentPage } = state.decksSlice
-      //   const patchResult = dispatch(
-      //     decksApi.util.updateQueryData(
-      //       'getDecks',
-      //       { name: searchByName, orderBy, itemsPerPage, currentPage },
-      //       (draft) => {
-      //         debugger
-      //         console.log(draft)
-      //         draft.items.pop()
-      //         draft.items.unshift()
-      //       }
-      //     )
-      //   )
-      //
-      //   try {
-      //     await queryFulfilled
-      //   } catch {
-      //     patchResult.undo()
-      //   }
-      // },
+    //   onQueryStarted({ name}, { dispatch, getState, queryFulfilled }) {
+    //     const state = getState() as RootState
+    //     const {minCardsCount, maxCardsCount, searchByName, itemsPerPage, currentPage } = state.decksSlice
+    //     const authorId = state.authSlice.userId
+    //     const patchResult = dispatch(
+    //       decksApi.util.updateQueryData(
+    //         'getDecks',
+    //         {itemsPerPage, authorId, name: searchByName, minCardsCount,  maxCardsCount, currentPage},
+    //         (draft) => {
+    //           const newCard = {
+    //             id: '',
+    //             userId: authorId,
+    //             name: name,
+    //             isPrivate: false,
+    //             shots: 0,
+    //             cover: null,
+    //             rating:0,
+    //             created: '',
+    //             updated: '',
+    //             cardsCount: 0,
+    //             author: {id: authorId, name: ''}
+    //           }
+    //           draft.items.pop()
+    //           draft.items.unshift(newCard)
+    //         }
+    //       )
+    //     )
+    //     queryFulfilled.catch(patchResult.undo)
+    //   },
       invalidatesTags: ['Decks'],
     }),
     updateDeck: build.mutation<any, UpdateDeckArgs>({
@@ -70,37 +75,24 @@ const decksApi = baseApi.injectEndpoints({
       invalidatesTags: ['Decks'],
     }),
     deleteDeck: build.mutation<void, DeleteDeckArgs>({
-      query: ({ id }) => {
-        return {
+      query: ({ id }) => ({
           url: `v1/decks/${id}`,
           method: 'DELETE',
-        }
-      },
-      invalidatesTags: ['Decks'],
-      // async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
-      //   const state = getState() as RootState
-      //
-      //   console.log(id)
-      //   const { orderBy, searchByName, itemsPerPage, currentPage } = state.decksSlice
-      //   const patchResult = dispatch(
-      //     decksApi.util.updateQueryData(
-      //       'getDecks',
-      //       { name: searchByName, orderBy, itemsPerPage, currentPage },
-      //       draft => {
-      //         debugger
-      //         console.log(draft)
-      //         draft.items = draft.items.filter(deck => deck.id !== id)
-      //       }
-      //     )
-      //   )
-      //
-      //     try {
-      //       await queryFulfilled
-      //     } catch {
-      //       patchResult.undo()
-      //     }
-      //   },
-      //   invalidatesTags: ['Decks'],
+        }),
+      onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
+        const state = getState() as RootState
+        const { itemsPerPage, currentPage, maxCardsCount, minCardsCount, searchByName } = state.decksSlice
+        const authorId = state.authSlice.userId
+        const patchResult = dispatch(
+          decksApi.util.updateQueryData(
+            'getDecks',
+              {authorId, itemsPerPage, currentPage, maxCardsCount, minCardsCount, name: searchByName },
+            draft => {
+              draft.items = draft.items.filter(deck => deck.id !== id)
+            })
+        )
+        queryFulfilled.catch(patchResult.undo)
+        },
     }),
   }),
 })

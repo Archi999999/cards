@@ -14,7 +14,7 @@ export const EditProfile = () => {
     const [showInput, setShowInput] = useState(false)
     const [newName, setNewName] = useState<string>(name!)
     const inputRef = useRef<HTMLInputElement>(null)
-    const [inputFile, setInputFile] = useState(avatar)
+    // const [inputFile, setInputFile] = useState(avatar)
 
     const [updateMe] = useUpdateMeMutation()
     function renameHandler (){
@@ -30,12 +30,10 @@ export const EditProfile = () => {
     const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
             const image = e.target.files[0]
-            // const avatar = new Blob([image], {type: image.type})
             const formData = new FormData();
             formData.append('avatar', image)
-            // console.log(image)
             updateMe(formData)
-            setInputFile(URL.createObjectURL(image))
+            // setInputFile(URL.createObjectURL(image))
         }
     }
 
@@ -53,7 +51,7 @@ export const EditProfile = () => {
         <Card className={s.profile}>
             <Typography variant={'large'} className={s.title}>Personal Information</Typography>
             <div className={s.avatarBlock}>
-                <Avatar className={s.avatar} avatar={inputFile!}/>
+                <Avatar className={s.avatar} avatar={avatar!}/>
                 <button className={`${s.buttonEdit} ${s.buttonEditImage}`} onClick={selectFileHandler}>
                     <Edit2Outline color={'white'}/>
                 </button>

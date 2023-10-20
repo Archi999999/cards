@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import {FC, useEffect, useState} from 'react'
 
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
@@ -19,10 +19,16 @@ export const Cards: FC<CardsProps> = ({}) => {
   const navigate = useNavigate()
   const { deckId } = useParams<{ deckId: string }>()
 
-  const { data: { id: authorId } = {} } = useMeQuery()
-  const { data: dataCards } = useGetCardsQuery({
-    id: deckId || '',
-  })
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(cardsSlice.actions.setDeckID(deckId!))
+    }, []);
+
+    const {data: {id: authorId} = {}} = useMeQuery()
+    const {data: dataCards} = useGetCardsQuery({
+        id: deckId || '',
+    })
+
 
   const { data, isError } = useGetDeckByIdQuery({
     id: deckId!,
@@ -34,13 +40,13 @@ export const Cards: FC<CardsProps> = ({}) => {
     navigate('/')
   }
 
-  const [openModalNewCard, setOpenModalNewCard] = useState(false)
+    const [openModalNewCard, setOpenModalNewCard] = useState(false)
 
-  const isMyCard = currentId === authorId
+    const isMyCard = currentId === authorId
 
-  const createNewCardButton = () => {
-    setOpenModalNewCard(true)
-  }
+    const createNewCardButton = () => {
+        setOpenModalNewCard(true)
+    }
 
   return (
     <div className={styles.wrapper}>

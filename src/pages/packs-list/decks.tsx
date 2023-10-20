@@ -98,7 +98,6 @@ export const Decks: FC<Props> = ({ variant }) => {
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
           totalPages={totalPages}
-          // totalItems={totalItems}
         />
       </section>
     </>

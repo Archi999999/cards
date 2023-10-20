@@ -34,7 +34,7 @@ export type updateResponse = {
 }
 
 export type updateRequest = {
-  avatar?: string | File | undefined | null | Blob
+  avatar?: string
   name?: string
   email?: string
 } | FormData
