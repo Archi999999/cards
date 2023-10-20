@@ -49,6 +49,12 @@ const cardsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
+    getRandomCard: build.query<OneCardResponse, { idDeck: string }>({
+      query: ({ idDeck }) => ({
+        url: `/v1/decks/${idDeck}/learn`,
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
@@ -58,4 +64,5 @@ export const {
   useDeleteCardMutation,
   useGetCardByIdQuery,
   useUpdateCardMutation,
+  useGetRandomCardQuery,
 } = cardsApi
