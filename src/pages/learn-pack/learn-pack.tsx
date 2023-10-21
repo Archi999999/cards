@@ -20,6 +20,15 @@ export const LearnPack = () => {
 
   const { data: dataRandomCard } = useGetRandomCardQuery({ idDeck: deckId || '' })
 
+  if (data?.cardsCount === 0) {
+    return (
+      <div className={styles.emptyPage}>
+        <Typography variant={'large'}>There are no cards in the deck.</Typography>
+        <Link to={'/'}> leave page</Link>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.wrapper}>
       <Link className={styles.linkBack} to={`/`}>
