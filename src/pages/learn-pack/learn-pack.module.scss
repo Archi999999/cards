@@ -11,4 +11,27 @@
 
     text-decoration: none;
   }
+
+  .cardQuestion {
+    margin: 45px 0 18px;
+  }
+
+  .cardEffortQuantity {
+    margin: 19px 0 11px;
+    color: var(--color-dark-100);
+  }
+}
+
+.cardAnswer {
+  display: flex;
+  flex-direction: column;
+  margin: 31px 0 48px;
+
+  .rate {
+    margin: 30px 0 13px;
+  }
+
+  .radioGroup {
+    margin: 13px 0 29px;
+  }
 }
