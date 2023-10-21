@@ -60,7 +60,13 @@ export const Cards: FC<CardsProps> = ({}) => {
           </Button>
         )}
         {!isMyCard && dataCards?.items.length !== 0 && (
-          <Button variant={'primary'} disabled={dataCards?.items.length === 0}>
+          <Button
+            variant={'primary'}
+            disabled={dataCards?.items.length === 0}
+            onClick={() => {
+              navigate(`/learn/${deckId}`)
+            }}
+          >
             Learn to Pack
           </Button>
         )}
