@@ -86,6 +86,22 @@ const cardsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
+    getRandomCard: build.query<OneCardResponse, { idDeck: string; previousCardId?: string }>({
+      query: ({ idDeck, previousCardId }) => ({
+        url: `/v1/decks/${idDeck}/learn`,
+        method: 'GET',
+        params: { previousCardId },
+      }),
+      providesTags: ['Cards'],
+    }),
+    updateGradeCard: build.mutation<any, { idDeck: string; cardId: string; grade: number }>({
+      query: ({ idDeck, cardId, grade }) => ({
+        url: `/v1/decks/${idDeck}/learn`,
+        method: 'POST',
+        body: { cardId, grade },
+      }),
+      invalidatesTags: ['Cards'],
+    }),
   }),
 })
 
@@ -95,4 +111,6 @@ export const {
   useDeleteCardMutation,
   useGetCardByIdQuery,
   useUpdateCardMutation,
+  useGetRandomCardQuery,
+  useUpdateGradeCardMutation,
 } = cardsApi

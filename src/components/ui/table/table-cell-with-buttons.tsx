@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FC, useState } from 'react'
 
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { DeleteModal } from '@/components/customized/modals/delete-modal/delete-modal.tsx'
 import { UpdatePackModal } from '@/components/customized/modals/pack-modal/update-pack-modal.tsx'
@@ -22,15 +22,22 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
   variant,
   ...props
 }) => {
+  const navigate = useNavigate()
   const [modalDelete, setModalDelete] = useState(false)
   const [modalUpdate, setModalUpdate] = useState(false)
 
   return (
     <td className={`${className} ${s.cell} `} {...props}>
       <div className={s.buttonsBlock}>
-        <Link to={'./#'} className={s.button} aria-labelledby='learn'>
+        <button
+          id={nameItem}
+          className={s.button}
+          onClick={() => {
+            navigate(`/learn/${packId}`)
+          }}
+        >
           <PlayCircleOutline />
-        </Link>
+        </button>
         {variant === 'myPacks' && (
           <>
             <button className={s.button} onClick={() => setModalUpdate(true)}>
@@ -41,7 +48,7 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
             </button>
           </>
         )}
-        {variant === 'allPacks' && <label id='learn'>Learn</label>}
+        {variant === 'allPacks' && <label htmlFor={nameItem}>Learn</label>}
       </div>
       {modalDelete && (
         <DeleteModal
