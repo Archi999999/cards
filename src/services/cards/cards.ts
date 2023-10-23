@@ -75,4 +75,5 @@ export const {
   useGetCardByIdQuery,
   useUpdateCardMutation,
   useGetRandomCardQuery,
+  useUpdateGradeCardMutation,
 } = cardsApi

@@ -7,7 +7,7 @@ import styles from './learn-pack.module.scss'
 import { Button, Typography } from '@/components'
 import { Card } from '@/components/ui/card/card.tsx'
 import ShowAnswer from '@/pages/learn-pack/show-answer.tsx'
-import { useGetRandomCardQuery } from '@/services/cards/cards.ts'
+import { useGetRandomCardQuery, useUpdateGradeCardMutation } from '@/services/cards/cards.ts'
 import { useGetDeckByIdQuery } from '@/services/decks/decks.ts'
 import { ArrowBack } from '@/svg/arrow-back-outline.tsx'
 
@@ -18,7 +18,16 @@ export const LearnPack = () => {
     id: deckId!,
   })
 
-  const { data: dataRandomCard } = useGetRandomCardQuery({ idDeck: deckId || '' })
+  const { data: dataRandomCard } = useGetRandomCardQuery({
+    idDeck: deckId || '',
+  })
+
+  const [updateGradeCard] = useUpdateGradeCardMutation()
+
+  const updateGradeCardHandler = (grade: number) => {
+    updateGradeCard({ grade, cardId: data ? data.id : '', idDeck: deckId || '' })
+    setShowAnswer(false)
+  }
 
   if (data?.cardsCount === 0) {
     return (
@@ -54,7 +63,12 @@ export const LearnPack = () => {
         >
           Show Answer
         </Button>
-        {showAnswer && <ShowAnswer answer={dataRandomCard ? dataRandomCard.answer : ''} />}
+        {showAnswer && (
+          <ShowAnswer
+            setNewQuestion={updateGradeCardHandler}
+            answer={dataRandomCard ? dataRandomCard.answer : ''}
+          />
+        )}
       </Card>
     </div>
   )
