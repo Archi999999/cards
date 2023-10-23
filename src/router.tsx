@@ -10,6 +10,7 @@ import { Header } from '@/components'
 import { PasswordRecovery } from '@/components/auth/password-recovery/password-recovery.tsx'
 import { EditProfile } from '@/components/ui/edit-profile/edit-profile.tsx'
 import { Cards } from '@/pages/cards-list/cards.tsx'
+import { LearnPack } from '@/pages/learn-pack/learn-pack.tsx'
 import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 import { SignInPage } from '@/pages/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up-page.tsx'
@@ -38,6 +39,10 @@ const privateRoutes: RouteObject[] = [
   {
     path: '/cards/:deckId',
     element: <Cards />,
+  },
+  {
+    path: '/learn/:deckId',
+    element: <LearnPack />,
   },
 
   {
