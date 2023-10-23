@@ -13,6 +13,8 @@ import { useGetCardsQuery } from '@/services/cards/cards.ts'
 import { useGetDeckByIdQuery } from '@/services/decks/decks.ts'
 import { DeckById } from '@/services/decks/types.ts'
 import { ArrowBack } from '@/svg/arrow-back-outline.tsx'
+import {useDispatch} from "react-redux";
+import {cardsSlice} from "@/services/cards/cards.slice.ts";
 
 type CardsProps = {}
 export const Cards: FC<CardsProps> = ({}) => {
@@ -20,6 +22,7 @@ export const Cards: FC<CardsProps> = ({}) => {
   const { deckId } = useParams<{ deckId: string }>()
 
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(cardsSlice.actions.setDeckID(deckId!))
     }, []);

@@ -23,11 +23,7 @@ const authApi = baseApi.injectEndpoints({
                     body: params,
                 }
             },
-            async onQueryStarted(args, {queryFulfilled, dispatch}) {
-                if (args instanceof FormData) {
-                    const image = args.get('avatar');
-                    console.log(image)
-                }
+            onQueryStarted(args, {queryFulfilled, dispatch}) {
                 const patchResult = dispatch(
                     authApi.util.updateQueryData('me', undefined, draft => {
                         if ('name' in args) {
@@ -39,11 +35,7 @@ const authApi = baseApi.injectEndpoints({
                         }
                     })
                 )
-                try {
-                    await queryFulfilled
-                } catch {
-                    patchResult.undo()
-                }
+                queryFulfilled.catch(patchResult.undo)
             },
             // invalidatesTags: ['Me'],
         }),

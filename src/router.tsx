@@ -48,7 +48,6 @@ const privateRoutes: RouteObject[] = [
 
 const Layout = () => {
   const { data, isLoading } = useMeQuery()
-
   return (
     <>
       <Header data={data} isLoading={isLoading} />
@@ -68,16 +67,6 @@ const router = createBrowserRouter([
       ...publicRoutes,
     ],
   },
-  // {
-  //   element: <Layout />,
-  //   children: [
-  //     ...privateRoutes.map(route => ({
-  //       ...route,
-  //       element: <PrivateRouteWrapper>{route.element}</PrivateRouteWrapper>,
-  //     })),
-  //     ...publicRoutes,
-  //   ],
-  // },
 ])
 
 export const Router = () => {
@@ -94,6 +83,3 @@ function PrivateRoutes() {
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
 
-// function PrivateRouteWrapper({ children }: { children: React.ReactNode }) {
-//   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />
-// }

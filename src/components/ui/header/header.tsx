@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 
 import {Link, useNavigate} from 'react-router-dom'
 
@@ -10,6 +10,7 @@ import { Typography } from '@/components/ui/typography/typography.tsx'
 import { Logo } from '@/svg'
 import {useDispatch} from "react-redux";
 import {decksSlice} from "@/services/decks/decks.slice.ts";
+import {authSlice} from "@/services/auth/auth.slice.ts";
 
 type Props = {
   data: any
@@ -19,10 +20,10 @@ type Props = {
 export const Header: FC<Props> = ({ data, isLoading }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // useEffect(() => {
-  //   if (data)
-  //   dispatch(authSlice.actions.setUserId(data.id))
-  // }, [data]);
+  useEffect(() => {
+    if (data) { console.log('here')
+    dispatch(authSlice.actions.setUserId(data.id)) }
+  }, [data]);
 
   const isAuth = !!data
 

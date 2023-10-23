@@ -93,6 +93,7 @@ const decksApi = baseApi.injectEndpoints({
         )
         queryFulfilled.catch(patchResult.undo)
         },
+      invalidatesTags: ['Decks'],
     }),
   }),
 })
