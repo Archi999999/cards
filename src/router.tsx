@@ -10,6 +10,7 @@ import { Header } from '@/components'
 import { PasswordRecovery } from '@/components/auth/password-recovery/password-recovery.tsx'
 import { EditProfile } from '@/components/ui/edit-profile/edit-profile.tsx'
 import { Cards } from '@/pages/cards-list/cards.tsx'
+import ErrorPack from '@/pages/error-pack/error-pack.tsx'
 import { LearnPack } from '@/pages/learn-pack/learn-pack.tsx'
 import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 import { SignInPage } from '@/pages/sign-in-page.tsx'
@@ -28,6 +29,10 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/password-recovery',
     element: <PasswordRecovery />,
+  },
+  {
+    path: '*',
+    element: <ErrorPack />,
   },
 ]
 
@@ -53,6 +58,7 @@ const privateRoutes: RouteObject[] = [
 
 const Layout = () => {
   const { data, isLoading } = useMeQuery()
+
   return (
     <>
       <Header data={data} isLoading={isLoading} />
@@ -87,4 +93,3 @@ function PrivateRoutes() {
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
-
