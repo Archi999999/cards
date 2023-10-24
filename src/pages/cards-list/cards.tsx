@@ -27,11 +27,10 @@ export const Cards: FC<CardsProps> = ({}) => {
         dispatch(cardsSlice.actions.setDeckID(deckId!))
     }, []);
 
-    const {data: {id: authorId} = {}} = useMeQuery()
-    const {data: dataCards} = useGetCardsQuery({
-        id: deckId || '',
-    })
-
+  const { data: { id: authorId } = {} } = useMeQuery()
+  const { data: dataCards } = useGetCardsQuery({
+    id: deckId || '',
+  })
 
   const { data, isError } = useGetDeckByIdQuery({
     id: deckId!,
@@ -43,13 +42,13 @@ export const Cards: FC<CardsProps> = ({}) => {
     navigate('/')
   }
 
-    const [openModalNewCard, setOpenModalNewCard] = useState(false)
+  const [openModalNewCard, setOpenModalNewCard] = useState(false)
 
-    const isMyCard = currentId === authorId
+  const isMyCard = currentId === authorId
 
-    const createNewCardButton = () => {
-        setOpenModalNewCard(true)
-    }
+  const createNewCardButton = () => {
+    setOpenModalNewCard(true)
+  }
 
   return (
     <div className={styles.wrapper}>
