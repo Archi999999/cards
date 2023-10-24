@@ -1,0 +1,93 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    position: relative;
+    top: -340px;
+  }
+}
+
+.errorPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 80px auto;
+
+  .rod {
+    position: relative;
+    top: -290px;
+
+    display: flex;
+    gap: 400px;
+
+    margin-left: 50px;
+  }
+
+  .ribbon {
+    position: relative;
+    top: -365px;
+
+    width: 450px;
+    height: 18px;
+    margin-left: 50px;
+
+    background: repeating-linear-gradient(135deg, #f5d100, #f5d100 8px, black 8px, black 16px);
+  }
+
+  .rectangle {
+    position: relative;
+    top: -340px;
+    left: 136px;
+  }
+}
+
+.numbers {
+  position: relative;
+  top: -148px;
+  left: 45px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+
+  .firstFour {
+    position: relative;
+    top: -10px;
+    left: -8px;
+    transform: rotate(56deg);
+  }
+}
+
+.zero {
+  display: flex;
+  flex-direction: column;
+
+  svg {
+    &:first-child {
+      margin-left: 14px;
+    }
+  }
+}
+
+.wallStairs {
+  display: flex;
+  margin-left: 5px;
+}
+
+.pipesCloud {
+  position: relative;
+  top: -200px;
+
+  display: flex;
+  gap: 60px;
+  align-items: center;
+
+  margin-left: 15px;
+}
+
+.string {
+  position: relative;
+  top: -300px;
+}
