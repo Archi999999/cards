@@ -1,5 +1,6 @@
-import {FC, useEffect, useState} from 'react'
+import { FC, useEffect, useState } from 'react'
 
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import styles from './cards.module.scss'
@@ -8,31 +9,31 @@ import { Button, TextField, Typography } from '@/components'
 import { CreateCardModal } from '@/components/customized/modals/card-modal/create-card-modal.tsx'
 import { CardsTable } from '@/pages/cards-list/cards-table/CardsTable.tsx'
 import CardsDrop from '@/pages/cards-list/cardsDrop.tsx'
+import { LoaderRotating } from '@/pages/loader/loader-roating.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
+import { cardsSlice } from '@/services/cards/cards.slice.ts'
 import { useGetCardsQuery } from '@/services/cards/cards.ts'
 import { useGetDeckByIdQuery } from '@/services/decks/decks.ts'
 import { DeckById } from '@/services/decks/types.ts'
 import { ArrowBack } from '@/svg/arrow-back-outline.tsx'
-import {useDispatch} from "react-redux";
-import {cardsSlice} from "@/services/cards/cards.slice.ts";
 
 type CardsProps = {}
 export const Cards: FC<CardsProps> = ({}) => {
   const navigate = useNavigate()
   const { deckId } = useParams<{ deckId: string }>()
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(cardsSlice.actions.setDeckID(deckId!))
-    }, []);
+  useEffect(() => {
+    dispatch(cardsSlice.actions.setDeckID(deckId!))
+  }, [])
 
   const { data: { id: authorId } = {} } = useMeQuery()
   const { data: dataCards } = useGetCardsQuery({
     id: deckId || '',
   })
 
-  const { data, isError } = useGetDeckByIdQuery({
+  const { data, isError, isLoading } = useGetDeckByIdQuery({
     id: deckId!,
   })
 
@@ -49,6 +50,8 @@ export const Cards: FC<CardsProps> = ({}) => {
   const createNewCardButton = () => {
     setOpenModalNewCard(true)
   }
+
+  if (isLoading) return <LoaderRotating />
 
   return (
     <div className={styles.wrapper}>
