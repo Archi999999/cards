@@ -1,7 +1,7 @@
 import { Navigate, useNavigate } from 'react-router-dom'
 
 import { SignIn } from '@/components'
-import { LoaderRotating } from '@/pages/loader/loader-roating.tsx'
+import { LoaderRotating } from '@/pages/loader/loader-rotating.tsx'
 import { useLoginMutation, useMeQuery } from '@/services/auth/auth.ts'
 
 export const SignInPage = () => {

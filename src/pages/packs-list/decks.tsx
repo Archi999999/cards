@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/table'
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { TableCellWithButtons } from '@/components/ui/table/table-cell-with-buttons.tsx'
-import { LoaderRotating } from '@/pages/loader/loader-roating.tsx'
+import { LoaderRotating } from '@/pages/loader/loader-rotating.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { RootState } from '@/services/store.ts'
