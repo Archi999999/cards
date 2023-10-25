@@ -12,6 +12,7 @@ import { EditProfile } from '@/components/ui/edit-profile/edit-profile.tsx'
 import { Cards } from '@/pages/cards-list/cards.tsx'
 import ErrorPack from '@/pages/error-pack/error-pack.tsx'
 import { LearnPack } from '@/pages/learn-pack/learn-pack.tsx'
+import { LoaderLinear } from '@/pages/loader/loader-line.tsx'
 import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 import { SignInPage } from '@/pages/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up-page.tsx'
@@ -87,7 +88,7 @@ export const Router = () => {
 function PrivateRoutes() {
   const { isLoading, isError } = useMeQuery()
 
-  if (isLoading) return <>Loading...</>
+  if (isLoading) return <LoaderLinear />
 
   const isAuthenticated = !isError
 

@@ -1,6 +1,7 @@
 import { Navigate, useNavigate } from 'react-router-dom'
 
 import { SignIn } from '@/components'
+import { LoaderRotating } from '@/pages/loader/loader-rotating.tsx'
 import { useLoginMutation, useMeQuery } from '@/services/auth/auth.ts'
 
 export const SignInPage = () => {
@@ -8,7 +9,7 @@ export const SignInPage = () => {
   const [signIn, { isLoading: isSigningIn }] = useLoginMutation()
   const navigate = useNavigate()
 
-  if (isLoading) return <>Loading...</>
+  if (isLoading) return <LoaderRotating />
   if (data) return <Navigate to={'/'} />
 
   const handleSignIn = (data: any) => {
