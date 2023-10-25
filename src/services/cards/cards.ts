@@ -5,7 +5,7 @@ import {
   GetRequestCards,
   OneCardResponse,
 } from '@/services/cards/types.ts'
-import {RootState} from "@/services/store.ts";
+import { RootState } from '@/services/store.ts'
 
 const cardsApi = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -33,32 +33,32 @@ const cardsApi = baseApi.injectEndpoints({
           body,
         }
       },
-    //   onQueryStarted(args, {dispatch, getState, queryFulfilled}){
-    //     const state = getState() as RootState
-    //     const userId = state.cardsSlice.userId
-    //
-    //     const patchResult = dispatch(
-    //         cardsApi.util.updateQueryData('getCards', args, draft => {
-    //           const newCard = {
-    //             deckId: args.id,
-    //             id: 'someId',
-    //             userId: userId,
-    //             question: args.question,
-    //             answer: args.answer,
-    //             shots: 0,
-    //             answerImg: '',
-    //             questionImg: '',
-    //             questionVideo: '',
-    //             answerVideo: '',
-    //             grade: 0,
-    //             created: 'date',
-    //             updated: 'date'
-    //           }
-    //           draft.items.unshift(newCard)
-    //         })
-    //     )
-    //     queryFulfilled.catch(patchResult.undo)
-    //   },
+      //   onQueryStarted(args, {dispatch, getState, queryFulfilled}){
+      //     const state = getState() as RootState
+      //     const userId = state.cardsSlice.userId
+      //
+      //     const patchResult = dispatch(
+      //         cardsApi.util.updateQueryData('getCards', args, draft => {
+      //           const newCard = {
+      //             deckId: args.id,
+      //             id: 'someId',
+      //             userId: userId,
+      //             question: args.question,
+      //             answer: args.answer,
+      //             shots: 0,
+      //             answerImg: '',
+      //             questionImg: '',
+      //             questionVideo: '',
+      //             answerVideo: '',
+      //             grade: 0,
+      //             created: 'date',
+      //             updated: 'date'
+      //           }
+      //           draft.items.unshift(newCard)
+      //         })
+      //     )
+      //     queryFulfilled.catch(patchResult.undo)
+      //   },
       invalidatesTags: ['Cards'],
     }),
     deleteCard: build.mutation<any, { id: string }>({
@@ -66,14 +66,15 @@ const cardsApi = baseApi.injectEndpoints({
         url: `v1/cards/${id}`,
         method: 'DELETE',
       }),
-      onQueryStarted({ id }, {dispatch, getState, queryFulfilled}){
+      onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
         const state = getState() as RootState
         const deckId = state.cardsSlice.deckId
         const patchResult = dispatch(
-            cardsApi.util.updateQueryData('getCards', {id: deckId}, (draft)=> {
-              draft.items = draft.items.filter(el=>el.id !== id)
-            })
+          cardsApi.util.updateQueryData('getCards', { id: deckId }, draft => {
+            draft.items = draft.items.filter(el => el.id !== id)
+          })
         )
+
         queryFulfilled.catch(patchResult.undo)
       },
       // invalidatesTags: ['Cards'],
