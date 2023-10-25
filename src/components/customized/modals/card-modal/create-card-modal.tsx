@@ -18,8 +18,9 @@ export const CreateCardModal: React.FC<Props> = ({ setModal, deckId }) => {
   // ]
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
+  // const [errorMessage, setErrorMessage] = useState('')
   const [createCard] = useCreateCardMutation()
-  let questionError = ''
+
   const confirmNewCard = () => {
     if (deckId) {
       createCard({ id: deckId, answer: answer, question: question })
@@ -48,8 +49,8 @@ export const CreateCardModal: React.FC<Props> = ({ setModal, deckId }) => {
         {/*  className={s.select}*/}
         {/*  options={options}*/}
         {/*/>*/}
-        <TextField label={'Question'} onValueChange={setQuestion} error={questionError} />
-        <TextField label={'Answer'} onValueChange={setAnswer} />
+        <TextField label={'Question'} onValueChange={setQuestion} />
+        <TextField label={'Answer'} onValueChange={setAnswer} error={``} />
       </Modal>
     </>
   )

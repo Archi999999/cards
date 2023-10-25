@@ -7,10 +7,10 @@ import { z } from 'zod'
 
 import s from './sign-up.module.scss'
 
-import {Button, TextField, Typography} from '@/components'
+import { Button, TextField, Typography } from '@/components'
 import { Card } from '@/components/ui/card/card.tsx'
-import {useRegistrationMutation} from "@/services/auth/auth.ts";
-import {ControlledTextField} from "@/components/ui/controlled-text-field/controlled-text-field.tsx";
+import { ControlledTextField } from '@/components/ui/controlled-text-field/controlled-text-field.tsx'
+import { useRegistrationMutation } from '@/services/auth/auth.ts'
 
 const loginSchema = z
   .object({
@@ -42,23 +42,26 @@ export const SignUp: FC<Props> = ({ onSubmit }) => {
   const {
     control,
     handleSubmit,
-      setError,
+    setError,
     // formState: { errors },
   } = useForm<LoginFormSchema>({ resolver: zodResolver(loginSchema) })
 
-  const [,{error}] = useRegistrationMutation()
+  const [, { error }] = useRegistrationMutation()
 
-    if (error) {
-        if (
-            'status' in error &&
-            typeof error.data === 'object' &&
-            error.data &&
-            'errorMessages' in error.data &&
-            Array.isArray(error.data.errorMessages)
-    ){
-            setError('confirmPassword', {type: 'dark side', message: error.data.errorMessages[0] as string})
-        }
+  if (error) {
+    if (
+      'status' in error &&
+      typeof error.data === 'object' &&
+      error.data &&
+      'errorMessages' in error.data &&
+      Array.isArray(error.data.errorMessages)
+    ) {
+      setError('confirmPassword', {
+        type: 'dark side',
+        message: error.data.errorMessages[0] as string,
+      })
     }
+  }
 
   return (
     <Card className={s.signUp}>
@@ -66,8 +69,8 @@ export const SignUp: FC<Props> = ({ onSubmit }) => {
         Sign Up
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <ControlledTextField name={'email'} control={control} label={'Email'}/>
-          <ControlledTextField name={'password'} control={control} label={'Password'}/>
+        <ControlledTextField name={'email'} control={control} label={'Email'} />
+        <ControlledTextField name={'password'} control={control} label={'Password'} />
         {/*  <ControlledTextField name={'confirmPassword'} control={control} label={'Confirm password'}/>*/}
         <Controller
           name="confirmPassword"
