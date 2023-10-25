@@ -8,6 +8,7 @@ type Props = {
   name: 'text' | 'password' | 'email'
   control: any
   label: string
+  onValueChange?: (value: string) => void
 }
 export const ControlledTextField: FC<Props> = ({ name, control, label }) => {
   return (
