@@ -7,6 +7,7 @@ import styles from './learn-pack.module.scss'
 import { Button, Typography } from '@/components'
 import { Card } from '@/components/ui/card/card.tsx'
 import ShowAnswer from '@/pages/learn-pack/show-answer.tsx'
+import { LoaderRotating } from '@/pages/loader/loader-rotating.tsx'
 import { useGetRandomCardQuery, useUpdateGradeCardMutation } from '@/services/cards/cards.ts'
 import { useGetDeckByIdQuery } from '@/services/decks/decks.ts'
 import { ArrowBack } from '@/svg/arrow-back-outline.tsx'
@@ -18,7 +19,7 @@ export const LearnPack = () => {
     id: deckId!,
   })
 
-  const { data: dataRandomCard } = useGetRandomCardQuery({
+  const { data: dataRandomCard, isLoading } = useGetRandomCardQuery({
     idDeck: deckId || '',
   })
 
@@ -37,6 +38,7 @@ export const LearnPack = () => {
       </div>
     )
   }
+  if (isLoading) return <LoaderRotating />
 
   return (
     <div className={styles.wrapper}>

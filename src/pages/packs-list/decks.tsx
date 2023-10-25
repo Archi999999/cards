@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/table'
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { TableCellWithButtons } from '@/components/ui/table/table-cell-with-buttons.tsx'
+import { LoaderRotating } from '@/pages/loader/loader-rotating.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { RootState } from '@/services/store.ts'
@@ -53,7 +54,7 @@ export const Decks: FC<Props> = ({ variant }) => {
 
   const totalPages = decks.data?.pagination.totalPages
 
-  if (decks.isLoading) return <div>...Loading</div>
+  if (decks.isLoading) return <LoaderRotating />
   if (decks.error) return <div>ERROR!!!</div>
 
   return (
@@ -94,11 +95,7 @@ export const Decks: FC<Props> = ({ variant }) => {
         </TableBody>
       </Table>
       <section className={s.pagination}>
-        <Pagination
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-          totalPages={totalPages}
-        />
+        <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} totalPages={totalPages} />
       </section>
     </>
   )
