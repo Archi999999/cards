@@ -18,7 +18,7 @@ export const CreateCardModal: React.FC<Props> = ({ setModal, deckId }) => {
   // ]
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
-  // const [errorMessage, setErrorMessage] = useState('')
+
   const [createCard] = useCreateCardMutation()
 
   const confirmNewCard = () => {
