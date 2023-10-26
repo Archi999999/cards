@@ -5,12 +5,13 @@ import { useUpdateDeckMutation } from '@/services/decks/decks.ts'
 
 type Props = {
   id: string
+  nameDeck: string
   setModal: (value: boolean) => void
 }
 
-export const UpdatePackModal: FC<Props> = ({ id, setModal }) => {
+export const UpdatePackModal: FC<Props> = ({ id,nameDeck, setModal }) => {
   const [isPrivate, setPrivate] = useState(false)
-  const [name, setName] = useState('')
+  const [name, setName] = useState(nameDeck)
   const [updateDeck] = useUpdateDeckMutation()
 
   const changePrivate = () => {
@@ -35,6 +36,7 @@ export const UpdatePackModal: FC<Props> = ({ id, setModal }) => {
       onNameChange={onNameChange}
       changePrivate={changePrivate}
       onPrivate={isPrivate}
+      nameDeck={name}
     />
   )
 }

@@ -59,7 +59,7 @@ const cardsApi = baseApi.injectEndpoints({
     //     )
     //     queryFulfilled.catch(patchResult.undo)
     //   },
-      invalidatesTags: ['Cards'],
+      invalidatesTags: ['Cards','Decks'],
     }),
     deleteCard: build.mutation<any, { id: string }>({
       query: ({ id }) => ({
