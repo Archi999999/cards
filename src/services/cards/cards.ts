@@ -5,7 +5,7 @@ import {
   GetRequestCards,
   OneCardResponse,
 } from '@/services/cards/types.ts'
-import {RootState} from "@/services/store.ts";
+import { RootState } from '@/services/store.ts'
 
 const cardsApi = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -66,14 +66,15 @@ const cardsApi = baseApi.injectEndpoints({
         url: `v1/cards/${id}`,
         method: 'DELETE',
       }),
-      onQueryStarted({ id }, {dispatch, getState, queryFulfilled}){
+      onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
         const state = getState() as RootState
         const deckId = state.cardsSlice.deckId
         const patchResult = dispatch(
-            cardsApi.util.updateQueryData('getCards', {id: deckId}, (draft)=> {
-              draft.items = draft.items.filter(el=>el.id !== id)
-            })
+          cardsApi.util.updateQueryData('getCards', { id: deckId }, draft => {
+            draft.items = draft.items.filter(el => el.id !== id)
+          })
         )
+
         queryFulfilled.catch(patchResult.undo)
       },
       // invalidatesTags: ['Cards'],

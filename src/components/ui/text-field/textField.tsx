@@ -25,7 +25,7 @@ export const TextField: FC<TextFieldProps> = props => {
     label,
     onValueChange,
     onChange,
-      ...rest
+    ...rest
   } = props
   const [isVisible, setIsVisible] = useState(false)
   const onVisible = () => {

@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css'
 
 import styles from './cards.module.scss'
 
@@ -54,43 +55,45 @@ export const Cards: FC<CardsProps> = ({}) => {
   if (isLoading) return <LoaderRotating />
 
   return (
-    <div className={styles.wrapper}>
-      <Link className={styles.linkBack} to={`/`}>
-        <ArrowBack />
-        <Typography variant={'body_2'}> Back to Packs List</Typography>
-      </Link>
-      <div className={styles.headerCards}>
-        <div className={styles.headerDeckInfo}>
-          <Typography variant={'large'}>{cardName}</Typography>
-          {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} cardName={cardName} />}
-        </div>
+    <>
+      <div className={styles.wrapper}>
+        <Link className={styles.linkBack} to={`/`}>
+          <ArrowBack />
+          <Typography variant={'body_2'}> Back to Packs List</Typography>
+        </Link>
+        <div className={styles.headerCards}>
+          <div className={styles.headerDeckInfo}>
+            <Typography variant={'large'}>{cardName}</Typography>
+            {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} cardName={cardName} />}
+          </div>
 
-        {isMyCard && dataCards?.items.length !== 0 && (
-          <Button variant={'primary'} onClick={createNewCardButton}>
-            Add New Card
-          </Button>
-        )}
-        {!isMyCard && dataCards?.items.length !== 0 && (
-          <Button
-            variant={'primary'}
-            disabled={dataCards?.items.length === 0}
-            onClick={() => {
-              navigate(`/learn/${deckId}`)
-            }}
-          >
-            Learn to Pack
-          </Button>
+          {isMyCard && dataCards?.items.length !== 0 && (
+            <Button variant={'primary'} onClick={createNewCardButton}>
+              Add New Card
+            </Button>
+          )}
+          {!isMyCard && dataCards?.items.length !== 0 && (
+            <Button
+              variant={'primary'}
+              disabled={dataCards?.items.length === 0}
+              onClick={() => {
+                navigate(`/learn/${deckId}`)
+              }}
+            >
+              Learn to Pack
+            </Button>
+          )}
+        </div>
+        <TextField className={styles.inputSearch} variant={'search'} />
+        <CardsTable
+          data={dataCards && dataCards.items}
+          isMyCard={isMyCard}
+          createNewCardButton={createNewCardButton}
+        />
+        {openModalNewCard && (
+          <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId ? deckId : ''} />
         )}
       </div>
-      <TextField className={styles.inputSearch} variant={'search'} />
-      <CardsTable
-        data={dataCards && dataCards.items}
-        isMyCard={isMyCard}
-        createNewCardButton={createNewCardButton}
-      />
-      {openModalNewCard && (
-        <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId ? deckId : ''} />
-      )}
-    </div>
+    </>
   )
 }
