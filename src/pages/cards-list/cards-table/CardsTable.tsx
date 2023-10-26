@@ -51,7 +51,7 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
 
   return (
     <>
-      <Table className={s.table}>
+      <Table className={s.tableCard}>
         <TableHeader>
           <TableRow>
             <TableHead>Question</TableHead>

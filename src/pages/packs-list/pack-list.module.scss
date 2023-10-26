@@ -1,3 +1,8 @@
+.wrapper {
+  max-width: 100vh;
+  margin: 36px 136px;
+}
+
 .packList {
   max-width: var(--main-container-width);
   margin: 36px 136px;
@@ -26,6 +31,12 @@
   margin: 0 auto 30px;
 }
 
+.tableCard {
+  overflow: auto;
+  max-width: 100%;
+  margin: 0 auto 30px;
+}
+
 .buttonUpdated {
   cursor: pointer;
   display: flex;
@@ -47,7 +58,6 @@
   display: flex;
   justify-content: center;
   margin-top: 100px;
-
 }
 
 //these styles for cards
