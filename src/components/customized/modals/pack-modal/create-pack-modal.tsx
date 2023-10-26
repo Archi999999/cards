@@ -29,7 +29,9 @@ export const CreatePackModal: React.FC<Props> = ({ setModal }) => {
         setModal(false)
       })
       .catch(() => {
-        toast('name must be longer than or equal to 3 characters"')
+        toast(
+          'name must be longer than or equal to 3 characters and shorter than or equal to 30 characters'
+        )
       })
   }
 
