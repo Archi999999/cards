@@ -25,6 +25,17 @@
 .cell {
   border-bottom: 1px solid var(--color-dark-500);
 
+  &:first-child,
+  &:nth-child(2) {
+    overflow: hidden; /* Добавляет прокрутку, если содержимое не помещается */
+    max-width: 100px; /* Максимальная ширина по вашему усмотрению */
+    text-overflow: ellipsis; /* Добавляет многоточие, если содержимое обрезается */
+  }
+
+  &:not(:first-child, &:nth-child(2)) {
+    width: 70px; /* Максимальная ширина по вашему усмотрению */
+  }
+
   &:first-child {
     border-left: 1px solid var(--color-dark-500);
   }
