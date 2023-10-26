@@ -1,5 +1,9 @@
 .wrapper {
   margin: 0 136px;
+
+  .inputSearch {
+    padding-bottom: 24px;
+  }
 }
 
 .linkBack {
@@ -15,7 +19,10 @@
 
 .headerCards {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+
+  min-width: 455px;
   margin-bottom: 27px;
 
   .headerDeckInfo {
@@ -24,8 +31,4 @@
     align-items: flex-end;
     justify-content: flex-end;
   }
-}
-
-.inputSearch {
-  padding-bottom: 24px;
 }
