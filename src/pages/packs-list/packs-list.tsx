@@ -77,18 +77,20 @@ export const PacksList = () => {
           onValueChange={setSearchValue}
           value={searchValue}
         />
-        <TabSwitcherPacks />
-        <Slider
-          label={'Count of cards'}
-          maxValue={maxCardsCount}
-          currentMinValue={currentMinValue}
-          currentMaxValue={currentMaxValue}
-          valueChangeHandler={valueChangeHandler}
-        />
-        <Button variant={'secondary'} onClick={onResetValues}>
-          <Trash />
-          Clear Filter
-        </Button>
+        <div className={s.filterSecondSection}>
+          <TabSwitcherPacks />
+          <Slider
+            label={'Count of cards'}
+            maxValue={maxCardsCount}
+            currentMinValue={currentMinValue}
+            currentMaxValue={currentMaxValue}
+            valueChangeHandler={valueChangeHandler}
+          />
+          <Button variant={'secondary'} onClick={onResetValues}>
+            <Trash />
+            Clear Filter
+          </Button>
+        </div>
       </section>
       {modal && <CreatePackModal setModal={setModal} />}
     </div>

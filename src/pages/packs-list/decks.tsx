@@ -59,7 +59,7 @@ export const Decks: FC<Props> = ({ variant }) => {
 
   return (
     <>
-      <Table className={s.table}>
+      <Table className={s.tableDeck}>
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>

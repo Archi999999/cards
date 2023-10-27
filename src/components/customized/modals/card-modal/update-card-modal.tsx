@@ -1,32 +1,19 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 
 import { TextField } from '@/components'
 import { Modal } from '@/components/ui/modal/modal.tsx'
-import { useGetCardByIdQuery, useUpdateCardMutation } from '@/services/cards/cards.ts'
+import { useUpdateCardMutation } from '@/services/cards/cards.ts'
 
 type Props = {
   setModal: (value: boolean) => void
   cardId: string
+  questionCard: string
+  answerCard: string
 }
 
-export const UpdateCardModal: FC<Props> = ({ setModal, cardId }) => {
-  // const options = [
-  //   { id: '', value: 'text' },
-  //   { id: '', value: 'image' },
-  // ]
-  const { data: dataCards } = useGetCardByIdQuery({
-    id: cardId,
-  })
-
-  const [question, setQuestion] = useState('')
-  const [answer, setAnswer] = useState('')
-
-  useEffect(() => {
-    if (dataCards) {
-      setQuestion(dataCards.question)
-      setAnswer(dataCards.answer)
-    }
-  }, [dataCards])
+export const UpdateCardModal: FC<Props> = ({ setModal, cardId, answerCard, questionCard }) => {
+  const [question, setQuestion] = useState(questionCard)
+  const [answer, setAnswer] = useState(answerCard)
 
   const [updateCard] = useUpdateCardMutation()
   const confirmUpdateCard = () => {
