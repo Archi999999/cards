@@ -33,33 +33,33 @@ const cardsApi = baseApi.injectEndpoints({
           body,
         }
       },
-      //   onQueryStarted(args, {dispatch, getState, queryFulfilled}){
-      //     const state = getState() as RootState
-      //     const userId = state.cardsSlice.userId
-      //
-      //     const patchResult = dispatch(
-      //         cardsApi.util.updateQueryData('getCards', args, draft => {
-      //           const newCard = {
-      //             deckId: args.id,
-      //             id: 'someId',
-      //             userId: userId,
-      //             question: args.question,
-      //             answer: args.answer,
-      //             shots: 0,
-      //             answerImg: '',
-      //             questionImg: '',
-      //             questionVideo: '',
-      //             answerVideo: '',
-      //             grade: 0,
-      //             created: 'date',
-      //             updated: 'date'
-      //           }
-      //           draft.items.unshift(newCard)
-      //         })
-      //     )
-      //     queryFulfilled.catch(patchResult.undo)
-      //   },
-      invalidatesTags: ['Cards'],
+    //   onQueryStarted(args, {dispatch, getState, queryFulfilled}){
+    //     const state = getState() as RootState
+    //     const userId = state.cardsSlice.userId
+    //
+    //     const patchResult = dispatch(
+    //         cardsApi.util.updateQueryData('getCards', args, draft => {
+    //           const newCard = {
+    //             deckId: args.id,
+    //             id: 'someId',
+    //             userId: userId,
+    //             question: args.question,
+    //             answer: args.answer,
+    //             shots: 0,
+    //             answerImg: '',
+    //             questionImg: '',
+    //             questionVideo: '',
+    //             answerVideo: '',
+    //             grade: 0,
+    //             created: 'date',
+    //             updated: 'date'
+    //           }
+    //           draft.items.unshift(newCard)
+    //         })
+    //     )
+    //     queryFulfilled.catch(patchResult.undo)
+    //   },
+      invalidatesTags: ['Cards','Decks'],
     }),
     deleteCard: build.mutation<any, { id: string }>({
       query: ({ id }) => ({
