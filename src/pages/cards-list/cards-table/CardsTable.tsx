@@ -28,10 +28,18 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [openUpdateModal, setOpenUpdateModal] = useState(false)
   const [cardId, setCardId] = useState('')
+  const [question, setQuestion] = useState('')
+  const [answer, setAnswer] = useState('')
 
-  const clickOnButton = (id: string, chooseButton: string) => {
+  const clickOnButton = (id: string) => {
     setCardId(id)
-    chooseButton === 'update' ? setOpenUpdateModal(true) : setOpenDeleteModal(true)
+    setOpenDeleteModal(true)
+  }
+  const clickOnUpdateButton = (cardId: string, question: string, answer: string) => {
+    setCardId(cardId)
+    setQuestion(question)
+    setAnswer(answer)
+    setOpenUpdateModal(true)
   }
 
   if (data?.length === 0) {
@@ -79,10 +87,13 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
                 {isMyCard && (
                   <TableCell>
                     <div className={s.tablesButtons}>
-                      <button className={s.button} onClick={() => clickOnButton(card.id, 'update')}>
+                      <button
+                        className={s.button}
+                        onClick={() => clickOnUpdateButton(card.id, card.question, card.answer)}
+                      >
                         <Edit2Outline color={'white'} />
                       </button>
-                      <button className={s.button} onClick={() => clickOnButton(card.id, 'delete')}>
+                      <button className={s.button} onClick={() => clickOnButton(card.id)}>
                         <Trash />
                       </button>
                     </div>
@@ -101,7 +112,14 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
           setModal={setOpenDeleteModal}
         />
       )}
-      {openUpdateModal && <UpdateCardModal setModal={setOpenUpdateModal} cardId={cardId} />}
+      {openUpdateModal && (
+        <UpdateCardModal
+          setModal={setOpenUpdateModal}
+          cardId={cardId}
+          answerCard={answer}
+          questionCard={question}
+        />
+      )}
     </>
   )
 }
