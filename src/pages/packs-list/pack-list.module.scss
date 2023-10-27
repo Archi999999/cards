@@ -1,9 +1,7 @@
-.wrapper {
-}
-
 .packList {
   max-width: var(--main-container-width);
   margin: 36px auto;
+  padding: 10px;
 }
 
 .headerSection {
@@ -13,10 +11,34 @@
 
 .filterSection {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 2px;
   align-items: end;
   justify-content: space-between;
+}
+
+.filterSecondSection {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 20px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+@media (width <= 1000px) {
+  .filterSection {
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+    margin-top: 20px;
+  }
+}
+
+@media (width <= 700px) {
+  .filterSecondSection {
+    flex-direction: column-reverse;
+    gap: 15px;
+    align-items: start;
+    margin-top: 20px;
+  }
 }
 
 .inputSearch {
@@ -24,7 +46,7 @@
   width: 18.6875rem;
 }
 
-.table {
+.tableDeck {
   max-width: var(--main-container-width);
   margin: 0 auto 30px;
 }
