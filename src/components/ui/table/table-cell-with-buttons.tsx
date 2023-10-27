@@ -58,7 +58,7 @@ export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = 
           packId={packId}
         />
       )}
-      {modalUpdate && <UpdatePackModal id={packId} setModal={setModalUpdate} />}
+      {modalUpdate && <UpdatePackModal id={packId} setModal={setModalUpdate} nameDeck={nameItem}/>}
     </td>
   )
 }
