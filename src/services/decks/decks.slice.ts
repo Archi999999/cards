@@ -4,7 +4,7 @@ const initialState = {
   itemsPerPage: 10,
   currentPage: 1,
   searchByName: '',
-  orderBy: 'created-desc',
+  orderBy: 'updated-asc',
   minCardsCount: 0,
   maxCardsCount: 0,
 }
