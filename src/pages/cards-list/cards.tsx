@@ -64,7 +64,7 @@ export const Cards: FC<CardsProps> = ({}) => {
         <div className={styles.headerCards}>
           <div className={styles.headerDeckInfo}>
             <Typography variant={'large'}>{cardName}</Typography>
-            {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} cardName={cardName} />}
+            {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} deckName={cardName} />}
           </div>
 
           {isMyCard && dataCards?.items.length !== 0 && (
