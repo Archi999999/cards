@@ -9,7 +9,7 @@ type Props = {
   setModal: (value: boolean) => void
 }
 
-export const UpdatePackModal: FC<Props> = ({ id,nameDeck, setModal }) => {
+export const UpdatePackModal: FC<Props> = ({ id, nameDeck, setModal }) => {
   const [isPrivate, setPrivate] = useState(false)
   const [name, setName] = useState(nameDeck)
   const [updateDeck] = useUpdateDeckMutation()

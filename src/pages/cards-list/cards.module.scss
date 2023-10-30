@@ -1,6 +1,7 @@
 .wrapper {
-  min-width: 530px;
-  margin: 0 10px;
+  max-width: var(--main-container-width);
+  margin: 0 auto;
+  padding: 10px;
 
   .inputSearch {
     padding-bottom: 24px;

@@ -42,7 +42,8 @@ const CardsDrop: FC<CardsDropProps> = ({ deckId, deckName }) => {
           onClick={() => setModalDelete(true)}
         />
       </Dropdown>
-      {modalUpdate && <UpdatePackModal id={deckId} setModal={setModalUpdate} nameDeck={deckName}/>}
+      {modalUpdate && <UpdatePackModal id={deckId} setModal={setModalUpdate} nameDeck={deckName} />}
+
       {modalDelete && (
         <DeleteModal
           setModal={setModalDelete}
