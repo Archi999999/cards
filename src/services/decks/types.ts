@@ -36,12 +36,27 @@ export type Deck = {
 }
 export type DeckById = Omit<Deck, 'isDeleted' | 'isBlocked'>
 
+// export type DecksParams = {
+//   minCardsCount?: number
+//   maxCardsCount?: number
+//   name?: string
+//   authorId?: string
+//   orderBy?: string
+//   currentPage?: number
+//   itemsPerPage?: number
+// } | void
+
+export type Direction = 'asc' | 'desc'
+export type Field = 'name' | 'created' | 'updated' | 'cardsCount'
+
+export type OrderByType = `${Field}-${Direction}`
+
 export type DecksParams = {
   minCardsCount?: number
   maxCardsCount?: number
   name?: string
   authorId?: string
-  orderBy?: string
+  orderBy?: OrderByType
   currentPage?: number
   itemsPerPage?: number
-} | void
+} |void

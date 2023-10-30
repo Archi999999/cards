@@ -94,3 +94,20 @@
     box-shadow: 0 0 0 5px var(--color-dark-100);
   }
 }
+
+.headSort {
+  cursor: pointer;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.arrow {
+  transform: rotate(180deg);
+  fill: currentcolor;
+  opacity: 0;
+}
+
+.active {
+  opacity: 1;
+}
