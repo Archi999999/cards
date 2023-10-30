@@ -65,7 +65,6 @@ export const Cards: FC<CardsProps> = ({}) => {
           <div className={styles.headerDeckInfo}>
             <Typography variant={'large'}>{deckName}</Typography>
             {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} deckName={deckName} />}
-
           </div>
 
           {isMyCard && dataCards?.items.length !== 0 && (

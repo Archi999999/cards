@@ -9,13 +9,13 @@ import {
   TableCell,
   TableHead,
   TableHeader,
+  TableHeadWithArrow,
   TableRow,
 } from '@/components/ui/table'
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { CardsGrade } from '@/pages/cards-list/cards-table/cards-grade.tsx'
 import s from '@/pages/packs-list/pack-list.module.scss'
 import { RootObjectItems } from '@/services/cards/types.ts'
-import { Arrow } from '@/svg/arrow.tsx'
 import { Edit2Outline } from '@/svg/edit-2-outline.tsx'
 import { Trash } from '@/svg/trash-outline.tsx'
 
@@ -62,15 +62,10 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
       <Table className={s.tableCard}>
         <TableHeader>
           <TableRow>
-            <TableHead>Question222</TableHead>
-            <TableHead>Answer</TableHead>
-            <TableHead>
-              <button className={s.buttonUpdated}>
-                Last Updated
-                <Arrow className={s.arrow} />
-              </button>
-            </TableHead>
-            <TableHead>Grade</TableHead>
+            <TableHeadWithArrow orient={'down'}>Question </TableHeadWithArrow>
+            <TableHeadWithArrow orient={'down'}>Answer</TableHeadWithArrow>
+            <TableHeadWithArrow orient={'acv'}>Last Updated</TableHeadWithArrow>
+            <TableHeadWithArrow orient={'down'}>Grade</TableHeadWithArrow>
             {isMyCard && <TableHead></TableHead>}
           </TableRow>
         </TableHeader>

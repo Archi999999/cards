@@ -1,6 +1,6 @@
-import {FC, useState} from 'react'
+import { FC, useState } from 'react'
 
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import s from './pack-list.module.scss'
@@ -17,13 +17,13 @@ import {
 } from '@/components/ui/table'
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { TableCellWithButtons } from '@/components/ui/table/table-cell-with-buttons.tsx'
+import { TableHeadWithSort } from '@/components/ui/table/table-head-with-sort.tsx'
 import { LoaderRotating } from '@/pages/loader/loader-rotating.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
+import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
+import { Field, OrderByType } from '@/services/decks/types.ts'
 import { RootState } from '@/services/store.ts'
-import {decksSlice} from "@/services/decks/decks.slice.ts";
-import {TableHeadWithSort} from "@/components/ui/table/table-head-with-sort.tsx";
-import {Field, OrderByType} from "@/services/decks/types.ts";
 
 type Props = {
   variant?: 'myPacks' | 'allPacks'
@@ -76,10 +76,30 @@ export const Decks: FC<Props> = ({ variant }) => {
       <Table className={s.tableDeck}>
         <TableHeader>
           <TableRow>
-            <TableHeadWithSort callBack={orderByHandler} name={'name'} currentNameSort={nameSort}>Name</TableHeadWithSort>
-            <TableHeadWithSort callBack={orderByHandler} name={'cardsCount'} currentNameSort={nameSort}>Cards</TableHeadWithSort>
-            <TableHeadWithSort callBack={orderByHandler} name={'updated'} currentNameSort={nameSort}>Last Updated</TableHeadWithSort>
-            <TableHeadWithSort callBack={orderByHandler} name={'created'} currentNameSort={nameSort}>Created by</TableHeadWithSort>
+            <TableHeadWithSort callBack={orderByHandler} name={'name'} currentNameSort={nameSort}>
+              Name{' '}
+            </TableHeadWithSort>
+            <TableHeadWithSort
+              callBack={orderByHandler}
+              name={'cardsCount'}
+              currentNameSort={nameSort}
+            >
+              Cards
+            </TableHeadWithSort>
+            <TableHeadWithSort
+              callBack={orderByHandler}
+              name={'updated'}
+              currentNameSort={nameSort}
+            >
+              Last Updated
+            </TableHeadWithSort>
+            <TableHeadWithSort
+              callBack={orderByHandler}
+              name={'created'}
+              currentNameSort={nameSort}
+            >
+              Created by
+            </TableHeadWithSort>
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>

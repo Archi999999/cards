@@ -1,8 +1,9 @@
-import { ComponentPropsWithoutRef, FC } from 'react'
+import { ComponentPropsWithoutRef, FC, useState } from 'react'
 
 import s from './table.module.scss'
 
 import { Typography } from '@/components'
+import { Arrow } from '@/svg/arrow.tsx'
 
 export const Table: FC<ComponentPropsWithoutRef<'table'>> = ({ className, ...props }) => (
   <table className={`${className} ${s.table}`} {...props} />
@@ -20,6 +21,31 @@ export const TableHead: FC<ComponentPropsWithoutRef<'th'>> = ({ className, ...pr
   </th>
 )
 
+interface TableHeadWithArrowProps extends ComponentPropsWithoutRef<'th'> {
+  orient: string
+}
+export const TableHeadWithArrow: FC<TableHeadWithArrowProps> = ({
+  className,
+  orient,
+  ...props
+}) => {
+  const [sort, setSort] = useState('')
+  const handler = () => {
+    const current = sort === '' ? 'down' : sort === 'down' ? 'up' : ''
+
+    setSort(current)
+  }
+
+  return (
+    <th className={`${className} ${s.head}`} {...props}>
+      <button className={s.headSort} onClick={handler}>
+        {props.children}
+        {sort === 'down' && <Arrow />}
+        {sort === 'up' && <Arrow style={{ transform: 'rotate(180deg)' }} />}
+      </button>
+    </th>
+  )
+}
 export const TableBody: FC<ComponentPropsWithoutRef<'tbody'>> = ({ className, ...props }) => (
   <tbody className={`${className} ${s.body}`} {...props} />
 )
