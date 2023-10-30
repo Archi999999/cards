@@ -103,11 +103,15 @@
 }
 
 .arrow {
-  transform: rotate(180deg);
   fill: currentcolor;
   opacity: 0;
+  transition: transform 0.3s ease;
 }
 
 .active {
   opacity: 1;
+}
+
+.rotate {
+  transform: rotate(-180deg);
 }

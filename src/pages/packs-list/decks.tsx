@@ -1,4 +1,4 @@
-import {FC, useState} from 'react'
+import {FC} from 'react'
 
 import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -30,7 +30,7 @@ type Props = {
 }
 
 export const Decks: FC<Props> = ({ variant }) => {
-  const [nameSort, setNameSort] = useState('updated')
+  // const [nameSort, setNameSort] = useState('updated')
   const { data: { id: authorId } = {} } = useMeQuery()
 
   const searchByName = useSelector<RootState, string>(state => state.decksSlice.searchByName)
@@ -39,6 +39,8 @@ export const Decks: FC<Props> = ({ variant }) => {
   const itemsPerPage = useSelector<RootState, number>(state => state.decksSlice.itemsPerPage)
   const currentPage = useSelector<RootState, number>(state => state.decksSlice.currentPage)
   const orderBy = useSelector<RootState, OrderByType>(state => state.decksSlice.orderBy)
+
+  let [nameSort, direction] = orderBy.split('-')
 
   const dispatch = useDispatch()
 
@@ -53,10 +55,14 @@ export const Decks: FC<Props> = ({ variant }) => {
   })
 
   const orderByHandler = (name: Field) => {
-    console.log(orderBy)
-
-    dispatch(decksSlice.actions.setOrderBy(`${name}-asc`))
-    setNameSort(name)
+    if (name === nameSort) {
+      if (direction === 'asc') {
+        direction = 'desc'
+      } else {
+        direction='asc'
+      }
+    }
+    dispatch(decksSlice.actions.setOrderBy(`${name}-${direction}` as OrderByType))
   }
 
   if (decks.data?.pagination.totalItems === 0)
@@ -76,10 +82,10 @@ export const Decks: FC<Props> = ({ variant }) => {
       <Table className={s.tableDeck}>
         <TableHeader>
           <TableRow>
-            <TableHeadWithSort callBack={orderByHandler} name={'name'} currentNameSort={nameSort}>Name</TableHeadWithSort>
-            <TableHeadWithSort callBack={orderByHandler} name={'cardsCount'} currentNameSort={nameSort}>Cards</TableHeadWithSort>
-            <TableHeadWithSort callBack={orderByHandler} name={'updated'} currentNameSort={nameSort}>Last Updated</TableHeadWithSort>
-            <TableHeadWithSort callBack={orderByHandler} name={'created'} currentNameSort={nameSort}>Created by</TableHeadWithSort>
+            <TableHeadWithSort callBack={orderByHandler} name={'name'} currentNameSort={nameSort} direction={direction}>Name</TableHeadWithSort>
+            <TableHeadWithSort callBack={orderByHandler} name={'cardsCount'} currentNameSort={nameSort} direction={direction}>Cards</TableHeadWithSort>
+            <TableHeadWithSort callBack={orderByHandler} name={'updated'} currentNameSort={nameSort} direction={direction}>Last Updated</TableHeadWithSort>
+            <TableHeadWithSort callBack={orderByHandler} name={'created'} currentNameSort={nameSort} direction={direction}>Created by</TableHeadWithSort>
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
