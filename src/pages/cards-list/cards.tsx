@@ -38,9 +38,9 @@ export const Cards: FC<CardsProps> = ({}) => {
     id: deckId!,
   })
 
-  const { name: cardName, userId: currentId } = data ? data : ({} as DeckById)
+  const { name: deckName, userId: currentId } = data ? data : ({} as DeckById)
 
-  if (isError && !cardName) {
+  if (isError && !deckName) {
     navigate('/')
   }
 
@@ -63,8 +63,8 @@ export const Cards: FC<CardsProps> = ({}) => {
         </Link>
         <div className={styles.headerCards}>
           <div className={styles.headerDeckInfo}>
-            <Typography variant={'large'}>{cardName}</Typography>
-            {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} cardName={cardName} />}
+            <Typography variant={'large'}>{deckName}</Typography>
+            {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} deckName={deckName} />}
           </div>
 
           {isMyCard && dataCards?.items.length !== 0 && (
