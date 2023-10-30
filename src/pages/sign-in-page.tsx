@@ -18,5 +18,5 @@ export const SignInPage = () => {
       })
   }
 
-  return <SignIn error={error} onSubmit={handleSignIn} isSubmitting={isLoading} />
+  return <SignIn onSubmit={handleSignIn} isSubmitting={isLoading} error={error}/>
 }

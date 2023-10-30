@@ -1,6 +1,6 @@
-import { FC } from 'react'
+import {FC, useState} from 'react'
 
-import { useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import s from './pack-list.module.scss'
@@ -21,13 +21,16 @@ import { LoaderRotating } from '@/pages/loader/loader-rotating.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
 import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { RootState } from '@/services/store.ts'
-import { Arrow } from '@/svg/arrow.tsx'
+import {decksSlice} from "@/services/decks/decks.slice.ts";
+import {TableHeadWithSort} from "@/components/ui/table/table-head-with-sort.tsx";
+import {Field, OrderByType} from "@/services/decks/types.ts";
 
 type Props = {
   variant?: 'myPacks' | 'allPacks'
 }
 
 export const Decks: FC<Props> = ({ variant }) => {
+  const [nameSort, setNameSort] = useState('updated')
   const { data: { id: authorId } = {} } = useMeQuery()
 
   const searchByName = useSelector<RootState, string>(state => state.decksSlice.searchByName)
@@ -35,6 +38,9 @@ export const Decks: FC<Props> = ({ variant }) => {
   const maxCardsCount = useSelector<RootState, number>(state => state.decksSlice.maxCardsCount)
   const itemsPerPage = useSelector<RootState, number>(state => state.decksSlice.itemsPerPage)
   const currentPage = useSelector<RootState, number>(state => state.decksSlice.currentPage)
+  const orderBy = useSelector<RootState, OrderByType>(state => state.decksSlice.orderBy)
+
+  const dispatch = useDispatch()
 
   const decks = useGetDecksQuery({
     itemsPerPage,
@@ -43,7 +49,15 @@ export const Decks: FC<Props> = ({ variant }) => {
     minCardsCount,
     maxCardsCount,
     currentPage,
+    orderBy,
   })
+
+  const orderByHandler = (name: Field) => {
+    console.log(orderBy)
+
+    dispatch(decksSlice.actions.setOrderBy(`${name}-asc`))
+    setNameSort(name)
+  }
 
   if (decks.data?.pagination.totalItems === 0)
     return (
@@ -62,15 +76,10 @@ export const Decks: FC<Props> = ({ variant }) => {
       <Table className={s.tableDeck}>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Cards</TableHead>
-            <TableHead>
-              <button className={s.buttonUpdated}>
-                Last Updated
-                <Arrow className={s.arrow} />
-              </button>
-            </TableHead>
-            <TableHead>Created by</TableHead>
+            <TableHeadWithSort callBack={orderByHandler} name={'name'} currentNameSort={nameSort}>Name</TableHeadWithSort>
+            <TableHeadWithSort callBack={orderByHandler} name={'cardsCount'} currentNameSort={nameSort}>Cards</TableHeadWithSort>
+            <TableHeadWithSort callBack={orderByHandler} name={'updated'} currentNameSort={nameSort}>Last Updated</TableHeadWithSort>
+            <TableHeadWithSort callBack={orderByHandler} name={'created'} currentNameSort={nameSort}>Created by</TableHeadWithSort>
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
