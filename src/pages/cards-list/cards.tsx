@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -18,10 +18,14 @@ import { useGetDeckByIdQuery } from '@/services/decks/decks.ts'
 import { DeckById } from '@/services/decks/types.ts'
 import { ArrowBack } from '@/svg/arrow-back-outline.tsx'
 
-type CardsProps = {}
-export const Cards: FC<CardsProps> = ({}) => {
+export type Sort = {
+  key: string
+  direction: 'asc' | 'desc'
+} | null
+export const Cards = () => {
   const navigate = useNavigate()
   const { deckId } = useParams<{ deckId: string }>()
+  const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'asc' })
 
   const dispatch = useDispatch()
 
@@ -32,6 +36,7 @@ export const Cards: FC<CardsProps> = ({}) => {
   const { data: { id: authorId } = {} } = useMeQuery()
   const { data: dataCards } = useGetCardsQuery({
     id: deckId || '',
+    orderBy: `${sort?.key}-${sort?.direction}`,
   })
 
   const { data, isError, isLoading } = useGetDeckByIdQuery({
@@ -55,45 +60,43 @@ export const Cards: FC<CardsProps> = ({}) => {
   if (isLoading) return <LoaderRotating />
 
   return (
-    <>
-      <div className={styles.wrapper}>
-        <Link className={styles.linkBack} to={`/`}>
-          <ArrowBack />
-          <Typography variant={'body_2'}> Back to Packs List</Typography>
-        </Link>
-        <div className={styles.headerCards}>
-          <div className={styles.headerDeckInfo}>
-            <Typography variant={'large'}>{deckName}</Typography>
-            {isMyCard && <CardsDrop deckId={deckId ? deckId : ''} deckName={deckName} />}
-          </div>
-
-          {isMyCard && dataCards?.items.length !== 0 && (
-            <Button variant={'primary'} onClick={createNewCardButton}>
-              Add New Card
-            </Button>
-          )}
-          {!isMyCard && dataCards?.items.length !== 0 && (
-            <Button
-              variant={'primary'}
-              disabled={dataCards?.items.length === 0}
-              onClick={() => {
-                navigate(`/learn/${deckId}`)
-              }}
-            >
-              Learn to Pack
-            </Button>
-          )}
+    <div className={styles.wrapper}>
+      <Link className={styles.linkBack} to={`/`}>
+        <ArrowBack />
+        <Typography variant={'body_2'}> Back to Packs List</Typography>
+      </Link>
+      <div className={styles.headerCards}>
+        <div className={styles.headerDeckInfo}>
+          <Typography variant={'large'}>{deckName}</Typography>
+          {isMyCard && <CardsDrop deckId={deckId || ''} deckName={deckName} />}
         </div>
-        <TextField className={styles.inputSearch} variant={'search'} />
-        <CardsTable
-          data={dataCards && dataCards.items}
-          isMyCard={isMyCard}
-          createNewCardButton={createNewCardButton}
-        />
-        {openModalNewCard && (
-          <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId ? deckId : ''} />
+
+        {isMyCard && dataCards?.items.length !== 0 && (
+          <Button variant={'primary'} onClick={createNewCardButton}>
+            Add New Card
+          </Button>
+        )}
+        {!isMyCard && dataCards?.items.length !== 0 && (
+          <Button
+            variant={'primary'}
+            disabled={dataCards?.items.length === 0}
+            onClick={() => {
+              navigate(`/learn/${deckId}`)
+            }}
+          >
+            Learn to Pack
+          </Button>
         )}
       </div>
-    </>
+      <TextField className={styles.inputSearch} variant={'search'} />
+      <CardsTable
+        data={dataCards && dataCards.items}
+        isMyCard={isMyCard}
+        createNewCardButton={createNewCardButton}
+        sort={sort}
+        setSort={setSort}
+      />
+      {openModalNewCard && <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId || ''} />}
+    </div>
   )
 }

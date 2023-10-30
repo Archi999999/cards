@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FC, useState } from 'react'
+import { ComponentPropsWithoutRef, FC } from 'react'
 
 import s from './table.module.scss'
 
@@ -22,26 +22,15 @@ export const TableHead: FC<ComponentPropsWithoutRef<'th'>> = ({ className, ...pr
 )
 
 interface TableHeadWithArrowProps extends ComponentPropsWithoutRef<'th'> {
-  orient: string
+  sort?: 'asc' | 'desc' | ''
 }
-export const TableHeadWithArrow: FC<TableHeadWithArrowProps> = ({
-  className,
-  orient,
-  ...props
-}) => {
-  const [sort, setSort] = useState('')
-  const handler = () => {
-    const current = sort === '' ? 'down' : sort === 'down' ? 'up' : ''
-
-    setSort(current)
-  }
-
+export const TableHeadWithArrow: FC<TableHeadWithArrowProps> = ({ className, sort, ...props }) => {
   return (
     <th className={`${className} ${s.head}`} {...props}>
-      <button className={s.headSort} onClick={handler}>
+      <button className={s.headSort}>
         {props.children}
-        {sort === 'down' && <Arrow />}
-        {sort === 'up' && <Arrow style={{ transform: 'rotate(180deg)' }} />}
+        {sort === 'asc' && <Arrow />}
+        {sort === 'desc' && <Arrow style={{ transform: 'rotate(180deg)' }} />}
       </button>
     </th>
   )
