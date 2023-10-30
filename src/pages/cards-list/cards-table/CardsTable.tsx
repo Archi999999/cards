@@ -62,7 +62,7 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
       <Table className={s.tableCard}>
         <TableHeader>
           <TableRow>
-            <TableHead>Question</TableHead>
+            <TableHead>Question222</TableHead>
             <TableHead>Answer</TableHead>
             <TableHead>
               <button className={s.buttonUpdated}>
