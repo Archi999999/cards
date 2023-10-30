@@ -2,13 +2,14 @@ import {TableHead} from "@/components/ui/table/table.tsx";
 import {FC, ReactNode} from "react";
 import s from "./table.module.scss";
 import {Arrow} from "@/svg/arrow.tsx";
+import {Field} from "@/services/decks/types.ts";
 
 type Props = {
-    name: string
+    name: Field
     currentNameSort: string
     children: ReactNode
     className?: string
-    callBack: (name: string)=>void
+    callBack: (name: Field)=>void
 }
 
 export const TableHeadWithSort:FC<Props> = (

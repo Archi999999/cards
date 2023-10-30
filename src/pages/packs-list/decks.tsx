@@ -23,6 +23,7 @@ import { useGetDecksQuery } from '@/services/decks/decks.ts'
 import { RootState } from '@/services/store.ts'
 import {decksSlice} from "@/services/decks/decks.slice.ts";
 import {TableHeadWithSort} from "@/components/ui/table/table-head-with-sort.tsx";
+import {Field, OrderByType} from "@/services/decks/types.ts";
 
 type Props = {
   variant?: 'myPacks' | 'allPacks'
@@ -37,7 +38,7 @@ export const Decks: FC<Props> = ({ variant }) => {
   const maxCardsCount = useSelector<RootState, number>(state => state.decksSlice.maxCardsCount)
   const itemsPerPage = useSelector<RootState, number>(state => state.decksSlice.itemsPerPage)
   const currentPage = useSelector<RootState, number>(state => state.decksSlice.currentPage)
-  const orderBy = useSelector<RootState, string>(state => state.decksSlice.orderBy)
+  const orderBy = useSelector<RootState, OrderByType>(state => state.decksSlice.orderBy)
 
   const dispatch = useDispatch()
 
@@ -51,8 +52,9 @@ export const Decks: FC<Props> = ({ variant }) => {
     orderBy,
   })
 
-  const orderByHandler = (name: string) => {
+  const orderByHandler = (name: Field) => {
     console.log(orderBy)
+
     dispatch(decksSlice.actions.setOrderBy(`${name}-asc`))
     setNameSort(name)
   }
