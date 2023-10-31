@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 
 import { toast, ToastContainer } from 'react-toastify'
 
@@ -11,7 +11,7 @@ type Props = {
   deckId: string
 }
 
-export const CreateCardModal: React.FC<Props> = ({ setModal, deckId }) => {
+export const CreateCardModal: FC<Props> = ({ setModal, deckId }) => {
   // const options = [
   //   { id: '', value: 'text' },
   //   { id: '', value: 'image' },
