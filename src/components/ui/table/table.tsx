@@ -29,6 +29,7 @@ export const TableHeadWithArrow: FC<TableHeadWithArrowProps> = ({ className, sor
     <th className={`${className} ${s.head}`} {...props}>
       <button className={s.headSort}>
         {props.children}
+        {sort === '' && <Arrow style={{ visibility: 'hidden' }} />}
         {sort === 'asc' && <Arrow />}
         {sort === 'desc' && <Arrow style={{ transform: 'rotate(180deg)' }} />}
       </button>

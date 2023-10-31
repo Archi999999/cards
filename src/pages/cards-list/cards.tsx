@@ -26,6 +26,7 @@ export const Cards = () => {
   const navigate = useNavigate()
   const { deckId } = useParams<{ deckId: string }>()
   const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'asc' })
+  const [value, setValue] = useState('')
 
   const dispatch = useDispatch()
 
@@ -34,9 +35,10 @@ export const Cards = () => {
   }, [])
 
   const { data: { id: authorId } = {} } = useMeQuery()
-  const { data: dataCards } = useGetCardsQuery({
+  const { data: dataCards, isFetching: isCardDadaLoading } = useGetCardsQuery({
     id: deckId || '',
     orderBy: `${sort?.key}-${sort?.direction}`,
+    question: value,
   })
 
   const { data, isError, isLoading } = useGetDeckByIdQuery({
@@ -88,14 +90,21 @@ export const Cards = () => {
           </Button>
         )}
       </div>
-      <TextField className={styles.inputSearch} variant={'search'} />
+      <TextField
+        className={styles.inputSearch}
+        variant={'search'}
+        value={value}
+        onValueChange={setValue}
+      />
       <CardsTable
         data={dataCards && dataCards.items}
         isMyCard={isMyCard}
         createNewCardButton={createNewCardButton}
         sort={sort}
         setSort={setSort}
+        isCardDadaLoading={isCardDadaLoading}
       />
+
       {openModalNewCard && <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId || ''} />}
     </div>
   )
