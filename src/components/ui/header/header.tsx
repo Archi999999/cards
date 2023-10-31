@@ -23,7 +23,6 @@ export const Header: FC<Props> = ({ data, isLoading }) => {
 
   useEffect(() => {
     if (data) {
-      // console.log('here')
       dispatch(authSlice.actions.setUserId(data.id))
     }
   }, [data])
