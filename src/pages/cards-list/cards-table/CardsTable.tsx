@@ -15,6 +15,7 @@ import {
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { CardsGrade } from '@/pages/cards-list/cards-table/cards-grade.tsx'
 import { Sort } from '@/pages/cards-list/cards.tsx'
+import { LoaderRotating } from '@/pages/loader/loader-rotating.tsx'
 import s from '@/pages/packs-list/pack-list.module.scss'
 import { RootObjectItems } from '@/services/cards/types.ts'
 import { Edit2Outline } from '@/svg/edit-2-outline.tsx'
@@ -26,14 +27,15 @@ type CardsTableProps = {
   createNewCardButton: () => void
   sort: Sort
   setSort: (sort: Sort) => void
+  isCardDadaLoading: boolean
 }
-
 export const CardsTable: FC<CardsTableProps> = ({
   data,
   isMyCard,
   createNewCardButton,
   setSort,
   sort,
+  isCardDadaLoading,
 }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [openUpdateModal, setOpenUpdateModal] = useState(false)
@@ -83,6 +85,11 @@ export const CardsTable: FC<CardsTableProps> = ({
 
   return (
     <>
+      {isCardDadaLoading && (
+        <div className={s.loading}>
+          <LoaderRotating />
+        </div>
+      )}
       <Table className={s.tableCard}>
         <TableHeader>
           <TableRow>
