@@ -9,13 +9,14 @@ import {
   TableCell,
   TableHead,
   TableHeader,
+  TableHeadWithArrow,
   TableRow,
 } from '@/components/ui/table'
 import { TableCellDate } from '@/components/ui/table/table-cell-date.tsx'
 import { CardsGrade } from '@/pages/cards-list/cards-table/cards-grade.tsx'
+import { Sort } from '@/pages/cards-list/cards.tsx'
 import s from '@/pages/packs-list/pack-list.module.scss'
 import { RootObjectItems } from '@/services/cards/types.ts'
-import { Arrow } from '@/svg/arrow.tsx'
 import { Edit2Outline } from '@/svg/edit-2-outline.tsx'
 import { Trash } from '@/svg/trash-outline.tsx'
 
@@ -23,8 +24,17 @@ type CardsTableProps = {
   data: RootObjectItems[] | undefined
   isMyCard: boolean
   createNewCardButton: () => void
+  sort: Sort
+  setSort: (sort: Sort) => void
 }
-export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardButton }) => {
+
+export const CardsTable: FC<CardsTableProps> = ({
+  data,
+  isMyCard,
+  createNewCardButton,
+  setSort,
+  sort,
+}) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [openUpdateModal, setOpenUpdateModal] = useState(false)
   const [cardId, setCardId] = useState('')
@@ -40,6 +50,20 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
     setQuestion(question)
     setAnswer(answer)
     setOpenUpdateModal(true)
+  }
+
+  const handleSort = (key: string) => {
+    if (sort && sort.key === key) {
+      setSort({
+        key,
+        direction: sort.direction === 'asc' ? 'desc' : 'asc',
+      })
+    } else {
+      setSort({
+        key,
+        direction: 'asc',
+      })
+    }
   }
 
   if (data?.length === 0) {
@@ -62,15 +86,30 @@ export const CardsTable: FC<CardsTableProps> = ({ data, isMyCard, createNewCardB
       <Table className={s.tableCard}>
         <TableHeader>
           <TableRow>
-            <TableHead>Question222</TableHead>
-            <TableHead>Answer</TableHead>
-            <TableHead>
-              <button className={s.buttonUpdated}>
-                Last Updated
-                <Arrow className={s.arrow} />
-              </button>
-            </TableHead>
-            <TableHead>Grade</TableHead>
+            <TableHeadWithArrow
+              onClick={() => handleSort('question')}
+              sort={sort && sort.key === 'question' ? sort.direction : ''}
+            >
+              Question{' '}
+            </TableHeadWithArrow>
+            <TableHeadWithArrow
+              onClick={() => handleSort('answer')}
+              sort={sort && sort.key === 'answer' ? sort.direction : ''}
+            >
+              Answer
+            </TableHeadWithArrow>
+            <TableHeadWithArrow
+              onClick={() => handleSort('updated')}
+              sort={sort && sort.key === 'updated' ? sort.direction : ''}
+            >
+              Last Updated
+            </TableHeadWithArrow>
+            <TableHeadWithArrow
+              onClick={() => handleSort('grade')}
+              sort={sort && sort.key === 'grade' ? sort.direction : ''}
+            >
+              Grade
+            </TableHeadWithArrow>
             {isMyCard && <TableHead></TableHead>}
           </TableRow>
         </TableHeader>
