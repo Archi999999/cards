@@ -29,7 +29,6 @@ type CardsTableProps = {
   setSort: (sort: Sort) => void
   isCardDadaLoading: boolean
 }
-
 export const CardsTable: FC<CardsTableProps> = ({
   data,
   isMyCard,
