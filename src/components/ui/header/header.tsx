@@ -1,16 +1,16 @@
-import {FC, useEffect} from 'react'
+import { FC, useEffect } from 'react'
 
-import {Link, useNavigate} from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 import s from './header.module.scss'
 
 import { Button } from '@/components/ui'
 import { UserHeader } from '@/components/ui/header/user-header'
 import { Typography } from '@/components/ui/typography/typography.tsx'
+import { authSlice } from '@/services/auth/auth.slice.ts'
+import { decksSlice } from '@/services/decks/decks.slice.ts'
 import { Logo } from '@/svg'
-import {useDispatch} from "react-redux";
-import {decksSlice} from "@/services/decks/decks.slice.ts";
-import {authSlice} from "@/services/auth/auth.slice.ts";
 
 type Props = {
   data: any
@@ -20,10 +20,13 @@ type Props = {
 export const Header: FC<Props> = ({ data, isLoading }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   useEffect(() => {
-    if (data) { console.log('here')
-    dispatch(authSlice.actions.setUserId(data.id)) }
-  }, [data]);
+    if (data) {
+      // console.log('here')
+      dispatch(authSlice.actions.setUserId(data.id))
+    }
+  }, [data])
 
   const isAuth = !!data
 
@@ -31,13 +34,10 @@ export const Header: FC<Props> = ({ data, isLoading }) => {
   const avatar = data?.avatar
   const email = data?.email
 
-
-  
   const backStart = () => {
     dispatch(decksSlice.actions.setCurrentPage(1))
     navigate('/')
   }
-
 
   return (
     <header className={`${s.header}`}>
@@ -49,7 +49,7 @@ export const Header: FC<Props> = ({ data, isLoading }) => {
           <Typography>Sign in</Typography>
         </Button>
       ) : (
-        <UserHeader name={name} avatar={avatar} email={email}/>
+        <UserHeader name={name} avatar={avatar} email={email} />
       )}
     </header>
   )

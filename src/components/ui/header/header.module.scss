@@ -1,5 +1,6 @@
 .header {
   display: flex;
+  gap: 10px;
   justify-content: space-between;
 
   height: 60px;
@@ -17,6 +18,7 @@
 .userHeader {
   cursor: pointer;
   display: flex;
+  align-items: center;
 }
 
 .headerSpan {
@@ -34,4 +36,18 @@
 .headerEmail {
   margin-right: 15px;
   color: var(--color-dark-100);
+}
+
+@media (width<=1000px) {
+  .header {
+    padding: 0.75rem 4.5rem;
+    transition: padding 0.6s ease;
+  }
+}
+
+@media (width<=700px) {
+  .header {
+    padding: 0.75rem 2.5rem;
+    transition: padding 0.6s ease;
+  }
 }
