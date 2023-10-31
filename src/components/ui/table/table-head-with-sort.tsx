@@ -7,6 +7,7 @@ import {Field} from "@/services/decks/types.ts";
 type Props = {
     name: Field
     currentNameSort: string
+    direction: string
     children: ReactNode
     className?: string
     callBack: (name: Field)=>void
@@ -17,6 +18,7 @@ export const TableHeadWithSort:FC<Props> = (
         name,
         currentNameSort,
         children,
+        direction,
         callBack,
     }
 ) => {
@@ -25,7 +27,7 @@ export const TableHeadWithSort:FC<Props> = (
         <TableHead >
             <button onClick={()=>callBack(name)} className={s.headSort} >
                 {children}
-                <Arrow className={`${s.arrow} ${(currentNameSort===name)? s.active: ''}`} />
+                <Arrow className={`${s.arrow} ${(currentNameSort===name)? s.active: ''} ${direction==='asc'? s.rotate : ''}`} />
             </button>
         </TableHead>
     );

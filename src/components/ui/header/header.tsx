@@ -21,7 +21,7 @@ export const Header: FC<Props> = ({ data, isLoading }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   useEffect(() => {
-    if (data) { console.log('here')
+    if (data) {
     dispatch(authSlice.actions.setUserId(data.id)) }
   }, [data]);
 
