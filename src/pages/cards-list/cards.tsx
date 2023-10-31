@@ -35,7 +35,7 @@ export const Cards = () => {
   }, [])
 
   const { data: { id: authorId } = {} } = useMeQuery()
-  const { data: dataCards } = useGetCardsQuery({
+  const { data: dataCards, isFetching: isCardDadaLoading } = useGetCardsQuery({
     id: deckId || '',
     orderBy: `${sort?.key}-${sort?.direction}`,
     question: value,
@@ -102,6 +102,7 @@ export const Cards = () => {
         createNewCardButton={createNewCardButton}
         sort={sort}
         setSort={setSort}
+        isCardDadaLoading={isCardDadaLoading}
       />
 
       {openModalNewCard && <CreateCardModal setModal={setOpenModalNewCard} deckId={deckId || ''} />}
