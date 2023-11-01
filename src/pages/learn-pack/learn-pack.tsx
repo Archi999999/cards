@@ -26,7 +26,11 @@ export const LearnPack = () => {
   const [updateGradeCard, { isLoading }] = useUpdateGradeCardMutation()
 
   const updateGradeCardHandler = (grade: number) => {
-    updateGradeCard({ idDeck: deckId || '', grade: grade, cardId: data ? data.id : '' })
+    updateGradeCard({
+      idDeck: deckId || '',
+      grade: grade,
+      cardId: dataRandomCard ? dataRandomCard.id : '',
+    })
     setShowAnswer(false)
   }
 
