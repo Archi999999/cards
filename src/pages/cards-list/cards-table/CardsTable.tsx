@@ -86,11 +86,7 @@ export const CardsTable: FC<CardsTableProps> = ({
 
   return (
     <>
-      {isCardDadaLoading && (
-        <div className={s.loading}>
-          <LoaderRotating />
-        </div>
-      )}
+      {isCardDadaLoading && <LoaderRotating />}
       <Table className={s.tableCard}>
         <TableHeader>
           <TableRow>
