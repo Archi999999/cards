@@ -16,17 +16,21 @@ export const LearnPack = () => {
   const [showAnswer, setShowAnswer] = useState(false)
   const { deckId } = useParams<{ deckId: string }>()
   const { data } = useGetDeckByIdQuery({
-    id: deckId!,
+    id: deckId || '',
   })
 
-  const { data: dataRandomCard, isLoading } = useGetRandomCardQuery({
+  const { data: dataRandomCard, isFetching: nextCardLoading } = useGetRandomCardQuery({
     idDeck: deckId || '',
   })
 
-  const [updateGradeCard] = useUpdateGradeCardMutation()
+  const [updateGradeCard, { isLoading }] = useUpdateGradeCardMutation()
 
   const updateGradeCardHandler = (grade: number) => {
-    updateGradeCard({ grade, cardId: data ? data.id : '', idDeck: deckId || '' })
+    updateGradeCard({
+      idDeck: deckId || '',
+      grade: grade,
+      cardId: dataRandomCard ? dataRandomCard.id : '',
+    })
     setShowAnswer(false)
   }
 
@@ -38,6 +42,8 @@ export const LearnPack = () => {
       </div>
     )
   }
+
+  if (nextCardLoading) return <LoaderRotating />
   if (isLoading) return <LoaderRotating />
 
   return (
@@ -54,6 +60,13 @@ export const LearnPack = () => {
         <Typography variant={'h1'} as={'div'}>
           {dataRandomCard && dataRandomCard.question}
         </Typography>
+        {dataRandomCard && dataRandomCard.questionImg && (
+          <img
+            className={styles.learnImage}
+            src={dataRandomCard && dataRandomCard.questionImg}
+            alt={dataRandomCard && dataRandomCard.question}
+          />
+        )}
         <Typography className={styles.cardEffortQuantity} variant={'body_2'}>
           Количество попыток ответов на вопрос: {dataRandomCard && dataRandomCard.shots}
         </Typography>
@@ -69,6 +82,7 @@ export const LearnPack = () => {
           <ShowAnswer
             setNewQuestion={updateGradeCardHandler}
             answer={dataRandomCard ? dataRandomCard.answer : ''}
+            answerImg={dataRandomCard ? dataRandomCard.answerImg : ''}
           />
         )}
       </Card>

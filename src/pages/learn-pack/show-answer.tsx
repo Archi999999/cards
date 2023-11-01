@@ -5,11 +5,12 @@ import styles from './learn-pack.module.scss'
 import { Button, RadioGroup, Typography } from '@/components'
 type ShowAnswerType = {
   answer: string
+  answerImg?: string
   setNewQuestion: (grade: number) => void
 }
 
-const ShowAnswer: FC<ShowAnswerType> = ({ answer, setNewQuestion }) => {
-  const [value, setValue] = useState('1')
+const ShowAnswer: FC<ShowAnswerType> = ({ answer, answerImg, setNewQuestion }) => {
+  const [value, setValue] = useState('')
   const options = [
     { id: '1', value: 'Did not know' },
     { id: '2', value: 'Forgot' },
@@ -18,7 +19,10 @@ const ShowAnswer: FC<ShowAnswerType> = ({ answer, setNewQuestion }) => {
     { id: '5', value: 'Knew the answer' },
   ]
   const onClickNextQuestionButton = () => {
-    setNewQuestion(+value)
+    const gradeObject = options.find(el => el.value === value)
+    const grade = (gradeObject && gradeObject.id) || 0
+
+    setNewQuestion(+grade)
   }
 
   return (
@@ -27,6 +31,7 @@ const ShowAnswer: FC<ShowAnswerType> = ({ answer, setNewQuestion }) => {
       <Typography variant={'h1'} as={'div'}>
         {answer}
       </Typography>
+      <img className={styles.learnImage} src={answerImg} alt={answerImg} />
       <Typography variant={'subtitle_1'} className={styles.rate}>
         Rate yourself:{' '}
       </Typography>
