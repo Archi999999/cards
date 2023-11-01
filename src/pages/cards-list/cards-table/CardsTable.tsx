@@ -122,7 +122,7 @@ export const CardsTable: FC<CardsTableProps> = ({
             return (
               <TableRow key={card.id}>
                 <TableCellWithItem item={card.questionImg}>{card.question}</TableCellWithItem>
-                <TableCellWithItem item={card.answerImg}> {card.answer}</TableCellWithItem>
+                <TableCellWithItem item={card.answerImg}>{card.answer}</TableCellWithItem>
                 <TableCellDate date={card.updated} />
                 <TableCell>
                   <CardsGrade grade={card.grade} />
