@@ -13,8 +13,9 @@ import { VerticalOutline } from '@/svg/vertical-outline.tsx'
 type CardsDropProps = {
   deckId: string
   deckName: string
+  isPrivate: boolean
 }
-const CardsDrop: FC<CardsDropProps> = ({ deckId, deckName }) => {
+const CardsDrop: FC<CardsDropProps> = ({ deckId, deckName, isPrivate }) => {
   const navigate = useNavigate()
   const [modalDelete, setModalDelete] = useState(false)
   const [modalUpdate, setModalUpdate] = useState(false)
@@ -42,7 +43,7 @@ const CardsDrop: FC<CardsDropProps> = ({ deckId, deckName }) => {
           onClick={() => setModalDelete(true)}
         />
       </Dropdown>
-      {modalUpdate && <UpdatePackModal id={deckId} setModal={setModalUpdate} nameDeck={deckName} />}
+      {modalUpdate && <UpdatePackModal id={deckId} setModal={setModalUpdate} nameDeck={deckName} onPrivate={isPrivate}/>}
 
       {modalDelete && (
         <DeleteModal
