@@ -24,6 +24,7 @@
 }
 
 .cell {
+  height: auto;
   border-bottom: 1px solid var(--color-dark-500);
 
   &:first-child,
@@ -46,6 +47,16 @@
 
   &:last-child {
     border-right: 1px solid var(--color-dark-500);
+  }
+
+  .cellInner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  img {
+    width: 100px;
   }
 }
 
@@ -103,8 +114,8 @@
 }
 
 .arrow {
-  fill: currentcolor;
   opacity: 0;
+  fill: currentcolor;
   transition: transform 0.3s ease;
 }
 
