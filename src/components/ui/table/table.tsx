@@ -44,11 +44,27 @@ export const TableRow: FC<ComponentPropsWithoutRef<'tr'>> = ({ className, ...pro
   <tr className={`${className} ${s.row}`} {...props} />
 )
 
-export const TableCell: FC<ComponentPropsWithoutRef<'td'>> = ({ className, ...props }) => (
-  <td className={`${className} ${s.cell}`} {...props}>
-    <Typography>{props.children}</Typography>
-  </td>
-)
+export const TableCell: FC<ComponentPropsWithoutRef<'td'>> = ({ className, ...props }) => {
+  return (
+    <td className={`${className} ${s.cell}`} {...props}>
+      <Typography>{props.children}</Typography>
+    </td>
+  )
+}
+
+interface TableCellWithImageProps extends ComponentPropsWithoutRef<'th'> {
+  item?: string
+}
+export const TableCellWithItem: FC<TableCellWithImageProps> = ({ className, ...props }) => {
+  return (
+    <td className={`${className} ${s.cell}`} {...props}>
+      <div className={s.cellInner}>
+        <Typography>{props.children}</Typography>
+        {props.item && <img src={props.item} alt={'image'} />}
+      </div>
+    </td>
+  )
+}
 
 export const TableFooter: FC<ComponentPropsWithoutRef<'tfoot'>> = ({ className, ...props }) => (
   <tfoot className={`${className} ${s.footer}`} {...props} />

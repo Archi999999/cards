@@ -3,6 +3,7 @@ import { FC, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
 import { TextField } from '@/components'
+import { AddImageField } from '@/components/customized/modals/card-modal/addImageField.tsx'
 import { Modal } from '@/components/ui/modal/modal.tsx'
 import { useCreateCardMutation } from '@/services/cards/cards.ts'
 
@@ -43,14 +44,10 @@ export const CreateCardModal: FC<Props> = ({ setModal, deckId }) => {
         confirmButtonName={'Add New Card'}
         onConfirm={confirmNewCard}
       >
-        {/*<SelectSecond*/}
-        {/*  defaultValue={options[0].value}*/}
-        {/*  label={'Choose a question format'}*/}
-        {/*  className={s.select}*/}
-        {/*  options={options}*/}
-        {/*/>*/}
         <TextField label={'Question'} onValueChange={setQuestion} />
-        <TextField label={'Answer'} onValueChange={setAnswer} error={``} />
+        <AddImageField type={'Question'} />
+        <TextField label={'Answer'} onValueChange={setAnswer} />
+        <AddImageField type={'Answer'} />
       </Modal>
     </>
   )

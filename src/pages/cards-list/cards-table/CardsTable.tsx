@@ -7,6 +7,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableCellWithItem,
   TableHead,
   TableHeader,
   TableHeadWithArrow,
@@ -85,11 +86,7 @@ export const CardsTable: FC<CardsTableProps> = ({
 
   return (
     <>
-      {isCardDadaLoading && (
-        <div className={s.loading}>
-          <LoaderRotating />
-        </div>
-      )}
+      {isCardDadaLoading && <LoaderRotating />}
       <Table className={s.tableCard}>
         <TableHeader>
           <TableRow>
@@ -124,8 +121,8 @@ export const CardsTable: FC<CardsTableProps> = ({
           {data?.map(card => {
             return (
               <TableRow key={card.id}>
-                <TableCell>{card.question}</TableCell>
-                <TableCell>{card.answer}</TableCell>
+                <TableCellWithItem item={card.questionImg}>{card.question}</TableCellWithItem>
+                <TableCellWithItem item={card.answerImg}>{card.answer}</TableCellWithItem>
                 <TableCellDate date={card.updated} />
                 <TableCell>
                   <CardsGrade grade={card.grade} />
