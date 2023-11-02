@@ -6,11 +6,12 @@ import { useUpdateDeckMutation } from '@/services/decks/decks.ts'
 type Props = {
   id: string
   nameDeck: string
+  onPrivate: boolean
   setModal: (value: boolean) => void
 }
 
-export const UpdatePackModal: FC<Props> = ({ id, nameDeck, setModal }) => {
-  const [isPrivate, setPrivate] = useState(false)
+export const UpdatePackModal: FC<Props> = ({ id, nameDeck, onPrivate, setModal }) => {
+  const [isPrivate, setPrivate] = useState(onPrivate)
   const [name, setName] = useState(nameDeck)
   const [updateDeck] = useUpdateDeckMutation()
 
