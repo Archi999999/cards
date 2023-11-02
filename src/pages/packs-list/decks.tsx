@@ -109,7 +109,7 @@ export const Decks: FC<Props> = ({ variant }) => {
                 ) : (
                   <TableCell>{deck.author.name}</TableCell>
                 )}
-                <TableCellWithButtons packId={deck.id} variant={variant} nameItem={deck.name} />
+                <TableCellWithButtons packId={deck.id} variant={variant} nameItem={deck.name} isPrivate={deck.isPrivate}/>
               </TableRow>
             )
           })}

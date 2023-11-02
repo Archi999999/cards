@@ -5,7 +5,7 @@ const initialState = {
   itemsPerPage: 10,
   currentPage: 1,
   searchByName: '',
-  orderBy: 'updated-asc' as  OrderByType,
+  orderBy: 'updated-desc' as  OrderByType,
   minCardsCount: 0,
   maxCardsCount: 0,
 }
