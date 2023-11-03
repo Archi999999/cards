@@ -32,10 +32,10 @@ const authApi = baseApi.injectEndpoints({
       onQueryStarted(args, { queryFulfilled, dispatch }) {
         const patchResult = dispatch(
           authApi.util.updateQueryData('me', undefined, draft => {
-            if ('name' in args) {
+            if (draft && 'name' in args) {
               draft.name = args.name
             }
-            if (args instanceof FormData) {
+            if (draft && args instanceof FormData) {
               const image = args.get('avatar')
 
               draft.avatar = URL.createObjectURL(image as Blob)
@@ -67,7 +67,7 @@ const authApi = baseApi.injectEndpoints({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           authApi.util.updateQueryData('me', undefined, () => {
-            return {}
+            return null
           })
         )
 
