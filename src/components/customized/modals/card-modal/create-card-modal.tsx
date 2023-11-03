@@ -13,13 +13,10 @@ type Props = {
 }
 
 export const CreateCardModal: FC<Props> = ({ setModal, deckId }) => {
-  // const options = [
-  //   { id: '', value: 'text' },
-  //   { id: '', value: 'image' },
-  // ]
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
-
+  const [questionImage, setQuestionImage] = useState('')
+  const [answerImage, setAnswerImage] = useState('')
   const [createCard] = useCreateCardMutation()
 
   const confirmNewCard = () => {
@@ -45,9 +42,13 @@ export const CreateCardModal: FC<Props> = ({ setModal, deckId }) => {
         onConfirm={confirmNewCard}
       >
         <TextField label={'Question'} onValueChange={setQuestion} />
-        <AddImageField type={'Question'} />
+        <AddImageField
+          type={'Question'}
+          image={questionImage}
+          setImageToLearnPage={setQuestionImage}
+        />
         <TextField label={'Answer'} onValueChange={setAnswer} />
-        <AddImageField type={'Answer'} />
+        <AddImageField type={'Answer'} image={answerImage} setImageToLearnPage={setAnswerImage} />
       </Modal>
     </>
   )
