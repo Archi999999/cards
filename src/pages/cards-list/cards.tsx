@@ -34,7 +34,8 @@ export const Cards = () => {
     dispatch(cardsSlice.actions.setDeckID(deckId!))
   }, [])
 
-  const { data: { id: authorId } = {} } = useMeQuery()
+  let { data: dataMe } = useMeQuery()
+  const authorId = dataMe && dataMe.id
   const { data: dataCards, isFetching: isCardDadaLoading } = useGetCardsQuery({
     id: deckId || '',
     orderBy: `${sort?.key}-${sort?.direction}`,

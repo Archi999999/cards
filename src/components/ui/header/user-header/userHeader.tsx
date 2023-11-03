@@ -63,5 +63,3 @@ const User: FC<UserProps> = ({ name, avatar }) => {
     </div>
   )
 }
-
-export default UserHeader
