@@ -21,7 +21,7 @@ export type MeResponse = {
   avatar?: string | null,
   created?: string
   updated?: string
-}
+} | null
 
 export type updateResponse = {
   avatar: string

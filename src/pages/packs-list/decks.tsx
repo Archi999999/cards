@@ -34,7 +34,8 @@ type Props = {
 
 export const Decks: FC<Props> = ({ variant }) => {
   // const [nameSort, setNameSort] = useState('updated')
-  const { data: { id: authorId } = {} } = useMeQuery()
+  const { data } = useMeQuery()
+  const authorId = data? data.id : ''
 
   const searchByName = useSelector<RootState, string>(state => state.decksSlice.searchByName)
   const minCardsCount = useSelector<RootState, number>(state => state.decksSlice.minCardsCount)
