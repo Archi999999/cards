@@ -10,7 +10,7 @@ type Props = {
 
   setImageToLearnPage: (image: any) => void
 }
-export const AddImageField: FC<Props> = ({ type, image }) => {
+export const AddImageField: FC<Props> = ({ type, setImageToLearnPage }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [answer, setAnswer] = useState<File | null>()
 
@@ -22,6 +22,7 @@ export const AddImageField: FC<Props> = ({ type, image }) => {
       const image = e.target.files[0]
 
       setAnswer(image)
+      setImageToLearnPage(URL.createObjectURL(image))
     }
   }
 
@@ -29,7 +30,7 @@ export const AddImageField: FC<Props> = ({ type, image }) => {
     <div className={styles.imageField}>
       <div>
         {answer ? (
-          <img src={URL.createObjectURL(answer)} alt={image} />
+          <img src={URL.createObjectURL(answer)} alt={'image'} />
         ) : (
           <Typography variant={'subtitle_1'}>No Image</Typography>
         )}

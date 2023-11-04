@@ -19,7 +19,11 @@
     padding: 10px;
 
     &:first-child {
-      margin-left: 25px;
+      margin-left: 15px;
+    }
+
+    &:last-child {
+      margin-right: 15px;
     }
   }
 }

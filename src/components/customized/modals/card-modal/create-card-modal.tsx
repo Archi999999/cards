@@ -21,7 +21,13 @@ export const CreateCardModal: FC<Props> = ({ setModal, deckId }) => {
 
   const confirmNewCard = () => {
     if (deckId) {
-      createCard({ id: deckId, answer: answer, question: question })
+      createCard({
+        id: deckId,
+        answer: answer,
+        question: question,
+        questionImg: questionImage,
+        answerImg: answerImage,
+      })
         .unwrap()
         .then(() => {
           setModal(false)
