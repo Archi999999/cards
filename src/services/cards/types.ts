@@ -32,16 +32,8 @@ export type GetRequestCards = {
   currentPage?: number
   itemsPerPage?: number
 }
+
 export type CreateCardInput = {
-  id: string
-  question: string
-  answer: string
-  answerImg?: string | null
-  questionVideo?: string
-  answerVideo?: string
-  questionImg?: string | null
-}
-export type CreateCardInput1 = {
   packId: string
   data:
     | {

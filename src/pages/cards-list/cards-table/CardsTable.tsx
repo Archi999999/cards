@@ -41,17 +41,22 @@ export const CardsTable: FC<CardsTableProps> = ({
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [openUpdateModal, setOpenUpdateModal] = useState(false)
   const [cardId, setCardId] = useState('')
-  const [question, setQuestion] = useState('')
-  const [answer, setAnswer] = useState('')
+  // const [question, setQuestion] = useState('')
+  // const [answer, setAnswer] = useState('')
+  const [currentCard, setCurrentCard] = useState<RootObjectItems>()
 
   const clickOnButton = (id: string) => {
     setCardId(id)
     setOpenDeleteModal(true)
   }
-  const clickOnUpdateButton = (cardId: string, question: string, answer: string) => {
-    setCardId(cardId)
-    setQuestion(question)
-    setAnswer(answer)
+  // const clickOnUpdateButton = (cardId: string, question: string, answer: string) => {
+  //   setCardId(cardId)
+  //   setQuestion(question)
+  //   setAnswer(answer)
+  //   setOpenUpdateModal(true)
+  // }
+  const clickOnUpdateButton = (card: RootObjectItems) => {
+    setCurrentCard(card)
     setOpenUpdateModal(true)
   }
 
@@ -130,10 +135,7 @@ export const CardsTable: FC<CardsTableProps> = ({
                 {isMyCard && (
                   <TableCell>
                     <div className={s.tablesButtons}>
-                      <button
-                        className={s.button}
-                        onClick={() => clickOnUpdateButton(card.id, card.question, card.answer)}
-                      >
+                      <button className={s.button} onClick={() => clickOnUpdateButton(card)}>
                         <Edit2Outline color={'white'} />
                       </button>
                       <button className={s.button} onClick={() => clickOnButton(card.id)}>
@@ -156,12 +158,7 @@ export const CardsTable: FC<CardsTableProps> = ({
         />
       )}
       {openUpdateModal && (
-        <UpdateCardModal
-          setModal={setOpenUpdateModal}
-          cardId={cardId}
-          answerCard={answer}
-          questionCard={question}
-        />
+        <UpdateCardModal setModal={setOpenUpdateModal} currentCard={currentCard!} />
       )}
     </>
   )

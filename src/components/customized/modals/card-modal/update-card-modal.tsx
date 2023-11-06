@@ -3,23 +3,36 @@ import { FC, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
 import { TextField } from '@/components'
+import { AddImageField } from '@/components/customized/modals/card-modal/addImageField.tsx'
 import { Modal } from '@/components/ui/modal/modal.tsx'
 import { useUpdateCardMutation } from '@/services/cards/cards.ts'
+import { RootObjectItems } from '@/services/cards/types.ts'
 
 type Props = {
   setModal: (value: boolean) => void
-  cardId: string
-  questionCard: string
-  answerCard: string
+  currentCard: RootObjectItems
 }
 
-export const UpdateCardModal: FC<Props> = ({ setModal, cardId, answerCard, questionCard }) => {
-  const [question, setQuestion] = useState(questionCard)
-  const [answer, setAnswer] = useState(answerCard)
+export const UpdateCardModal: FC<Props> = ({ setModal, currentCard }) => {
+  const [question, setQuestion] = useState(currentCard.question)
+  const [answer, setAnswer] = useState(currentCard.answer)
+  const [answerImg, setAnswerImg] = useState<Blob | null | string>(currentCard.answerImg)
+  const [questionImg, setQuestionImg] = useState<Blob | null | string>(currentCard.questionImg)
 
   const [updateCard] = useUpdateCardMutation()
   const confirmUpdateCard = () => {
-    updateCard({ id: cardId, answer: answer, question: question })
+    const formData = new FormData()
+
+    formData.append('question', question)
+    formData.append('answer', answer)
+    if (answerImg && typeof answerImg !== 'string') {
+      formData.append('answerImg', answerImg)
+    }
+    if (questionImg && typeof questionImg !== 'string') {
+      formData.append('questionImg', questionImg)
+    }
+
+    updateCard({ packId: currentCard.id, data: formData })
       .unwrap()
       .then(() => {
         setModal(false)
@@ -39,7 +52,9 @@ export const UpdateCardModal: FC<Props> = ({ setModal, cardId, answerCard, quest
         onConfirm={confirmUpdateCard}
       >
         <TextField label={'Question'} value={question} onValueChange={setQuestion} />
+        <AddImageField type={'Question'} setImageToLearnPage={setQuestionImg} image={questionImg} />
         <TextField label={'Answer'} value={answer} onValueChange={setAnswer} />
+        <AddImageField type={'Answer'} setImageToLearnPage={setAnswerImg} image={answerImg} />
       </Modal>
     </>
   )

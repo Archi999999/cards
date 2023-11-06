@@ -2,7 +2,6 @@ import { baseApi } from '@/services/base-api.ts'
 import {
   CardsResponse,
   CreateCardInput,
-  CreateCardInput1,
   GetRequestCards,
   OneCardResponse,
 } from '@/services/cards/types.ts'
@@ -26,7 +25,7 @@ const cardsApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    createCard: build.mutation<any, CreateCardInput1>({
+    createCard: build.mutation<any, CreateCardInput>({
       query: ({ packId, data }) => {
         return {
           url: `v1/decks/${packId}/cards`,
@@ -81,10 +80,10 @@ const cardsApi = baseApi.injectEndpoints({
       // invalidatesTags: ['Cards'],
     }),
     updateCard: build.mutation<any, CreateCardInput>({
-      query: params => ({
-        url: `/v1/cards/${params.id}`,
+      query: ({ packId, data }) => ({
+        url: `/v1/cards/${packId}`,
         method: 'PATCH',
-        body: params,
+        body: data,
       }),
       invalidatesTags: ['Cards'],
     }),

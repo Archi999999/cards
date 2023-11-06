@@ -6,7 +6,7 @@ import { Button, Typography } from '@/components'
 
 type Props = {
   type?: 'Question' | 'Answer'
-  image: Blob | null
+  image: Blob | null | string
   setImageToLearnPage: (image: any) => void
 }
 export const AddImageField: FC<Props> = ({ type, image, setImageToLearnPage }) => {
@@ -28,7 +28,7 @@ export const AddImageField: FC<Props> = ({ type, image, setImageToLearnPage }) =
     <div className={styles.imageField}>
       <div>
         {image ? (
-          <img src={URL.createObjectURL(image)} alt={'image'} />
+          <img src={typeof image !== 'string' ? URL.createObjectURL(image) : image} alt={'image'} />
         ) : (
           <Typography variant={'subtitle_1'}>No Image</Typography>
         )}
