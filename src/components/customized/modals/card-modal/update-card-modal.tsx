@@ -38,12 +38,6 @@ export const UpdateCardModal: FC<Props> = ({ setModal, cardId, answerCard, quest
         confirmButtonName={'Save Changes'}
         onConfirm={confirmUpdateCard}
       >
-        {/*<SelectSecond*/}
-        {/*  defaultValue={options[0].value}*/}
-        {/*  label={'Choose a question format'}*/}
-        {/*  className={s.select}*/}
-        {/*  options={options}*/}
-        {/*/>*/}
         <TextField label={'Question'} value={question} onValueChange={setQuestion} />
         <TextField label={'Answer'} value={answer} onValueChange={setAnswer} />
       </Modal>

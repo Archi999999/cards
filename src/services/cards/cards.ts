@@ -25,41 +25,41 @@ const cardsApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    createCard: build.mutation<any, CreateCardInput>({
-      query: ({ id, ...body }) => {
+    createCard: build.mutation<any, { packId: string; data: FormData }>({
+      query: ({ packId, data }) => {
         return {
-          url: `v1/decks/${id}/cards`,
+          url: `v1/decks/${packId}/cards`,
           method: 'POST',
-          body,
+          body: data,
         }
       },
-    //   onQueryStarted(args, {dispatch, getState, queryFulfilled}){
-    //     const state = getState() as RootState
-    //     const userId = state.cardsSlice.userId
-    //
-    //     const patchResult = dispatch(
-    //         cardsApi.util.updateQueryData('getCards', args, draft => {
-    //           const newCard = {
-    //             deckId: args.id,
-    //             id: 'someId',
-    //             userId: userId,
-    //             question: args.question,
-    //             answer: args.answer,
-    //             shots: 0,
-    //             answerImg: '',
-    //             questionImg: '',
-    //             questionVideo: '',
-    //             answerVideo: '',
-    //             grade: 0,
-    //             created: 'date',
-    //             updated: 'date'
-    //           }
-    //           draft.items.unshift(newCard)
-    //         })
-    //     )
-    //     queryFulfilled.catch(patchResult.undo)
-    //   },
-      invalidatesTags: ['Cards','Decks'],
+      //   onQueryStarted(args, {dispatch, getState, queryFulfilled}){
+      //     const state = getState() as RootState
+      //     const userId = state.cardsSlice.userId
+      //
+      //     const patchResult = dispatch(
+      //         cardsApi.util.updateQueryData('getCards', args, draft => {
+      //           const newCard = {
+      //             deckId: args.id,
+      //             id: 'someId',
+      //             userId: userId,
+      //             question: args.question,
+      //             answer: args.answer,
+      //             shots: 0,
+      //             answerImg: '',
+      //             questionImg: '',
+      //             questionVideo: '',
+      //             answerVideo: '',
+      //             grade: 0,
+      //             created: 'date',
+      //             updated: 'date'
+      //           }
+      //           draft.items.unshift(newCard)
+      //         })
+      //     )
+      //     queryFulfilled.catch(patchResult.undo)
+      //   },
+      invalidatesTags: ['Cards', 'Decks'],
     }),
     deleteCard: build.mutation<any, { id: string }>({
       query: ({ id }) => ({
@@ -80,10 +80,10 @@ const cardsApi = baseApi.injectEndpoints({
       // invalidatesTags: ['Cards'],
     }),
     updateCard: build.mutation<any, CreateCardInput>({
-      query: ({ id, ...body }) => ({
-        url: `/v1/cards/${id}`,
+      query: params => ({
+        url: `/v1/cards/${params.id}`,
         method: 'PATCH',
-        body,
+        body: params,
       }),
       invalidatesTags: ['Cards'],
     }),

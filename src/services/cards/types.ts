@@ -36,10 +36,10 @@ export type CreateCardInput = {
   id: string
   question: string
   answer: string
-  questionImg?: string
-  answerImg?: string
+  answerImg?: string | null
   questionVideo?: string
   answerVideo?: string
+  questionImg?: string | null
 }
 export type OneCardResponse = {
   id: string

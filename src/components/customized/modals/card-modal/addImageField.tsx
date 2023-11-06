@@ -12,25 +12,38 @@ type Props = {
 }
 export const AddImageField: FC<Props> = ({ type, setImageToLearnPage }) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [answer, setAnswer] = useState<File | null>()
+  const [value, setValue] = useState<File | null>()
 
   const selectedImage = () => {
     inputRef && inputRef.current?.click()
   }
   const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
     if (e.target.files && e.target.files.length > 0) {
-      const image = e.target.files[0]
+      const file = e.target.files[0]
 
-      setAnswer(image)
-      setImageToLearnPage(URL.createObjectURL(image))
+      setValue(file)
+      const formData = new FormData()
+
+      formData.append('answerImg', file)
+      setImageToLearnPage(formData)
+
+      // reader.onloadend = event => {
+      //   if (event.target && typeof event.target.result === 'string') {
+      //     const binaryData = event.target.result
+      //
+      //     setImageToLearnPage(binaryData)
+      //   }
+      // }
+      // reader.readAsDataURL(file)
     }
   }
 
   return (
     <div className={styles.imageField}>
       <div>
-        {answer ? (
-          <img src={URL.createObjectURL(answer)} alt={'image'} />
+        {value ? (
+          <img src={URL.createObjectURL(value)} alt={'image'} />
         ) : (
           <Typography variant={'subtitle_1'}>No Image</Typography>
         )}
