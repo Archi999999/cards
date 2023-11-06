@@ -36,7 +36,6 @@ export type Deck = {
 }
 export type DeckById = Omit<Deck, 'isDeleted' | 'isBlocked'>
 
-
 export type Direction = 'asc' | 'desc'
 export type Field = 'name' | 'created' | 'updated' | 'cardsCount'
 
@@ -50,4 +49,4 @@ export type DecksParams = {
   orderBy?: OrderByType
   currentPage?: number
   itemsPerPage?: number
-} |void
+} | void

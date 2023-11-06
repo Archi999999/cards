@@ -2,6 +2,7 @@ import { baseApi } from '@/services/base-api.ts'
 import {
   CardsResponse,
   CreateCardInput,
+  CreateCardInput1,
   GetRequestCards,
   OneCardResponse,
 } from '@/services/cards/types.ts'
@@ -25,7 +26,7 @@ const cardsApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    createCard: build.mutation<any, { packId: string; data: FormData }>({
+    createCard: build.mutation<any, CreateCardInput1>({
       query: ({ packId, data }) => {
         return {
           url: `v1/decks/${packId}/cards`,

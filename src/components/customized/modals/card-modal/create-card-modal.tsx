@@ -58,9 +58,13 @@ export const CreateCardModal: FC<Props> = ({ setModal, deckId }) => {
         onConfirm={confirmNewCard}
       >
         <TextField label={'Question'} onValueChange={setQuestion} />
-        <AddImageField type={'Question'} setImageToLearnPage={setQuestionImage} />
+        <AddImageField
+          type={'Question'}
+          setImageToLearnPage={setQuestionImage}
+          image={questionImage}
+        />
         <TextField label={'Answer'} onValueChange={setAnswer} />
-        <AddImageField type={'Answer'} setImageToLearnPage={setAnswerImage} />
+        <AddImageField type={'Answer'} setImageToLearnPage={setAnswerImage} image={answerImage} />
       </Modal>
     </>
   )

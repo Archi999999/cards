@@ -41,6 +41,17 @@ export type CreateCardInput = {
   answerVideo?: string
   questionImg?: string | null
 }
+export type CreateCardInput1 = {
+  packId: string
+  data:
+    | {
+        question: string
+        answer: string
+        answerImg?: string | null
+        questionImg?: string | null
+      }
+    | FormData
+}
 export type OneCardResponse = {
   id: string
   deckId: string
