@@ -13,25 +13,38 @@ type Props = {
 }
 
 export const CreateCardModal: FC<Props> = ({ setModal, deckId }) => {
-  // const options = [
-  //   { id: '', value: 'text' },
-  //   { id: '', value: 'image' },
-  // ]
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
-
+  const [questionImage, setQuestionImage] = useState<Blob | null>(null)
+  const [answerImage, setAnswerImage] = useState<Blob | null>(null)
   const [createCard] = useCreateCardMutation()
 
   const confirmNewCard = () => {
-    if (deckId) {
-      createCard({ id: deckId, answer: answer, question: question })
+    if (deckId && question && answer) {
+      const formData = new FormData()
+
+      formData.append('answer', answer)
+      formData.append('question', question)
+      if (questionImage) {
+        formData.append('questionImg', questionImage)
+      }
+      if (answerImage) {
+        formData.append('answerImg', answerImage)
+      }
+
+      createCard({
+        packId: deckId,
+        data: formData,
+      })
         .unwrap()
         .then(() => {
           setModal(false)
         })
         .catch(() => {
-          toast('question and answer must be longer than or equal to 3 characters"')
+          toast.error('question and answer must be longer than or equal to 3 characters"')
         })
+    } else {
+      toast.error('Question and answer are required fields')
     }
   }
 
@@ -45,9 +58,13 @@ export const CreateCardModal: FC<Props> = ({ setModal, deckId }) => {
         onConfirm={confirmNewCard}
       >
         <TextField label={'Question'} onValueChange={setQuestion} />
-        <AddImageField type={'Question'} />
+        <AddImageField
+          type={'Question'}
+          setImageToLearnPage={setQuestionImage}
+          image={questionImage}
+        />
         <TextField label={'Answer'} onValueChange={setAnswer} />
-        <AddImageField type={'Answer'} />
+        <AddImageField type={'Answer'} setImageToLearnPage={setAnswerImage} image={answerImage} />
       </Modal>
     </>
   )

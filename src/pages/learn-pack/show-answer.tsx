@@ -28,10 +28,10 @@ const ShowAnswer: FC<ShowAnswerType> = ({ answer, answerImg, setNewQuestion }) =
   return (
     <div className={styles.cardAnswer}>
       <Typography variant={'subtitle_1'}>Answer: </Typography>
-      <Typography variant={'h1'} as={'div'}>
+      <Typography className={styles.cardQuestion} variant={'h1'} as={'div'}>
         {answer}
       </Typography>
-      <img className={styles.learnImage} src={answerImg} alt={answerImg} />
+      {answerImg && <img className={styles.learnImage} src={answerImg} alt={answerImg} />}
       <Typography variant={'subtitle_1'} className={styles.rate}>
         Rate yourself:{' '}
       </Typography>

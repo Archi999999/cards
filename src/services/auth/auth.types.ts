@@ -18,7 +18,7 @@ export type MeResponse = {
   name?: string
   id?: string
   isEmailVerified?: boolean
-  avatar?: string | null,
+  avatar?: string | null
   created?: string
   updated?: string
 } | null
@@ -33,8 +33,10 @@ export type updateResponse = {
   updated: string
 }
 
-export type updateRequest = {
-  avatar?: string
-  name?: string
-  email?: string
-} | FormData
+export type updateRequest =
+  | {
+      avatar?: string
+      name?: string
+      email?: string
+    }
+  | FormData
