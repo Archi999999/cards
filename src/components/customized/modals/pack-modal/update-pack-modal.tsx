@@ -10,11 +10,13 @@ type Props = {
   nameDeck: string
   onPrivate: boolean
   setModal: (value: boolean) => void
+  cover?: string
 }
 
-export const UpdatePackModal: FC<Props> = ({ id, nameDeck, onPrivate, setModal }) => {
+export const UpdatePackModal: FC<Props> = ({ id, nameDeck, onPrivate, setModal, cover }) => {
   const [isPrivate, setPrivate] = useState(onPrivate)
   const [name, setName] = useState(nameDeck)
+  const [image, setImage] = useState<Blob | null | string>(cover ?? '')
   const [updateDeck] = useUpdateDeckMutation()
 
   const changePrivate = () => {
@@ -26,16 +28,29 @@ export const UpdatePackModal: FC<Props> = ({ id, nameDeck, onPrivate, setModal }
   }
 
   const onConfirm = () => {
-    updateDeck({ name, isPrivate, id, cover: null })
-      .unwrap()
-      .then(() => {
-        setModal(false)
-      })
-      .catch(() => {
-        toast(
-          'name must be longer than or equal to 3 characters and shorter than or equal to 30 characters'
-        )
-      })
+    if (name && id) {
+      const formData = new FormData()
+
+      formData.append('name', name)
+      formData.append('isPrivate', onPrivate.toString())
+
+      if (image) {
+        formData.append('cover', image)
+      }
+
+      updateDeck({ id: id, data: formData })
+        .unwrap()
+        .then(() => {
+          setModal(false)
+        })
+        .catch(() => {
+          toast(
+            'name must be longer than or equal to 3 characters and shorter than or equal to 30 characters'
+          )
+        })
+    } else {
+      toast.error('name is required field')
+    }
   }
 
   return (
@@ -50,6 +65,8 @@ export const UpdatePackModal: FC<Props> = ({ id, nameDeck, onPrivate, setModal }
         changePrivate={changePrivate}
         onPrivate={isPrivate}
         nameDeck={name}
+        image={image}
+        setImage={setImage}
       />
     </>
   )

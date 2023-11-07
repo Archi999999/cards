@@ -30,10 +30,10 @@ const decksApi = baseApi.injectEndpoints({
       providesTags: ['Decks'],
     }),
     createDeck: build.mutation<Deck, CreateDeckArgs>({
-      query: ({ name, isPrivate }) => ({
+      query: data => ({
         url: 'v1/decks',
         method: 'POST',
-        body: { name, isPrivate },
+        body: data,
       }),
       //   onQueryStarted({ name}, { dispatch, getState, queryFulfilled }) {
       //     const state = getState() as RootState
@@ -67,10 +67,10 @@ const decksApi = baseApi.injectEndpoints({
       invalidatesTags: ['Decks'],
     }),
     updateDeck: build.mutation<any, UpdateDeckArgs>({
-      query: ({ id, name, isPrivate }) => ({
+      query: ({ id, data }) => ({
         url: `v1/decks/${id}`,
         method: 'PATCH',
-        body: { name, isPrivate },
+        body: data,
       }),
       invalidatesTags: ['Decks'],
     }),
