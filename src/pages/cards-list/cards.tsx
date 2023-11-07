@@ -46,7 +46,7 @@ export const Cards = () => {
     id: deckId!,
   })
 
-  const { name: deckName, userId: currentId, isPrivate } = data ? data : ({} as DeckById)
+  const { name: deckName, userId: currentId, isPrivate, cover } = data ? data : ({} as DeckById)
 
   if (isError && !deckName) {
     navigate('/')
@@ -71,7 +71,14 @@ export const Cards = () => {
       <div className={styles.headerCards}>
         <div className={styles.headerDeckInfo}>
           <Typography variant={'large'}>{deckName}</Typography>
-          {isMyCard && <CardsDrop deckId={deckId || ''} deckName={deckName} isPrivate={isPrivate}/>}
+          {isMyCard && (
+            <CardsDrop
+              deckId={deckId || ''}
+              deckName={deckName}
+              isPrivate={isPrivate}
+              cover={cover ?? ''}
+            />
+          )}
         </div>
 
         {isMyCard && dataCards?.items.length !== 0 && (

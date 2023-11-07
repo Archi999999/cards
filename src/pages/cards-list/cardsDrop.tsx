@@ -14,8 +14,9 @@ type CardsDropProps = {
   deckId: string
   deckName: string
   isPrivate: boolean
+  cover: string
 }
-const CardsDrop: FC<CardsDropProps> = ({ deckId, deckName, isPrivate }) => {
+const CardsDrop: FC<CardsDropProps> = ({ deckId, deckName, isPrivate, cover }) => {
   const navigate = useNavigate()
   const [modalDelete, setModalDelete] = useState(false)
   const [modalUpdate, setModalUpdate] = useState(false)
@@ -43,7 +44,15 @@ const CardsDrop: FC<CardsDropProps> = ({ deckId, deckName, isPrivate }) => {
           onClick={() => setModalDelete(true)}
         />
       </Dropdown>
-      {modalUpdate && <UpdatePackModal id={deckId} setModal={setModalUpdate} nameDeck={deckName} onPrivate={isPrivate}/>}
+      {modalUpdate && (
+        <UpdatePackModal
+          id={deckId}
+          setModal={setModalUpdate}
+          nameDeck={deckName}
+          onPrivate={isPrivate}
+          cover={cover}
+        />
+      )}
 
       {modalDelete && (
         <DeleteModal
