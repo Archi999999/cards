@@ -49,12 +49,7 @@ export const CardsTable: FC<CardsTableProps> = ({
     setCardId(id)
     setOpenDeleteModal(true)
   }
-  // const clickOnUpdateButton = (cardId: string, question: string, answer: string) => {
-  //   setCardId(cardId)
-  //   setQuestion(question)
-  //   setAnswer(answer)
-  //   setOpenUpdateModal(true)
-  // }
+
   const clickOnUpdateButton = (card: RootObjectItems) => {
     setCurrentCard(card)
     setOpenUpdateModal(true)

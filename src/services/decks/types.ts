@@ -13,11 +13,24 @@ export type DecksResponseItemsAuthor = {
   id: string
   name: string
 }
-export type CreateDeckArgs = {
-  name: string
-  isPrivate?: boolean
+export type CreateDeckArgs =
+  | {
+      name: string
+      cover?: FormData
+      isPrivate?: boolean
+    }
+  | FormData
+
+export type UpdateDeckArgs = {
+  id: string
+  data:
+    | {
+        name: string
+        cover?: FormData
+        isPrivate?: boolean
+      }
+    | FormData
 }
-export type UpdateDeckArgs = Pick<Deck, 'id' | 'cover' | 'name' | 'isPrivate'>
 export type DeleteDeckArgs = Pick<Deck, 'id'>
 export type Deck = {
   id: string
