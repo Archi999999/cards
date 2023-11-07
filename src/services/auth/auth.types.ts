@@ -38,3 +38,14 @@ export type updateRequest = {
   name?: string
   email?: string
 } | FormData
+
+export type RecoverPassArgs = {
+  html?: string
+  email: string
+  subject?: string
+}
+
+export type ResetPasswordArgs = {
+  token: string
+  password: string
+}
