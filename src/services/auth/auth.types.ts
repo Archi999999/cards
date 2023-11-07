@@ -33,10 +33,22 @@ export type updateResponse = {
   updated: string
 }
 
-export type updateRequest =
-  | {
-      avatar?: string
-      name?: string
-      email?: string
-    }
-  | FormData
+
+export type updateRequest = {
+  avatar?: string
+  name?: string
+  email?: string
+} | FormData
+
+export type RecoverPassArgs = {
+  html?: string
+  email: string
+  subject?: string
+}
+
+export type ResetPasswordArgs = {
+  token: string
+  password: string
+}
+
+
