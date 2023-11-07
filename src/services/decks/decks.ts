@@ -67,10 +67,10 @@ const decksApi = baseApi.injectEndpoints({
       invalidatesTags: ['Decks'],
     }),
     updateDeck: build.mutation<any, UpdateDeckArgs>({
-      query: ({ id, name, isPrivate }) => ({
+      query: ({ id, data }) => ({
         url: `v1/decks/${id}`,
         method: 'PATCH',
-        body: { name, isPrivate },
+        body: data,
       }),
       invalidatesTags: ['Decks'],
     }),

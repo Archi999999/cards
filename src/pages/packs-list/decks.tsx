@@ -139,6 +139,7 @@ export const Decks: FC<Props> = ({ variant }) => {
                   variant={variant}
                   nameItem={deck.name}
                   isPrivate={deck.isPrivate}
+                  cover={deck.cover ?? ''}
                 />
               </TableRow>
             )

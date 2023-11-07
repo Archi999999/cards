@@ -21,7 +21,16 @@ export type CreateDeckArgs =
     }
   | FormData
 
-export type UpdateDeckArgs = Pick<Deck, 'id' | 'cover' | 'name' | 'isPrivate'>
+export type UpdateDeckArgs = {
+  id: string
+  data:
+    | {
+        name: string
+        cover?: FormData
+        isPrivate?: boolean
+      }
+    | FormData
+}
 export type DeleteDeckArgs = Pick<Deck, 'id'>
 export type Deck = {
   id: string
