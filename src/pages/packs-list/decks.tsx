@@ -1,7 +1,4 @@
-
-import {FC} from 'react'
-
-
+import { FC } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -14,6 +11,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableCellWithItem,
   TableHead,
   TableHeader,
   TableRow,
@@ -35,7 +33,7 @@ type Props = {
 export const Decks: FC<Props> = ({ variant }) => {
   // const [nameSort, setNameSort] = useState('updated')
   const { data } = useMeQuery()
-  const authorId = data? data.id : ''
+  const authorId = data ? data.id : ''
 
   const searchByName = useSelector<RootState, string>(state => state.decksSlice.searchByName)
   const minCardsCount = useSelector<RootState, number>(state => state.decksSlice.minCardsCount)
@@ -63,7 +61,7 @@ export const Decks: FC<Props> = ({ variant }) => {
       if (direction === 'asc') {
         direction = 'desc'
       } else {
-        direction='asc'
+        direction = 'asc'
       }
     }
     dispatch(decksSlice.actions.setOrderBy(`${name}-${direction}` as OrderByType))
@@ -86,13 +84,39 @@ export const Decks: FC<Props> = ({ variant }) => {
       <Table className={s.tableDeck}>
         <TableHeader>
           <TableRow>
+            <TableHeadWithSort
+              callBack={orderByHandler}
+              name={'name'}
+              currentNameSort={nameSort}
+              direction={direction}
+            >
+              Name
+            </TableHeadWithSort>
+            <TableHeadWithSort
+              callBack={orderByHandler}
+              name={'cardsCount'}
+              currentNameSort={nameSort}
+              direction={direction}
+            >
+              Cards
+            </TableHeadWithSort>
+            <TableHeadWithSort
+              callBack={orderByHandler}
+              name={'updated'}
+              currentNameSort={nameSort}
+              direction={direction}
+            >
+              Last Updated
+            </TableHeadWithSort>
+            <TableHeadWithSort
+              callBack={orderByHandler}
+              name={'created'}
+              currentNameSort={nameSort}
+              direction={direction}
+            >
+              Created by
+            </TableHeadWithSort>
 
-            <TableHeadWithSort callBack={orderByHandler} name={'name'} currentNameSort={nameSort} direction={direction}>Name</TableHeadWithSort>
-            <TableHeadWithSort callBack={orderByHandler} name={'cardsCount'} currentNameSort={nameSort} direction={direction}>Cards</TableHeadWithSort>
-            <TableHeadWithSort callBack={orderByHandler} name={'updated'} currentNameSort={nameSort} direction={direction}>Last Updated</TableHeadWithSort>
-            <TableHeadWithSort callBack={orderByHandler} name={'created'} currentNameSort={nameSort} direction={direction}>Created by</TableHeadWithSort>
-
-           
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
@@ -100,9 +124,9 @@ export const Decks: FC<Props> = ({ variant }) => {
           {decks.data?.items?.map(deck => {
             return (
               <TableRow key={deck.id}>
-                <TableCell className={s.linkCard}>
+                <TableCellWithItem item={deck.cover ?? ''} className={s.linkCard}>
                   <Link to={`/cards/${deck.id}`}>{deck.name}</Link>
-                </TableCell>
+                </TableCellWithItem>
                 <TableCell>{deck.cardsCount}</TableCell>
                 <TableCellDate date={deck.updated} />
                 {variant === 'myPacks' ? (
@@ -110,7 +134,12 @@ export const Decks: FC<Props> = ({ variant }) => {
                 ) : (
                   <TableCell>{deck.author.name}</TableCell>
                 )}
-                <TableCellWithButtons packId={deck.id} variant={variant} nameItem={deck.name} isPrivate={deck.isPrivate}/>
+                <TableCellWithButtons
+                  packId={deck.id}
+                  variant={variant}
+                  nameItem={deck.name}
+                  isPrivate={deck.isPrivate}
+                />
               </TableRow>
             )
           })}
