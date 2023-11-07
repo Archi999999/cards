@@ -28,20 +28,19 @@
     text-decoration: none;
   }
 
-  .cardQuestion {
+  .cardQuestionTitle {
     margin: 45px 0 18px;
+  }
+
+  .cardQuestion {
+    word-wrap: break-word; /* Разрывать слова, если не помещаются */
+    white-space: normal; /* Переносить слова и пробелы */
   }
 
   .cardEffortQuantity {
     margin: 19px 0 11px;
     color: var(--color-dark-100);
   }
-}
-
-.learnImage {
-  max-width: 180px;
-  height: 120px;
-  margin: 0 auto;
 }
 
 .cardAnswer {
