@@ -13,11 +13,24 @@ export type DecksResponseItemsAuthor = {
   id: string
   name: string
 }
-export type CreateDeckArgs = {
-  name: string
-  isPrivate?: boolean
+export type CreateDeckArgs =
+  | {
+      name: string
+      cover?: FormData
+      isPrivate?: boolean
+    }
+  | FormData
+
+export type UpdateDeckArgs = {
+  id: string
+  data:
+    | {
+        name: string
+        cover?: FormData
+        isPrivate?: boolean
+      }
+    | FormData
 }
-export type UpdateDeckArgs = Pick<Deck, 'id' | 'cover' | 'name' | 'isPrivate'>
 export type DeleteDeckArgs = Pick<Deck, 'id'>
 export type Deck = {
   id: string
@@ -36,7 +49,6 @@ export type Deck = {
 }
 export type DeckById = Omit<Deck, 'isDeleted' | 'isBlocked'>
 
-
 export type Direction = 'asc' | 'desc'
 export type Field = 'name' | 'created' | 'updated' | 'cardsCount'
 
@@ -50,4 +62,4 @@ export type DecksParams = {
   orderBy?: OrderByType
   currentPage?: number
   itemsPerPage?: number
-} |void
+} | void

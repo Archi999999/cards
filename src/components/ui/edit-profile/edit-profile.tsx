@@ -40,6 +40,7 @@ export const EditProfile = () => {
       const formData = new FormData()
 
       formData.append('avatar', image)
+
       updateMe(formData)
       // setInputFile(URL.createObjectURL(image))
     }

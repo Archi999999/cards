@@ -18,7 +18,7 @@ export type MeResponse = {
   name?: string
   id?: string
   isEmailVerified?: boolean
-  avatar?: string | null,
+  avatar?: string | null
   created?: string
   updated?: string
 } | null
@@ -32,6 +32,7 @@ export type updateResponse = {
   created: string
   updated: string
 }
+
 
 export type updateRequest = {
   avatar?: string
@@ -49,3 +50,5 @@ export type ResetPasswordArgs = {
   token: string
   password: string
 }
+
+

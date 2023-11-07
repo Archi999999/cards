@@ -54,10 +54,10 @@ export const LearnPack = () => {
       </Link>
       <Card>
         <Typography variant={'large'}>Learn “{data ? data.name : ''}”</Typography>
-        <Typography className={styles.cardQuestion} variant={'subtitle_1'}>
+        <Typography className={styles.cardQuestionTitle} variant={'subtitle_1'}>
           Question:
         </Typography>
-        <Typography variant={'h1'} as={'div'}>
+        <Typography className={styles.cardQuestion} variant={'h1'} as={'div'}>
           {dataRandomCard && dataRandomCard.question}
         </Typography>
         {dataRandomCard && dataRandomCard.questionImg && (

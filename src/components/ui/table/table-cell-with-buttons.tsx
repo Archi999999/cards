@@ -10,59 +10,67 @@ import { PlayCircleOutline } from '@/svg/play-circle-outline.tsx'
 import { Trash } from '@/svg/trash-outline.tsx'
 
 type Props = {
-    nameItem: string
-    packId: string
-    isPrivate: boolean
-    variant?: 'myPacks' | 'allPacks'
+  nameItem: string
+  packId: string
+  isPrivate: boolean
+  variant?: 'myPacks' | 'allPacks'
+  cover?: string
 }
 
-export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = (
-    {
-        className,
-        nameItem,
-        packId,
-        isPrivate,
-        variant,
-        ...props
-    }) => {
-    const navigate = useNavigate()
-    const [modalDelete, setModalDelete] = useState(false)
-    const [modalUpdate, setModalUpdate] = useState(false)
+export const TableCellWithButtons: FC<ComponentPropsWithoutRef<'td'> & Props> = ({
+  className,
+  nameItem,
+  packId,
+  isPrivate,
+  variant,
+  cover,
+  ...props
+}) => {
+  const navigate = useNavigate()
+  const [modalDelete, setModalDelete] = useState(false)
+  const [modalUpdate, setModalUpdate] = useState(false)
 
-    return (
-        <td className={`${className} ${s.cell} `} {...props}>
-            <div className={s.buttonsBlock}>
-                <button
-                    id={nameItem}
-                    className={s.button}
-                    onClick={() => {
-                        navigate(`/learn/${packId}`)
-                    }}
-                >
-                    <PlayCircleOutline/>
-                </button>
-                {variant === 'myPacks' && (
-                    <>
-                        <button className={s.button} onClick={() => setModalUpdate(true)}>
-                            <Edit2Outline color={'currentColor'}/>
-                        </button>
-                        <button className={s.button} onClick={() => setModalDelete(true)}>
-                            <Trash/>
-                        </button>
-                    </>
-                )}
-                {variant === 'allPacks' && <label htmlFor={nameItem}>Learn</label>}
-            </div>
-            {modalDelete && (
-                <DeleteModal
-                    title={'Delete Pack'}
-                    nameItem={nameItem}
-                    setModal={setModalDelete}
-                    packId={packId}
-                />
-            )}
-            {modalUpdate &&
-                <UpdatePackModal id={packId} setModal={setModalUpdate} nameDeck={nameItem} onPrivate={isPrivate}/>}
-        </td>
-    )
+  return (
+    <td className={`${className} ${s.cell} `} {...props}>
+      <div className={s.buttonsBlock}>
+        <button
+          id={nameItem}
+          className={s.button}
+          onClick={() => {
+            navigate(`/learn/${packId}`)
+          }}
+        >
+          <PlayCircleOutline />
+        </button>
+        {variant === 'myPacks' && (
+          <>
+            <button className={s.button} onClick={() => setModalUpdate(true)}>
+              <Edit2Outline color={'currentColor'} />
+            </button>
+            <button className={s.button} onClick={() => setModalDelete(true)}>
+              <Trash />
+            </button>
+          </>
+        )}
+        {variant === 'allPacks' && <label htmlFor={nameItem}>Learn</label>}
+      </div>
+      {modalDelete && (
+        <DeleteModal
+          title={'Delete Pack'}
+          nameItem={nameItem}
+          setModal={setModalDelete}
+          packId={packId}
+        />
+      )}
+      {modalUpdate && (
+        <UpdatePackModal
+          id={packId}
+          setModal={setModalUpdate}
+          nameDeck={nameItem}
+          onPrivate={isPrivate}
+          cover={cover}
+        />
+      )}
+    </td>
+  )
 }
