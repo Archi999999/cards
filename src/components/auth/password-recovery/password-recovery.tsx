@@ -16,9 +16,14 @@ export const PasswordRecovery = () => {
   const Email = z.string().nonempty('field is required').email()
   const onSendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const mailHtml = '<h1>Здравствуйте!</h1><br/>' +
+      '<h3>Вы получили это письмо, потому что запросили сброс пароля для вашей учетной записи. Если вы не запрашивали сброс пароля, проигнорируйте это письмо. Чтобы сбросить пароль, пожалуйста, перейдите по следующей ссылке:</h3>' +
+      '<a href=https://cards-lac-project.vercel.app/change-password/##token##>Сброс пароля</a>' +
+      '<h3>Пожалуйста, обратите внимание, что ссылка будет действительна в течение ограниченного времени.</h3>'
+
     try {
       Email.parse(email)
-      sendEmail({email})
+      sendEmail({email, html:mailHtml})
         .unwrap()
         .then(() => navigate('/check-email'))
         .catch(e => {
