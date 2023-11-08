@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useEffect } from 'react'
 
 import s from './modal.module.scss'
 
@@ -16,6 +16,19 @@ export const Modal: FC<Props> = ({ title, setModal, confirmButtonName, children,
   const onCloseModal = () => {
     setModal(false)
   }
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setModal(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      window.addEventListener('keydown', handleKeyPress)
+    }
+  }, [])
 
   return (
     <section
