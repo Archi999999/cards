@@ -11,7 +11,7 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableCellWithItem,
+  TableCellDeck,
   TableHead,
   TableHeader,
   TableRow,
@@ -124,9 +124,12 @@ export const Decks: FC<Props> = ({ variant }) => {
           {decks.data?.items?.map(deck => {
             return (
               <TableRow key={deck.id}>
-                <TableCellWithItem item={deck.cover ?? ''} className={s.linkCard}>
-                  <Link to={`/cards/${deck.id}`}>{deck.name}</Link>
-                </TableCellWithItem>
+                <TableCellDeck className={s.linkCard}>
+                  <Link to={`/cards/${deck.id}`}>
+                    <Typography> {deck.name}</Typography>
+                    {deck.cover && <img src={deck.cover} alt={'image'} />}
+                  </Link>
+                </TableCellDeck>
                 <TableCell>{deck.cardsCount}</TableCell>
                 <TableCellDate date={deck.updated} />
                 {variant === 'myPacks' ? (

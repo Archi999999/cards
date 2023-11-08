@@ -51,6 +51,13 @@ export const TableCell: FC<ComponentPropsWithoutRef<'td'>> = ({ className, ...pr
     </td>
   )
 }
+export const TableCellDeck: FC<ComponentPropsWithoutRef<'td'>> = ({ className, ...props }) => {
+  return (
+    <td className={`${className} ${s.cell}`} {...props}>
+      {props.children}
+    </td>
+  )
+}
 
 interface TableCellWithImageProps extends ComponentPropsWithoutRef<'th'> {
   item?: string
