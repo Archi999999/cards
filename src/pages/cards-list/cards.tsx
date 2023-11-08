@@ -40,6 +40,7 @@ export const Cards = () => {
     id: deckId || '',
     orderBy: `${sort?.key}-${sort?.direction}`,
     question: value,
+    itemsPerPage: 40,
   })
 
   const { data, isError, isLoading } = useGetDeckByIdQuery({

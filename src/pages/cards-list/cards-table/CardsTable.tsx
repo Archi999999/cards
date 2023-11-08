@@ -41,8 +41,7 @@ export const CardsTable: FC<CardsTableProps> = ({
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [openUpdateModal, setOpenUpdateModal] = useState(false)
   const [cardId, setCardId] = useState('')
-  // const [question, setQuestion] = useState('')
-  // const [answer, setAnswer] = useState('')
+
   const [currentCard, setCurrentCard] = useState<RootObjectItems>()
 
   const clickOnButton = (id: string) => {
