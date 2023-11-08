@@ -38,7 +38,7 @@ const publicRoutes: RouteObject[] = [
     element: <CheckEmail />
   },
   {
-    path: '/confirm-email/:token',
+    path: '/change-password/:token',
     element: <CreatePassword/>
   },
   {
