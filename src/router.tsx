@@ -17,8 +17,8 @@ import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 import { SignInPage } from '@/pages/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up-page.tsx'
 import { useMeQuery } from '@/services/auth/auth.ts'
-import {CreatePassword} from "@/components/auth/password-recovery/create-password/create-password.tsx";
-import {CheckEmail} from "@/components/auth/password-recovery/check-email/check-email.tsx";
+import { CreatePassword } from '@/components/auth/password-recovery/create-password/create-password.tsx'
+import { CheckEmail } from '@/components/auth/password-recovery/check-email/check-email.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -35,11 +35,11 @@ const publicRoutes: RouteObject[] = [
   },
   {
     path: '/check-email',
-    element: <CheckEmail />
+    element: <CheckEmail />,
   },
   {
     path: '/change-password/:token',
-    element: <CreatePassword/>
+    element: <CreatePassword />,
   },
   {
     path: '*',

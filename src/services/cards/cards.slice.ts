@@ -18,6 +18,6 @@ export const cardsSlice = createSlice({
     },
     setDeckID: (state, action: PayloadAction<string>) => {
       state.deckId = action.payload
-    }
+    },
   },
 })

@@ -7,7 +7,7 @@ import { Typography } from '@/components'
 type Props = {
   label?: string
   tabs: Tab[]
-    defaultValue: string
+  defaultValue: string
 }
 
 type Tab = {

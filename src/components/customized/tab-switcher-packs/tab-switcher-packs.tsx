@@ -7,5 +7,5 @@ export const TabSwitcherPacks = () => {
     { trigger: 'All Packs', content: <Decks variant={'allPacks'} /> },
   ]
 
-  return <TabSwitcher label={'Show packs cards'} tabs={tabs} defaultValue={'All Packs'}/>
+  return <TabSwitcher label={'Show packs cards'} tabs={tabs} defaultValue={'All Packs'} />
 }

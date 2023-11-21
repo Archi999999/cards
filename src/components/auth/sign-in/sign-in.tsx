@@ -47,13 +47,12 @@ export const SignIn: FC<Props> = ({ onSubmit, isSubmitting, error }) => {
     }
   }
 
-  const onKeydownHandler =(e: KeyboardEvent<HTMLInputElement>)=>{
-    if(e.key === 'Enter') {
+  const onKeydownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
       e.preventDefault()
       handleSubmit(onSubmit)()
     }
   }
-
 
   return (
     <>
@@ -64,7 +63,12 @@ export const SignIn: FC<Props> = ({ onSubmit, isSubmitting, error }) => {
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <ControlledTextField name={'email'} control={control} label={'Email'} />
-          <ControlledTextField name={'password'} control={control} label={'Password'} onKeyDown={onKeydownHandler}/>
+          <ControlledTextField
+            name={'password'}
+            control={control}
+            label={'Password'}
+            onKeyDown={onKeydownHandler}
+          />
           <Controller
             name="rememberMe"
             control={control}

@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {OrderByType} from "@/services/decks/types.ts";
+import { OrderByType } from '@/services/decks/types.ts'
 
 const initialState = {
   itemsPerPage: 10,
   currentPage: 1,
   searchByName: '',
-  orderBy: 'updated-desc' as  OrderByType,
+  orderBy: 'updated-desc' as OrderByType,
   minCardsCount: 0,
   maxCardsCount: 0,
 }
